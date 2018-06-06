@@ -14,7 +14,7 @@ public class Carrera {
     private int id;
 
     @Column(name = "tiempo_total")
-    private Time tiempo_total;
+    private String tiempo_total;
 
     @Column(name = "fecha")
     private Date fecha;
@@ -55,7 +55,7 @@ public class Carrera {
             inverseJoinColumns = @JoinColumn(name = "id_equipo", referencedColumnName = "id"))
     private List<Equipo> equipoList;
 
-    public Carrera(Time tiempo_total, Date fecha) {
+    public Carrera(String tiempo_total, Date fecha) {
         this.tiempo_total = tiempo_total;
         this.fecha = fecha;
     }
@@ -68,11 +68,11 @@ public class Carrera {
         this.id = id;
     }
 
-    public Time getTiempo_total() {
+    public String getTiempo_total() {
         return tiempo_total;
     }
 
-    public void setTiempo_total(Time tiempo_total) {
+    public void setTiempo_total(String tiempo_total) {
         this.tiempo_total = tiempo_total;
     }
 
