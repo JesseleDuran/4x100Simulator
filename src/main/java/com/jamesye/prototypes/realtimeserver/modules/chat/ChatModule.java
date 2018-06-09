@@ -10,21 +10,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.ArrayList;
+import java.util.UUID;
 
 @Component
 public class ChatModule {
 
     private final SocketIONamespace namespace;
-    private static ConnectedDTO conectados = new ConnectedDTO(0);
+    private static ConnectedDTO conectados = new ConnectedDTO(0, new ArrayList<UUID>());
 
     @Autowired
     public ChatModule(SocketIOServer server) {
-
         this.namespace = server.addNamespace("/chat");
         this.namespace.addConnectListener(onConnected());
         this.namespace.addDisconnectListener(onDisconnected());
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
-
     }
 
     private DataListener<ChatDTO> onChatReceived() {
@@ -40,16 +40,51 @@ public class ChatModule {
         return client -> {
             HandshakeData handshakeData = client.getHandshakeData();
             log.debug("Client[{}] - Connected to chat module through '{}'", client.getSessionId().toString(), handshakeData.getUrl());
+
+            //add 1 to total of connected and add the client's session id
             conectados.addConectados();
-            System.out.printf("hay %02d%n personas yay", conectados.getConectados());
-            namespace.getBroadcastOperations().sendEvent("conectados", conectados);
+            conectados.getId_conectados().add(client.getSessionId());
+
+            sendHtmlBySizeOFClients();
+
+            namespace.getBroadcastOperations().sendEvent("cantidadConectados", conectados);
+
         };
+    }
+
+    private void sendHtmlBySizeOFClients() {
+
+        System.out.println(conectados.getId_conectados().size());
+
+        switch(conectados.getId_conectados().size()) {
+            case 1 :
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
+                break;
+            case 2 :
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html2_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html2_para_02.html");
+                break;
+            case 3 :
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html3_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html3_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "html3_para_01.html");
+                break;
+            default :
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
+        }
+
     }
 
     private DisconnectListener onDisconnected() {
         return client -> {
             log.debug("Client[{}] - Disconnected from chat module.", client.getSessionId().toString());
+
+            //remove 1 to total of connected and add the client's session id
             conectados.deleteConectados();
+            conectados.getId_conectados().remove(client.getSessionId());
+
+            sendHtmlBySizeOFClients();
+
             System.out.printf("se desconecto alguien, quedan %02d%n personas", conectados.getConectados());
         };
     }

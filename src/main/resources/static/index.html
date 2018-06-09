@@ -32,6 +32,8 @@
 <h1>Chat Client</h1>
 <br/>
 
+<div id="test">This text will change</div>
+
 <div id="console" class="well"></div>
 
 <form class="well form-inline" onsubmit="return false;">
@@ -59,8 +61,14 @@
     socket.on('disconnect', function () {
         output('<span class="disconnect-msg">The client has disconnected!</span>');
     });
-    socket.on('conectados', function (data) {
-        console.log('Received conectados', data);
+    socket.on('cantidadConectados', function (data) {
+        console.log('Received conectados', data.conectados);
+
+    });
+
+    socket.on('htmlType', function (data) {
+
+        document.getElementById("test").textContent = data;
 
     });
 
