@@ -30,8 +30,6 @@ public class RealTimeServerApplication {
         return new SocketIOServer(config);
     }
 
-
-
     public static void main(String[] args) {
 
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
