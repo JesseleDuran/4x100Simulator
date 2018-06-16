@@ -1,31 +1,27 @@
 package models;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "equipo")
 public class Equipo {
 
-    @Id
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "nombre", unique=true, nullable=false)
     private String nombre;
 
-    @OneToMany(mappedBy="equipo")
     private Set<Corredor> integrantes;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "carrera_equipo",
-            joinColumns = @JoinColumn(name = "id_equipo", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_carrera", referencedColumnName = "id"))
     private List<Carrera> carreraList;
 
+    public Equipo() {
+    }
 
     public Equipo(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Equipo(int id, String nombre) {
+        this.id = id;
         this.nombre = nombre;
     }
 
@@ -58,6 +54,8 @@ public class Equipo {
         return "Equipo{" +
                 "id=" + id +
                 ", nombre='" + nombre + '\'' +
+                ", integrantes=" + integrantes +
+                ", carreraList=" + carreraList +
                 '}';
     }
 }

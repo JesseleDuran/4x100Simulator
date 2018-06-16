@@ -1,29 +1,14 @@
 package models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "corredor")
 public class Corredor {
 
-    @Id
-    @Column(name = "id")
+
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_equipo")
     private Equipo equipo;
 
-    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido")
     private String apellido;
 
     private int velocidad;

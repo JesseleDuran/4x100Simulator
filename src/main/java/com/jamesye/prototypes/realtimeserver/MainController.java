@@ -1,12 +1,8 @@
 package com.jamesye.prototypes.realtimeserver;
 
-import models.Carrera;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
-import java.sql.Time;
-import java.util.Date;
-import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
