@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 });
 
+var actionClick = false;
 var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 var socket = io('http://localhost:9092/chat');
 socket.connect();
@@ -32,8 +33,18 @@ socket.on('cantidadConectados', function (data) {
 
 //divide .html to different users
 socket.on('htmlType', function (data) {
-    document.getElementById("test").textContent = data;
+    if(actionClick == true) {
+        document.getElementById("test").textContent = data;
+    }
+
+    $('#body').load('views/' + data);
+    //document.getElementById("test").textContent = data;
+
 });
+
+function startSimulator() {
+    actionClick = true;
+}
 
 function sendDisconnect() {
     socket.disconnect();

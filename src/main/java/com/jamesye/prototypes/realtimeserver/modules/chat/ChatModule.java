@@ -59,19 +59,19 @@ public class ChatModule {
 
         switch(conectados.getId_conectados().size()) {
             case 1 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
                 break;
             case 2 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html2_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html2_para_02.html");
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
+                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-izquierdo.html");
                 break;
             case 3 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html3_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html3_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "html3_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
+                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio.html");
+                namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
                 break;
             default :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
         }
 
     }
