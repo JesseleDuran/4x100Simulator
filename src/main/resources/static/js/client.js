@@ -3,7 +3,6 @@ $(document).ready(function(){
 
 });
 
-var actionClick = false;
 var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 var socket = io('http://localhost:9092/chat');
 socket.connect();
@@ -33,17 +32,15 @@ socket.on('cantidadConectados', function (data) {
 
 //divide .html to different users
 socket.on('htmlType', function (data) {
-    if(actionClick == true) {
-        document.getElementById("test").textContent = data;
-    }
-
+    $('#connectedModal').modal('hide');
     $('#body').load('views/' + data);
-    //document.getElementById("test").textContent = data;
 
 });
 
 function startSimulator() {
-    actionClick = true;
+    console.log("he dado click a empezar");
+    var jsonObject = {start: true};
+    socket.emit('firstStart', jsonObject);
 }
 
 function sendDisconnect() {

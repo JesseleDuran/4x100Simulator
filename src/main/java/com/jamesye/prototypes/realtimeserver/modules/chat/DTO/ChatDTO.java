@@ -1,4 +1,4 @@
-package com.jamesye.prototypes.realtimeserver.modules.chat;
+package com.jamesye.prototypes.realtimeserver.modules.chat.DTO;
 
 public class ChatDTO {
 

@@ -6,6 +6,9 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ChatDTO;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ConnectedDTO;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.FirstStartDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,7 @@ public class ChatModule {
         this.namespace.addConnectListener(onConnected());
         this.namespace.addDisconnectListener(onDisconnected());
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
+        this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
     }
 
     private DataListener<ChatDTO> onChatReceived() {
@@ -46,33 +50,34 @@ public class ChatModule {
             conectados.addConectados();
             conectados.getId_conectados().add(client.getSessionId());
 
-            sendHtmlBySizeOFClients();
+            //sendHtmlBySizeOFClients();
 
             namespace.getBroadcastOperations().sendEvent("cantidadConectados", conectados);
 
         };
     }
 
-    private void sendHtmlBySizeOFClients() {
-
-        System.out.println(conectados.getId_conectados().size());
-
-        switch(conectados.getId_conectados().size()) {
-            case 1 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
-                break;
-            case 2 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-izquierdo.html");
-                break;
-            case 3 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio.html");
-                namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
-                break;
-            default :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
-        }
+    private DataListener<FirstStartDTO> sendHtmlBySizeOFClients() {
+        return (client, data, ackSender) -> {
+            if (data.isStart()) {
+                switch (conectados.getId_conectados().size()) {
+                    case 1:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
+                        break;
+                    case 2:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-izquierdo.html");
+                        break;
+                    case 3:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio.html");
+                        namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
+                        break;
+                    default:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
+                }
+            }
+        };
 
     }
 
@@ -84,7 +89,7 @@ public class ChatModule {
             conectados.deleteConectados();
             conectados.getId_conectados().remove(client.getSessionId());
 
-            sendHtmlBySizeOFClients();
+            //sendHtmlBySizeOFClients();
 
             System.out.printf("se desconecto alguien, quedan %02d%n personas", conectados.getConectados());
         };
