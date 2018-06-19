@@ -34,6 +34,7 @@ socket.on('cantidadConectados', function (data) {
 socket.on('htmlType', function (data) {
     $('#connectedModal').modal('hide');
     $('#body').load('views/' + data);
+    $('#equiposModal').modal({backdrop: 'static', keyboard: false});
 
 });
 
