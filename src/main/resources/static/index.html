@@ -7,6 +7,13 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
+
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
@@ -15,9 +22,11 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
 
-    <script src="js/libraries/socket.io/socket.io.js"></script>
-    <script src="js/libraries/moment.min.js"></script>
-    <script src="js/client.js"></script>
+
+
+    <script type="text/javascript" src="js/libraries/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/libraries/moment.min.js"></script>
+    <script type="text/javascript" src="js/client.js"></script>
     <style>
         body {
             padding: 20px;
@@ -47,7 +56,7 @@
         Main App Body
     </div>
 
-    <!-- Modal -->
+    <!-- Connected Modal -->
     <div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -78,38 +87,21 @@
                 <div class="modal-body">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th scope="col">Pais</th>
-                            <th scope="col">Jugadores</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                        </tr>
+                            <tr>
+                                <th scope="col" data-field="nombre_equipo">País</th>
+                                <th scope="col" data-field="nombre_corredor" data-field="apellido">Corredor</th>
+                                <th scope="col" data-field="prob_terminar">Prob. de Terminar</th>
+                                <th scope="col" data-field="tiempo_arranque">Tiempo de arranque</th>
+                                <th scope="col" data-field="velocidad_curva">Velocidad en curvas</th>
+                                <th scope="col" data-field="velocidad_recta">Velocidad en rectas</th>
+                                <th scope="col" data-field="fase">Fase</th>
+                            </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                        </tr>
-                        </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Atras</button>
-                    <button type="button" onClick="startSimulator()" class="btn btn-primary">Start</button>
+                    <button type="button" onClick="" class="btn btn-primary">Start</button>
                 </div>
             </div>
         </div>

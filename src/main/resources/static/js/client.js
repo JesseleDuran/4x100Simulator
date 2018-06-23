@@ -32,6 +32,10 @@ socket.on('cantidadConectados', function (data) {
 
 //divide .html to different users
 socket.on('htmlType', function (data) {
+
+    console.log("antes del req");
+    //displayEquipos();
+
     $('#connectedModal').modal('hide');
     $('#body').load('views/' + data);
     $('#equiposModal').modal({backdrop: 'static', keyboard: false});
@@ -39,9 +43,11 @@ socket.on('htmlType', function (data) {
 });
 
 function startSimulator() {
-    console.log("he dado click a empezar");
+
+    console.log("AHHHH");
     var jsonObject = {start: true};
     socket.emit('firstStart', jsonObject);
+
 }
 
 function sendDisconnect() {
@@ -67,6 +73,24 @@ $(document).keydown(function (e) {
         $('#send').click();
     }
 });
+
+
+/*function displayEquipos()
+{
+    console.log("empieza request");
+    $.ajax({
+        url: "localhost:8080/equipo/all",
+        type: 'GET',
+        success: function (entry)
+        {
+            console.log(entry);
+            $('.table').bootstrapTable({
+                data: entry
+            });
+        }
+    });
+
+}*/
 
 
 

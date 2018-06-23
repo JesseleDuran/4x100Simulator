@@ -1,4 +1,4 @@
-package controllers;
+package com.jamesye.prototypes.realtimeserver;
 
 import daos.JDBCEquipoDAO;
 import models.Equipo;
@@ -10,22 +10,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/equipo")
 public class EquipoController {
 
+    ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
-    public List<Equipo> findAll() {
+    public List<Map<String, Object>> findAll() {
 
-        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         JDBCEquipoDAO jdbcEquipoDAO = (JDBCEquipoDAO) context.getBean("jdbcEquipoDAO");
         /*Equipo equipo3 = new Equipo("Panama");
         jdbcEquipoDAO.insert(equipo3);*/
 
-        List<Equipo> equipos = jdbcEquipoDAO.findAll();
+        List<Map<String, Object>> equipos = jdbcEquipoDAO.findAll();
         System.out.println(equipos);
 
         String name = jdbcEquipoDAO.findNameById(3);
@@ -36,9 +39,9 @@ public class EquipoController {
 
 
         System.out.println(" FindAll : " + jdbcEquipoDAO.findAll());
-        jdbcEquipoDAO.insertBatch2("UPDATE equipo SET nombre ='Peru' WHERE id = 3");
+        jdbcEquipoDAO.insertBatch2("UPDATE equipo SET nombre_equipo ='Peru' WHERE id = 3");
 
-        List<Equipo> equipo1 = jdbcEquipoDAO.findAll();
+        List<Map<String, Object>> equipo1 = jdbcEquipoDAO.findAll();
         System.out.println("Updated column nombre of table: " + equipo1);
 
         System.out.println(" FindAll : " + jdbcEquipoDAO.findAll());
