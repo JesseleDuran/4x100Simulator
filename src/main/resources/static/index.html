@@ -7,12 +7,6 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js" integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E=" crossorigin="anonymous"></script>
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -23,10 +17,18 @@
             crossorigin="anonymous"></script>
 
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
     <script type="text/javascript" src="js/libraries/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/libraries/moment.min.js"></script>
-    <script type="text/javascript" src="js/client.js"></script>
+    <!-- <script type="text/javascript" src="js/client.js"></script> -->
     <style>
         body {
             padding: 20px;
@@ -78,26 +80,29 @@
     </div>
 
     <!-- START Modal -->
-    <div class="modal fade" id="equiposModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade bd-example-modal-lg" id="equiposModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="equipoModalTitle">Generar Equipos</h5>
                 </div>
                 <div class="modal-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" data-field="nombre_equipo">País</th>
-                                <th scope="col" data-field="nombre_corredor" data-field="apellido">Corredor</th>
-                                <th scope="col" data-field="prob_terminar">Prob. de Terminar</th>
-                                <th scope="col" data-field="tiempo_arranque">Tiempo de arranque</th>
-                                <th scope="col" data-field="velocidad_curva">Velocidad en curvas</th>
-                                <th scope="col" data-field="velocidad_recta">Velocidad en rectas</th>
-                                <th scope="col" data-field="fase">Fase</th>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="tableEquipos">
+                            <thead>
+                                <tr>
+                                    <th scope="col" data-field="nombre_equipo">País</th>
+                                    <th scope="col" data-field="nombre_corredor" data-field="apellido">Corredor</th>
+                                    <th scope="col" data-field="prob_terminar">Prob. de Terminar</th>
+                                    <th scope="col" data-field="tiempo_arranque">Tiempo de arranque</th>
+                                    <th scope="col" data-field="velocidad_curva">Velocidad en curvas</th>
+                                    <th scope="col" data-field="velocidad_recta">Velocidad en rectas</th>
+                                    <th scope="col" data-field="fase">Fase</th>
+                                </tr>
+                            
+                            </thead>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Atras</button>
@@ -109,3 +114,101 @@
 
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        $('#body').load('views/home.html');
+
+    });
+
+    var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+    var socket = io('http://localhost:9092/chat');
+    socket.connect();
+
+    //when a user connects
+    socket.on('connect', function () {
+        output('<span class="connect-msg">Client has connected to the server!</span>');
+    });
+
+    //send chat message
+    socket.on('chat', function (data) {
+        console.log('Received message', data);
+        output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+    });
+
+    //disconnect from network
+    socket.on('disconnect', function () {
+        output('<span class="disconnect-msg">The client has disconnected!</span>');
+    });
+
+    //quantity of connected
+    socket.on('cantidadConectados', function (data) {
+        console.log('Received conectados', data.conectados);
+        var conectados = data.conectados;
+        $(".displayConectados").html(conectados);
+    });
+
+    //divide .html to different users
+    socket.on('htmlType', function (data) {
+
+        console.log("antes del req");
+        displayEquipos();
+
+        $('#connectedModal').modal('hide');
+        $('#body').load('views/' + data);
+        $('#equiposModal').modal({backdrop: 'static', keyboard: false});
+
+    });
+
+    function startSimulator() {
+
+        console.log("He dado click a empezar");
+        var jsonObject = {start: true};
+        socket.emit('firstStart', jsonObject);
+
+    }
+
+    function sendDisconnect() {
+        socket.disconnect();
+    }
+
+    function sendMessage() {
+        var $msg = $('#msg');
+        var message = $msg.val();
+        $msg.val('');
+        var jsonObject = {userName: userName, message: message, actionTime: new Date()};
+        socket.emit('chat', jsonObject);
+    }
+
+    function output(message) {
+        var currentTime = "<span class='time'>" + moment().format('HH:mm:ss.SSS') + "</span>";
+        var element = $("<div>" + currentTime + " " + message + "</div>");
+        $('#console').prepend(element);
+    }
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#send').click();
+        }
+    });
+
+
+    function displayEquipos()
+    {
+        console.log("empieza request");
+        $.ajax({
+            url: "http://localhost:8080/equipo/all",
+            type: 'GET',
+            success: function (entry)
+            {
+                console.log(entry);
+                $('.tableEquipos').bootstrapTable({
+                    data: entry
+                });
+            }
+        });
+
+    }
+
+
+</script>
