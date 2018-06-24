@@ -114,8 +114,8 @@
                                         data-field="prob_terminar"
                                         data-align="center"
                                         data-halign="center"
-                                        data-align="center
-                                    >Prob. de Terminar"</th>
+                                        data-align="center"
+                                    >Prob. de Terminar</th>
                                     <th scope="col"
                                         data-field="tiempo_arranque"
                                         data-sortable="true"
@@ -134,7 +134,11 @@
                                         data-align="center"
                                         data-halign="center"
                                     >Velocidad en rectas</th>
-                                    <th scope="col" data-field="fase">Fase</th>
+                                    <th scope="col"
+                                        data-field="fase"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Fase</th>
                                 </tr>
 
                             </thead>
@@ -156,13 +160,23 @@
 
 <script>
     $(document).ready(function(){
-        $('#body').load('views/home.html');
-
+        goHome();
     });
 
     function goHome() {
-
         $('#body').load('views/home.html');
+
+    }
+
+    function goHistorialCarreras() {
+        displayHistorialCarreras();
+        $('#body').load('views/historial-carreras.html');
+
+    }
+
+    function goCorredores() {
+        displayCorredores();
+        $('#body').load('views/corredores.html');
 
     }
 
@@ -205,6 +219,7 @@
 
     });
 
+    //accept begin with that quantity of users
     function startSimulator() {
 
         console.log("He dado click a empezar");
@@ -240,7 +255,6 @@
 
     function displayEquipos()
     {
-        console.log("empieza request");
         $.ajax({
             url: "http://localhost:8080/equipo/all",
             type: 'GET',
@@ -248,6 +262,38 @@
             {
                 console.log(entry);
                 $('.tableEquipos').bootstrapTable({
+                    data: entry
+                });
+            }
+        });
+
+    }
+
+    function displayHistorialCarreras()
+    {
+        $.ajax({
+            url: "http://localhost:8080/historial/carrera",
+            type: 'GET',
+            success: function (entry)
+            {
+                console.log(entry);
+                $('.tableCarreras').bootstrapTable({
+                    data: entry
+                });
+            }
+        });
+
+    }
+
+    function displayCorredores()
+    {
+        $.ajax({
+            url: "http://localhost:8080/corredores",
+            type: 'GET',
+            success: function (entry)
+            {
+                console.log(entry);
+                $('.tableCorredores').bootstrapTable({
                     data: entry
                 });
             }
