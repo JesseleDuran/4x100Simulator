@@ -52,7 +52,10 @@ public class JDBCEquipoDAOImpl implements JDBCEquipoDAO {
     public List<Map<String, Object>> findAll(){
 
         jdbcTemplate = new JdbcTemplate(dataSource);
-        String sql = "SELECT * FROM equipo INNER JOIN corredor ON (corredor.id_equipo = equipo.id)";
+        String sql = "SELECT u.id, u.id_equipo, u.nombre_corredor, u.apellido, u.prob_terminar, u.tiempo_arranque, u.velocidad_curva, u.velocidad_recta, u.fase, a.nombre_equipo FROM corredor u\n" +
+                "JOIN (SELECT nombre_equipo ,id AS rand_id FROM equipo ORDER BY RAND()) a\n" +
+                "ON u.id_equipo=a.rand_id\n" +
+                "LIMIT 32";
 
         List<Equipo> equipos = new ArrayList<Equipo>();
 

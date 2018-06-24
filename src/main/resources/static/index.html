@@ -24,7 +24,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
 
     <!-- Latest compiled and minified Locales -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-es-ES.min.js"></script>
 
     <script type="text/javascript" src="js/libraries/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/libraries/moment.min.js"></script>
@@ -88,25 +88,64 @@
                 </div>
                 <div class="modal-body">
                     <div class="table-responsive">
-                        <table class="tableEquipos">
+                        <table class="tableEquipos "
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-pagination="true"
+                               data-page-list="[5, 10]"
+                        >
                             <thead>
                                 <tr>
-                                    <th scope="col" data-field="nombre_equipo">País</th>
-                                    <th scope="col" data-field="nombre_corredor" data-field="apellido">Corredor</th>
-                                    <th scope="col" data-field="prob_terminar">Prob. de Terminar</th>
-                                    <th scope="col" data-field="tiempo_arranque">Tiempo de arranque</th>
-                                    <th scope="col" data-field="velocidad_curva">Velocidad en curvas</th>
-                                    <th scope="col" data-field="velocidad_recta">Velocidad en rectas</th>
+                                    <th scope="col"
+                                        data-field="nombre_equipo"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >País</th>
+                                    <th scope="col"
+                                        data-field="nombre_corredor"
+                                        data-field="apellido"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Corredor</th>
+                                    <th scope="col"
+                                        data-field="prob_terminar"
+                                        data-align="center"
+                                        data-halign="center"
+                                        data-align="center
+                                    >Prob. de Terminar"</th>
+                                    <th scope="col"
+                                        data-field="tiempo_arranque"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Tiempo de arranque</th>
+                                    <th scope="col"
+                                        data-field="velocidad_curva"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Velocidad en curvas</th>
+                                    <th scope="col"
+                                        data-field="velocidad_recta"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Velocidad en rectas</th>
                                     <th scope="col" data-field="fase">Fase</th>
                                 </tr>
-                            
+
                             </thead>
                         </table>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atras</button>
+                    <button type="button" onClick="goHome()" class="btn btn-secondary" data-dismiss="modal">Atras</button>
+                    <button type="button" onClick="" class="btn btn-primary">Reload</button>
                     <button type="button" onClick="" class="btn btn-primary">Start</button>
+
                 </div>
             </div>
         </div>
@@ -120,6 +159,13 @@
         $('#body').load('views/home.html');
 
     });
+
+    function goHome() {
+
+        $('#body').load('views/home.html');
+
+    }
+
 
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
     var socket = io('http://localhost:9092/chat');
