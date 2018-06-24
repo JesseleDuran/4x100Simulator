@@ -16,13 +16,11 @@ import java.util.Map;
 @RequestMapping("/equipo")
 public class EquipoController {
 
-    ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     @ResponseBody
     public List<Map<String, Object>> findAll() {
 
-        //ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         JDBCEquipoDAO jdbcEquipoDAO = (JDBCEquipoDAO) context.getBean("jdbcEquipoDAO");
         /*Equipo equipo3 = new Equipo("Panama");

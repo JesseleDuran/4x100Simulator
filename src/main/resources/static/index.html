@@ -142,8 +142,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onClick="goHome()" class="btn btn-secondary" data-dismiss="modal">Atras</button>
-                    <button type="button" onClick="" class="btn btn-primary">Reload</button>
+                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
+                    <button type="button" onClick="displayEquipos()" class="btn btn-primary">Reload</button>
                     <button type="button" onClick="" class="btn btn-primary">Start</button>
 
                 </div>
@@ -165,7 +165,6 @@
         $('#body').load('views/home.html');
 
     }
-
 
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
     var socket = io('http://localhost:9092/chat');
