@@ -159,30 +159,11 @@
 </html>
 
 <script>
-    $(document).ready(function(){
-        goHome();
-    });
-
-    function goHome() {
-        $('#body').load('views/home.html');
-
-    }
-
-    function goHistorialCarreras() {
-        displayHistorialCarreras();
-        $('#body').load('views/historial-carreras.html');
-
-    }
-
-    function goCorredores() {
-        displayCorredores();
-        $('#body').load('views/corredores.html');
-
-    }
 
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
     var socket = io('http://localhost:9092/chat');
     socket.connect();
+
 
     //when a user connects
     socket.on('connect', function () {
@@ -219,6 +200,26 @@
 
     });
 
+    $(document).ready(function(){
+        goHome();
+    });
+
+    function goHome() {
+        $('#body').load('views/home.html');
+    }
+
+    function goHistorialCarreras() {
+        displayHistorialCarreras();
+        $('#body').load('views/historial-carreras.html');
+
+    }
+
+    function goCorredores() {
+        displayCorredores();
+        $('#body').load('views/corredores.html');
+
+    }
+
     //accept begin with that quantity of users
     function startSimulator() {
 
@@ -252,7 +253,6 @@
         }
     });
 
-
     function displayEquipos()
     {
         $.ajax({
@@ -260,10 +260,19 @@
             type: 'GET',
             success: function (entry)
             {
-                console.log(entry);
-                $('.tableEquipos').bootstrapTable({
-                    data: entry
+                var jsonObject = {equipos: entry};
+                socket.emit('getEquipos', jsonObject);
+
+                //divide .html to different users
+                socket.on('equipoList', function (data) {
+
+                    console.log("equipos para todos", data);
+                    $('.tableEquipos').bootstrapTable({
+                        data: data.equipos
+                    });
+
                 });
+
             }
         });
 
@@ -300,6 +309,5 @@
         });
 
     }
-
 
 </script>

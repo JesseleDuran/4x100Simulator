@@ -9,6 +9,7 @@ import com.corundumstudio.socketio.listener.DisconnectListener;
 import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ChatDTO;
 import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ConnectedDTO;
 import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.FirstStartDTO;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.listEquiposDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class ChatModule {
         this.namespace.addDisconnectListener(onDisconnected());
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
+        this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
     }
 
     private DataListener<ChatDTO> onChatReceived() {
@@ -77,6 +79,13 @@ public class ChatModule {
                         namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
                 }
             }
+        };
+
+    }
+
+    private DataListener<listEquiposDTO> sendEquiposToClients() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("equipoList", data);
         };
 
     }
