@@ -52,8 +52,6 @@ public class ChatModule {
             conectados.addConectados();
             conectados.getId_conectados().add(client.getSessionId());
 
-            //sendHtmlBySizeOFClients();
-
             namespace.getBroadcastOperations().sendEvent("cantidadConectados", conectados);
 
         };
@@ -62,6 +60,7 @@ public class ChatModule {
     private DataListener<FirstStartDTO> sendHtmlBySizeOFClients() {
         return (client, data, ackSender) -> {
             if (data.isStart()) {
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("master", "eres el principal");
                 switch (conectados.getId_conectados().size()) {
                     case 1:
                         namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
@@ -97,8 +96,6 @@ public class ChatModule {
             //remove 1 to total of connected and add the client's session id
             conectados.deleteConectados();
             conectados.getId_conectados().remove(client.getSessionId());
-
-            //sendHtmlBySizeOFClients();
 
             System.out.printf("se desconecto alguien, quedan %02d%n personas", conectados.getConectados());
         };
