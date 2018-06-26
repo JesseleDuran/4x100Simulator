@@ -6,10 +6,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
-import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ChatDTO;
-import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.ConnectedDTO;
-import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.FirstStartDTO;
-import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.listEquiposDTO;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +29,20 @@ public class ChatModule {
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
         this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
+        this.namespace.addEventListener("finishAnimation", FinishAnimation.class, sendAnimationType());
     }
 
     private DataListener<ChatDTO> onChatReceived() {
         return (client, data, ackSender) -> {
             log.debug("Client[{}] - Received chat message '{}'", client.getSessionId().toString(), data);
             namespace.getBroadcastOperations().sendEvent("chat", data);
+
+        };
+    }
+
+    private DataListener<FinishAnimation> sendAnimationType() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("animationType", data);
 
         };
     }

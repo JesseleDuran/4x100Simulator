@@ -1,106 +1,252 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Pista derecha</title>
-      <style media="screen">
+<head>
+  <meta charset="utf-8">
+  <title>Pista derecha</title>
+  <style media="screen">
 
 
-      .ovalo-interno{
-        display: block;
-        width: 240px;
-        height: 200px;
-        border-top-right-radius: 100%;
-        border-bottom-right-radius: 100%;
-        background: #008000;
+    .ovalo-interno{
+      display: block;
+      width: 240px;
+      height: 200px;
+      border-top-right-radius: 100%;
+      border-bottom-right-radius: 100%;
+      background: #008000;
+      border-right: 1px solid white;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+      left:0; top:0; bottom: 0;
+      margin:auto;
+      position: absolute;
+      max-width:100%;
+      max-height:100%;
+      overflow:auto;
 
-        border-right: 1px solid white;
-        border-top: 1px solid white;
-        border-bottom: 1px solid white;
-        left:0; top:0; bottom: 0;
-        margin:auto;
-        position: absolute;
+    }
+    .ovalo1, .ovalo2, .ovalo3, .ovalo4, .ovalo5, .ovalo6, .ovalo7, .ovalo8{
+      display: block;
+      margin: auto;
+      border-top: 1px solid white;
+      border-bottom: 1px solid white;
+      border-right: 1px solid white;
+      /* border-radius:150% / 0 100% 100% 0; */
+      border-top-right-radius: 100%;
+      border-bottom-right-radius: 100%;
+      background: #BC4328;
+      left:0;
+      top:0; bottom:0;
+      position: absolute;
+    }
 
-        max-width:100%;
-        max-height:100%;
-        overflow:auto;
+    .ovalo1{
+      height: 270px;
+      width: 270px;
+      line-height: 50px;
+    }
+    .ovalo2{
+      height: 340px;
+      width: 300px;
+    }
 
+    .ovalo3{
+      height: 400px;
+      width: 330px;
+    }
+
+    .ovalo4{
+      height: 470px;
+      width: 360px;
+    }
+
+    .ovalo5{
+      height: 540px;
+      width: 390px;
+    }
+    .ovalo6{
+      height: 600px;
+      width: 420px;
+    }
+    .ovalo7{
+      height: 660px;
+      width: 450px;
+    }
+    .ovalo8{
+      height: 720px;
+      width: 480px;
+    }
+
+    .circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      position: absolute;
+      bottom:0;
+      margin-bottom: 1px;
+    }
+
+    #circle1 {
+      animation-timing-function: ease-in-out;
+      background-color: #E84855;
+      left:80px;
+    }
+    #circle2 {
+      animation-timing-function: linear;
+      background-color: #0099FF;
+      left:100px;
+
+    }
+    #circle3 {
+      animation-timing-function: cubic-bezier(0, 1, .76, 1.14);
+      background-color: #FFCC00;
+      left:120px;
+    }
+    #circle4 {
+      animation-timing-function: ease-in-out;
+      background-color: #E84855;
+      left:140px
+    }
+    #circle5 {
+      animation-timing-function: linear;
+      background-color: #0099FF;
+      left:160px;
+    }
+    #circle6 {
+      animation-timing-function: cubic-bezier(0, 1, .76, 1.14);
+      background-color: #FFCC00;
+      left:180px
+    }
+    #circle7 {
+      animation-timing-function: ease-in-out;
+      background-color: #E84855;
+      left:200px
+    }
+    #circle8 {
+      animation-timing-function: linear;
+      background-color: #0099FF;
+      left:220px;
+
+    }
+
+    .slide{
+      animation-play-state: running;
+      animation-name: slide;
+      animation-duration: 2s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+    }
+
+    .linea{
+      width:100px;
+      height: 100px;
+      border-right: 2px solid white;
+      position:absolute;
+      bottom: 0px;
+    }
+
+    #linea1{
+      left:10px;
+    }
+
+    #linea2{
+      left:30px;
+    }
+    #linea3{
+      left:50px;
+    }
+    #linea4{
+      left:70px;
+    }
+    #linea5{
+      left:90px;
+    }
+    #linea6{
+      left:110px;
+    }
+    #linea7{
+      left:130px;
+    }
+    #linea8{
+      left:150px;
+    }
+
+    @keyframes myOrbit2 {
+      100% {
+        transform: rotate(180deg) translateX(350%) translateY(310px) rotate(-180deg);
       }
-      .ovalo1, .ovalo2, .ovalo3, .ovalo4, .ovalo5, .ovalo6, .ovalo7, .ovalo8{
-        display: block;
-        margin: auto;
-        border-top: 1px solid white;
-        border-bottom: 1px solid white;
-        border-right: 1px solid white;
-        /* border-radius:150% / 0 100% 100% 0; */
-        border-top-right-radius: 100%;
-        border-bottom-right-radius: 100%;
-        background: #BC4328;
-        left:0;
-        top:0; bottom:0;
-        position: absolute;
+      80% {
+        transform: rotate(180deg) translateX(340%) translateY(310px) rotate(-180deg);
       }
-
-
-      .ovalo1{
-        height: 270px;
-        width: 270px;
-
+      75% {
+        /* transform: rotate(180deg) translateX(300%) translateY(310px) rotate(-180deg); */
       }
-     .ovalo2{
-       height: 340px;
-       width: 300px;
+      50% {
+        transform: rotate(270deg) translateX(250px) translateY(170px) rotate(-270deg);
       }
-
-      .ovalo3{
-        height: 400px;
-        width: 330px;
+      35% {
+        transform: rotate(270deg) translateX(200px) translateY(170px) rotate(-270deg);
       }
-
-      .ovalo4{
-        height: 470px;
-        width: 360px;
+      10% {
+        transform: rotate(310deg) translateX(120px) translateY(80px) rotate(-270deg);
       }
-
-      .ovalo5{
-        height: 540px;
-        width: 390px;
+      0% {
+        transform: rotate(360deg) rotate(-360deg) scale(1);
       }
+    }
 
-      .ovalo6{
-        height: 600px;
-        width: 420px;
+    @keyframes myOrbit3 {
+      100% {
+        transform: rotate(180deg) translateX(420%) translateY(370px) rotate(-180deg);
       }
-
-      .ovalo7{
-        height: 660px;
-        width: 450px;
+      80% {
+        transform: rotate(180deg) translateX(420%) translateY(370px) rotate(-180deg);
       }
-
-      .ovalo8{
-        height: 720px;
-        width: 480px;
+      75% {
+        /* transform: rotate(180deg) translateX(300%) translateY(310px) rotate(-180deg); */
       }
-      </style>
+      50% {
+        transform: rotate(270deg) translateX(250px) translateY(230px) rotate(-270deg);
+      }
+      35% {
+        transform: rotate(270deg) translateX(230px) translateY(190px) rotate(-270deg);
+      }
+      10% {
+        transform: rotate(310deg) translateX(140px) translateY(80px) rotate(-270deg);
+      }
+      0% {
+        transform: rotate(360deg) rotate(-360deg) scale(1);
+      }
+    }
 
-  </head>
-  <body>
-    <div class="ovalo8">
-      <div class="ovalo7">
-        <div class="ovalo6">
-          <div class="ovalo5">
-            <div class="ovalo4">
-              <div class="ovalo3">
-                <div class="ovalo2">
-                  <div class="ovalo1">
+
+  </style>
+
+</head>
+<body>
+<div class="container">
+  <div class="ovalo8"><div class="linea" id="linea8"></div><div class="circle" id="circle8"></div>
+    <div class="ovalo7"><div class="linea" id="linea7"></div><div class="circle" id="circle7"></div>
+      <div class="ovalo6"><div class="linea" id="linea6"></div><div class="circle" id="circle6"></div>
+        <div class="ovalo5"><div class="linea" id="linea5"></div><div class="circle" id="circle5"></div>
+          <div class="ovalo4"><div class="linea" id="linea4"></div><div class="circle" id="circle4"></div>
+            <div class="ovalo3"><div class="linea" id="linea3"></div><div class="circle" id="circle3"></div>
+              <div class="ovalo2"><div class="linea" id="linea2"></div><div class="circle" id="circle2"></div>
+                <div class="slide">
+                  <div class="ovalo1"><div class="linea" id="linea1"></div><div class="circle" id="circle1"></div>
                     <div class="ovalo-interno"></div>
                   </div>
-              </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+
+
+  <script>
+
+  </script>
+</body>
 </html>

@@ -114,25 +114,25 @@
                                         data-align="center"
                                         data-halign="center"
                                         data-align="center"
-                                    >Prob. de Terminar</th>
+                                    >Prob. de Terminar (%)</th>
                                     <th scope="col"
                                         data-field="tiempo_arranque"
                                         data-sortable="true"
                                         data-align="center"
                                         data-halign="center"
-                                    >Tiempo de arranque</th>
+                                    >Tiempo de reacción (seg)</th>
                                     <th scope="col"
                                         data-field="velocidad_curva"
                                         data-sortable="true"
                                         data-align="center"
                                         data-halign="center"
-                                    >Velocidad en curvas</th>
+                                    >Velocidad en curvas (km/hr)</th>
                                     <th scope="col"
                                         data-field="velocidad_recta"
                                         data-sortable="true"
                                         data-align="center"
                                         data-halign="center"
-                                    >Velocidad en rectas</th>
+                                    >Velocidad en rectas (km/hr)</th>
                                     <th scope="col"
                                         data-field="fase"
                                         data-align="center"
@@ -147,7 +147,7 @@
                 <div class="modal-footer">
                     <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
                     <button type="button" class="btn btn-primary">Reload</button>
-                    <button type="button" onClick="" class="btn btn-primary">Start</button>
+                    <button type="button" onClick="startRace()" class="btn btn-primary">Start</button>
 
                 </div>
             </div>
@@ -161,8 +161,30 @@
 
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
     var socket = io('http://localhost:9092/chat');
-    var conectados;
+    var equipos;
+
+    var equipoFase1;
+    var equipoFase2 ;
+    var equipoFase3;
+    var equipoFase4;
     socket.connect();
+
+    $(document.body).on('webkitAnimationEnd', function(e){
+        var animName = e.originalEvent.animationName;
+        console.log(animName);
+        //emit when a animation finish
+        socket.emit('finishAnimation', animName);
+
+    })
+
+    //when an animation finish
+    socket.on('animationType', function (data) {
+        switch(data.animation){
+            case 'myOrbit2' :
+                console.log('hola ya termine');
+                break;
+        }
+    });
 
     //when a user connects
     socket.on('connect', function () {
@@ -234,6 +256,64 @@
 
     }
 
+    function activateAnimation(i)
+    {
+        circle.style["animation-duration"] = time + "s";
+        circle.style["animation-name"] = "myOrbit" + i;
+        circle.style.animationIterationCount = "1";
+
+    }
+
+
+
+    function activeEquiposFase1(equipos)
+    {
+
+        var k = 0;
+        var time = 0;
+        for(var i = 1; i <= 8; i++){
+
+            var classId = 'circle' + i;
+
+            if(equipos[k].fase === 1 || equipos[k].fase === 3) {
+                time = speedToTime(equipos[k].velocidad_curva);
+            }
+            else {
+                time = speedToTime(equipos[k].velocidad_recta);
+            }
+
+            console.log("clase",classId);
+            console.log("tiempo", time);
+            equipos[k]['circleId'] =  i;
+            console.log("un requipo", equipos[k]);
+
+            var circle = document.getElementById(classId);
+            circle.style["animation-duration"] = time + "s";
+            circle.style["animation-name"] = "myOrbit" + i;
+            circle.style.animationIterationCount = "1";
+
+        }
+
+    }
+
+
+    //start simulator
+    function startRace() {
+
+        $('#equiposModal').modal('hide');
+        console.log("He dado click a iniciar carrera");
+
+        equipoFase1 = orderArrays(equipos, 1);
+        equipoFase2 = orderArrays(equipos, 2);
+        equipoFase3 = orderArrays(equipos, 3);
+        equipoFase4 = orderArrays(equipos, 4);
+
+        activeEquiposFase1(equipoFase1);
+        console.log("equipos de fase 1", equipoFase1);
+
+    }
+
+
     function sendDisconnect() {
         socket.disconnect();
     }
@@ -267,6 +347,61 @@
 
     });
 
+    function activeEquiposFase1(equipos)
+    {
+
+        var k = 0;
+        var time = 0;
+        for(var i = 1; i <= 8; i++){
+
+            var classId = 'circle' + i;
+
+            if(equipos[k].fase === 1 || equipos[k].fase === 3) {
+                time = speedToTime(equipos[k].velocidad_curva);
+            }
+            else {
+                time = speedToTime(equipos[k].velocidad_recta);
+            }
+
+            console.log(classId);
+            console.log(time);
+
+            var circle = document.getElementById(classId);
+            circle.style["animation-duration"] = time + "s";
+            circle.style["animation-name"] = "myOrbit" + i;
+            circle.style.animationIterationCount = "1";
+
+        }
+
+    }
+
+    function orderArrays(equipos, fase)
+    {
+
+        var equiposFase = [];
+        for(var x in equipos){
+
+            if(equipos[x].fase === fase) {
+
+                equiposFase.push(equipos[x]);
+
+            }
+
+        }
+
+        return equiposFase;
+
+    }
+
+
+
+    function speedToTime(speed)
+    {
+        return ((0.1 / speed)*3600);
+
+    }
+
+
     function displayEquipos()
     {
         $.ajax({
@@ -274,8 +409,10 @@
             type: 'GET',
             success: function (entry)
             {
+                equipos = entry;
                 var jsonObject = {equipos: entry};
                 socket.emit('getEquipos', jsonObject);
+
 
             }
         });
@@ -289,7 +426,7 @@
             type: 'GET',
             success: function (entry)
             {
-                console.log(entry);
+
                 $('.tableCarreras').bootstrapTable({
                     data: entry
                 });
