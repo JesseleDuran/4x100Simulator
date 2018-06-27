@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Pista izquierda</title>
-
       <style media="screen">
 
       .ovalo-interno{
@@ -13,19 +12,17 @@
         border-top-left-radius: 100%;
         border-bottom-left-radius: 100%;
         background: #008000;
-
         border-left: 1px solid white;
         border-top: 1px solid white;
         border-bottom: 1px solid white;
         right:0; top:0; bottom: 0;
         margin:auto;
         position: absolute;
-
         max-width:100%;
         max-height:100%;
         overflow:auto;
-
       }
+
       .ovalo1, .ovalo2, .ovalo3, .ovalo4, .ovalo5, .ovalo6, .ovalo7, .ovalo8{
         display: block;
         margin: auto;
@@ -78,29 +75,407 @@
       }
 
       .ovalo8{
-        height: 710px;
+        height: 720px;
         width: 480px;
       }
+
+      .circleLeftIn{
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        top:0; right: -40px;
+        }
+
+      #circle25{
+        background-color: #E84855;
+      }
+      #circle26{
+        background-color: #0099FF;
+      }
+      #circle27{
+        background-color: #FFCC00;
+      }
+      #circle28{
+        background-color: #E84855;
+      }
+      #circle29{
+        background-color: #0099FF;
+      }
+      #circle30{
+        background-color: #FFCC00;
+      }
+      #circle31{
+        background-color: #E84855;
+
+      }
+      #circle32{
+        background-color: #0099FF;
+      }
+
+      @keyframes move25{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-140px);
+          }
+        }
+      @keyframes move26{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-150px);
+          }
+        }
+      @keyframes move27{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-160px);
+          }
+        }
+      @keyframes move28{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-170px);
+          }
+        }
+      @keyframes move29{
+        0%{
+          transform: translateX(-10px);
+        }
+        100%{
+          transform: translateX(-180px);
+        }
+      }
+      @keyframes move30{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-190px);
+          }
+        }
+      @keyframes move31{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-200px);
+          }
+        }
+      @keyframes move32{
+          0%{
+            transform: translateX(-10px);
+          }
+          100%{
+            transform: translateX(-210px);
+          }
+        }
+
+      .circle {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          position: absolute;
+          top:0;
+      }
+
+      #circle33 {
+          background-color: #E84855;
+          right:130px;
+      }
+      @keyframes move33 {
+           100% {
+              transform: rotate(-90deg) translateX(-240px) translateY(160px);
+          }
+          75%{
+              transform:  translateX(-70px) translateY(220px);
+          }
+
+          50% {
+              transform:  translateX(-110px) translateY(150px);
+          }
+          25% {
+              transform: translateX(-100px) translateY(60px) ;
+          }
+
+      }
+      #circle34 {
+          background-color: #0099FF;
+          right:140px;
+      }
+      @keyframes move34 {
+          100% {
+             transform: rotate(-90deg) translateX(-310px) translateY(170px);
+         }
+         75%{
+             transform:  translateX(-60px) translateY(290px);
+         }
+
+         50% {
+             transform:  translateX(-130px) translateY(190px);
+         }
+         25% {
+             transform: translateX(-100px) translateY(50px) ;
+         }
+      }
+
+      #circle35 {
+          background-color: #FFCC00;
+          right:150px;
+      }
+      @keyframes move35 {
+        100% {
+           transform: rotate(-90deg) translateX(-370px) translateY(180px);
+         }
+         75%{
+             transform:  translateX(-90px) translateY(340px);
+         }
+
+         50% {
+             transform:  translateX(-160px) translateY(220px);
+         }
+         25% {
+             transform: translateX(-100px) translateY(40px) ;
+         }
+        }
+
+      #circle36 {
+          background-color: #E84855;
+          right:160px;
+      }
+      @keyframes move36 {
+        100% {
+           transform: rotate(-90deg) translateX(-440px) translateY(190px);
+         }
+         80%{
+           transform: translateX(-30px) translateY(440px);
+         }
+         60%{
+             transform: translateX(-120px) translateY(400px);
+         }
+
+         40% {
+             transform:  translateX(-180px) translateY(250px);
+         }
+         20% {
+             transform: translateX(-100px) translateY(30px) ;
+         }
+      }
+      #circle37 {
+          background-color: #0099FF;
+          right:170px;
+      }
+      @keyframes move37 {
+        100% {
+           transform: rotate(-90deg) translateX(-500px) translateY(200px);
+         }
+         80%{
+           transform: translateX(-80px) translateY(500px);
+         }
+         60%{
+             transform: translateX(-140px) translateY(430px);
+         }
+
+         40% {
+             transform:  translateX(-200px) translateY(280px);
+         }
+         20% {
+             transform: translateX(-100px) translateY(20px) ;
+         }
+        }
+
+      #circle38 {
+          background-color: #FFCC00;
+          right:180px;
+      }
+      @keyframes move38 {
+        100% {
+           transform: rotate(-90deg) translateX(-570px) translateY(210px);
+         }
+         80%{
+           transform: translateX(-40px) translateY(580px);
+         }
+         60%{
+             transform: translateX(-200px) translateY(400px);
+         }
+
+         40% {
+             transform:  translateX(-210px) translateY(200px);
+         }
+         20% {
+             transform: translateX(-90px) translateY(10px) ;
+         }
+        }
+
+
+      #circle39 {
+          background-color: #E84855;
+          right:190px;
+      }
+      @keyframes move39 {
+        100% {
+           transform: rotate(-90deg) translateX(-630px) translateY(220px);
+         }
+         80%{
+           transform: translateX(-10px) translateY(640px);
+         }
+         60%{
+             transform: translateX(-180px) translateY(550px);
+         }
+
+         40% {
+             transform:  translateX(-240px) translateY(270px);
+         }
+         20% {
+             transform: translateX(-90px) translateY(10px) ;
+         }
+        }
+
+      #circle40 {
+          background-color: #0099FF;
+          right:200px;
+      }
+      @keyframes move40 {
+        100% {
+           transform: rotate(-90deg) translateX(-690px) translateY(230px);
+         }
+         80%{
+           transform: translateX(-120px) translateY(670px);
+         }
+         60%{
+             transform: translateX(-250px) translateY(480px);
+         }
+
+         40% {
+             transform:  translateX(-230px) translateY(180px);
+         }
+         20% {
+             transform: translateX(-70px) translateY(0px) ;
+         }
+        }
+
+      .linea{
+        width:100px;
+        height: 100px;
+        border-right: 2px solid white;
+        position:absolute;
+        top: 0px;
+      }
+
+      #linea1{
+        left:10px;
+      }
+
+      #linea2{
+        left:30px;
+      }
+      #linea3{
+        left:50px;
+      }
+      #linea4{
+        left:70px;
+      }
+      #linea5{
+        left:90px;
+      }
+      #linea6{
+        left:110px;
+      }
+      #linea7{
+        left:130px;
+      }
+      #linea8{
+        left:150px;
+      }
+
+
       </style>
 
   </head>
+
   <body>
-    <div class="ovalo8">
-      <div class="ovalo7">
-        <div class="ovalo6">
-          <div class="ovalo5">
-            <div class="ovalo4">
-              <div class="ovalo3">
-                <div class="ovalo2">
-                  <div class="ovalo1">
-                    <div class="ovalo-interno"></div>
+    <div class="container">
+        <div class="ovalo8">
+          <div class="linea" id="linea8"></div>
+          <div class="circle" id="circle40"></div>
+          <div class="circleLeftIn" id="circle32"></div>
+
+          <div class="ovalo7">
+            <div class="linea" id="linea7"></div>
+            <div class="circle" id="circle39"></div>
+            <div class="circleLeftIn" id="circle31"></div>
+
+            <div class="ovalo6">
+              <div class="linea" id="linea6"></div>
+              <div class="circle" id="circle38"></div>
+              <div class="circleLeftIn" id="circle30"></div>
+
+              <div class="ovalo5">
+                <div class="linea" id="linea5"></div>
+                <div class="circle" id="circle37"></div>
+                <div class="circleLeftIn" id="circle29"></div>
+
+                <div class="ovalo4">
+                  <div class="linea" id="linea4"></div>
+                  <div class="circle" id="circle36"></div>
+                  <div class="circleLeftIn" id="circle28"></div>
+
+                <div class="ovalo3">
+                    <div class="linea" id="linea3"></div>
+                    <div class="circle" id="circle35"></div>
+                    <div class="circleLeftIn" id="circle27"></div>
+
+                    <div class="ovalo2">
+                      <div class="linea" id="linea2"></div>
+                      <div class="circle" id="circle34"></div>
+                      <div class="circleLeftIn" id="circle26"></div>
+
+
+                        <div class="ovalo1">
+                          <div class="linea" id="linea1"></div>
+                          <div class="circle" id="circle33"></div>
+                          <div class="circleLeftIn" id="circle25"></div>
+
+                              <div class="ovalo-interno"></div>
+
+
+                    </div>
                   </div>
-              </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+
+
+
+      <script>
+
+      const $circle1 = document.getElementById('circle1');
+      const animation = $circle1.animate([
+         {
+            transform: 'translateX(0)'
+         },
+         {
+            transform: 'translateX(200px)',
+            transform: 'rotate(.6deg)'
+         }
+      ],{
+         duration: 4000,
+         delay: 500,
+         easing: 'linear',
+         iterations: 2,
+         fill: 'forwards',
+      })
+
+      </script>
   </body>
 </html>
