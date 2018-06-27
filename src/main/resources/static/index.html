@@ -3,8 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <title>4x100 Simulator</title>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
             crossorigin="anonymous"></script>
 
 
@@ -162,7 +163,6 @@
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
     var socket = io('http://localhost:9092/chat');
     var equipos;
-
     var equipoFase1;
     var equipoFase2 ;
     var equipoFase3;
@@ -177,12 +177,179 @@
 
     })
 
+    socket.on('getEquipoFase2', function (data) {
+
+        console.log("get equipo fase 2", data.equipos);
+        equipoFase2 = data.equipos;
+
+    });
+
+    socket.on('getEquipoFase3', function (data) {
+
+        console.log("get equipo fase 3", data.equipos);
+        equipoFase3 = data.equipos;
+
+    });
+
+    socket.on('getEquipoFase4', function (data) {
+
+        console.log("get equipo fase 4", data.equipos);
+        equipoFase4 = data.equipos;
+
+    });
+
     //when an animation finish
     socket.on('animationType', function (data) {
         switch(data.animation){
-            case 'myOrbit2' :
-                console.log('hola ya termine');
+            case 'move1' :
+                activateAnimation(9, 2);
                 break;
+            case 'move2' :
+                activateAnimation(10, 2);
+                break;
+            case 'move3' :
+                activateAnimation(11, 2);
+                break;
+            case 'move4' :
+                activateAnimation(12, 2);
+                break;
+            case 'move5' :
+                activateAnimation(13, 2);
+                break;
+            case 'move6' :
+                activateAnimation(14, 2);
+                break;
+            case 'move7' :
+                activateAnimation(15, 2);
+                break;
+            case 'move8' :
+                activateAnimation(16, 2);
+                break;
+            case'move9':
+                activateAnimation(17, speedToTime(equipoFase2[0].velocidad_recta));
+                break;
+            case'move10':
+                activateAnimation(18, speedToTime(equipoFase2[1].velocidad_recta));
+                break;
+            case'move11':
+                activateAnimation(19, speedToTime(equipoFase2[2].velocidad_recta));
+                break;
+            case'move12':
+                activateAnimation(20, speedToTime(equipoFase2[3].velocidad_recta));
+                break;
+            case'move13':
+                activateAnimation(21, speedToTime(equipoFase2[4].velocidad_recta));
+                break;
+            case'move14':
+                activateAnimation(22, speedToTime(equipoFase2[5].velocidad_recta));
+                break;
+            case'move15':
+                activateAnimation(23, speedToTime(equipoFase2[6].velocidad_recta));
+                break;
+            case'move16':
+                activateAnimation(24, speedToTime(equipoFase2[7].velocidad_recta));
+                break;
+
+            case 'move17' :
+                activateAnimation(25, 2);
+                break;
+            case 'move18' :
+                activateAnimation(26, 2);
+                break;
+            case 'move19' :
+                activateAnimation(27, 2);
+                break;
+            case 'move20' :
+                activateAnimation(28, 2);
+                break;
+            case 'move21' :
+                activateAnimation(29, 2);
+                break;
+            case 'move22' :
+                activateAnimation(30, 2);
+                break;
+            case 'move23' :
+                activateAnimation(31, 2);
+                break;
+            case 'move24' :
+                activateAnimation(32, 2);
+                break;
+
+            case'move25':
+                activateAnimation(33, speedToTime(equipoFase3[0].velocidad_curva));
+                break;
+            case'move26':
+                activateAnimation(34, speedToTime(equipoFase3[1].velocidad_curva));
+                break;
+            case'move27':
+                activateAnimation(35, speedToTime(equipoFase3[2].velocidad_curva));
+                break;
+            case'move28':
+                activateAnimation(36, speedToTime(equipoFase3[3].velocidad_curva));
+                break;
+            case'move29':
+                activateAnimation(37, speedToTime(equipoFase3[4].velocidad_curva));
+                break;
+            case'move30':
+                activateAnimation(38, speedToTime(equipoFase3[5].velocidad_curva));
+                break;
+            case'move31':
+                activateAnimation(39, speedToTime(equipoFase3[6].velocidad_curva));
+                break;
+            case'move32':
+                activateAnimation(40, speedToTime(equipoFase3[7].velocidad_curva));
+                break;
+
+            case 'move33' :
+                activateAnimation(41, 2);
+                break;
+            case 'move34' :
+                activateAnimation(42, 2);
+                break;
+            case 'move35' :
+                activateAnimation(43, 2);
+                break;
+            case 'move36' :
+                activateAnimation(44, 2);
+                break;
+            case 'move37' :
+                activateAnimation(45, 2);
+                break;
+            case 'move38' :
+                activateAnimation(46, 2);
+                break;
+            case 'move39' :
+                activateAnimation(47, 2);
+                break;
+            case 'move40' :
+                activateAnimation(48, 2);
+                break;
+
+            case'move41':
+                activateAnimation(49, speedToTime(equipoFase4[0].velocidad_recta));
+                break;
+            case'move42':
+                activateAnimation(50, speedToTime(equipoFase4[1].velocidad_recta));
+                break;
+            case'move43':
+                activateAnimation(51, speedToTime(equipoFase4[2].velocidad_recta));
+                break;
+            case'move44':
+                activateAnimation(52, speedToTime(equipoFase4[3].velocidad_recta));
+                break;
+            case'move45':
+                activateAnimation(53, speedToTime(equipoFase4[4].velocidad_recta));
+                break;
+            case'move46':
+                activateAnimation(54, speedToTime(equipoFase4[5].velocidad_recta));
+                break;
+            case'move47':
+                activateAnimation(55, speedToTime(equipoFase4[6].velocidad_recta));
+                break;
+            case'move48':
+                activateAnimation(56, speedToTime(equipoFase4[7].velocidad_recta));
+                break;
+
         }
     });
 
@@ -222,7 +389,7 @@
         console.log("antes del req");
 
         $('#connectedModal').modal('hide');
-        $('#body').load('views/' + data);
+        $('#body').load('views/' + data );
         $('#equiposModal').modal({backdrop: 'static', keyboard: false});
 
     });
@@ -256,12 +423,14 @@
 
     }
 
-    function activateAnimation(i)
+    function activateAnimation(i, time)
     {
+        var classId = 'circle' + i;
+        var circle = document.getElementById(classId);
         circle.style["animation-duration"] = time + "s";
-        circle.style["animation-name"] = "myOrbit" + i;
+        circle.style["animation-name"] = "move" + i;
         circle.style.animationIterationCount = "1";
-
+        circle.style.animationFillMode = "forwards";
     }
 
 
@@ -289,27 +458,50 @@
 
             var circle = document.getElementById(classId);
             circle.style["animation-duration"] = time + "s";
-            circle.style["animation-name"] = "myOrbit" + i;
+            circle.style["animation-name"] = "move" + i;
             circle.style.animationIterationCount = "1";
+            circle.style.animationFillMode = "forwards";
 
         }
 
     }
 
+    socket.on('cerrarMyModal', function (data) {
+
+        console.log("cerrar modal", data);
+        $('#equiposModal').modal('hide');
+
+    });
+
+
+
 
     //start simulator
     function startRace() {
 
-        $('#equiposModal').modal('hide');
-        console.log("He dado click a iniciar carrera");
+        socket.emit('cerrarModal', 'hide');
 
         equipoFase1 = orderArrays(equipos, 1);
         equipoFase2 = orderArrays(equipos, 2);
         equipoFase3 = orderArrays(equipos, 3);
         equipoFase4 = orderArrays(equipos, 4);
 
-        activeEquiposFase1(equipoFase1);
         console.log("equipos de fase 1", equipoFase1);
+        console.log("equipos de fase 2", equipoFase2);
+
+
+        var jsonObject = {equipos: equipoFase2};
+        socket.emit('sendEquipoFase2', jsonObject);
+
+        var jsonObject = {equipos: equipoFase3};
+        socket.emit('sendEquipoFase3', jsonObject);
+
+        var jsonObject = {equipos: equipoFase4};
+        socket.emit('sendEquipoFase4', jsonObject);
+
+        console.log("He dado click a iniciar carrera");
+
+        activeEquiposFase1(equipoFase1);
 
     }
 
@@ -341,39 +533,13 @@
     socket.on('equipoList', function (data) {
 
         console.log("equipos para todos", data);
+        equipos = data.equipos;
         $('.tableEquipos').bootstrapTable({
             data: data.equipos
         });
 
     });
 
-    function activeEquiposFase1(equipos)
-    {
-
-        var k = 0;
-        var time = 0;
-        for(var i = 1; i <= 8; i++){
-
-            var classId = 'circle' + i;
-
-            if(equipos[k].fase === 1 || equipos[k].fase === 3) {
-                time = speedToTime(equipos[k].velocidad_curva);
-            }
-            else {
-                time = speedToTime(equipos[k].velocidad_recta);
-            }
-
-            console.log(classId);
-            console.log(time);
-
-            var circle = document.getElementById(classId);
-            circle.style["animation-duration"] = time + "s";
-            circle.style["animation-name"] = "myOrbit" + i;
-            circle.style.animationIterationCount = "1";
-
-        }
-
-    }
 
     function orderArrays(equipos, fase)
     {
@@ -388,11 +554,10 @@
             }
 
         }
-
+        console.log("ordenado equipo!!", equiposFase);
         return equiposFase;
 
     }
-
 
 
     function speedToTime(speed)

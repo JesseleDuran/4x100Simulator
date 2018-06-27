@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pista medio</title>
+
+      <style media="screen">
+
+      .ovalo1, .ovalo2, .ovalo3, .ovalo4, .ovalo5, .ovalo6, .ovalo7, .ovalo8{
+        display: block;
+        margin: auto;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        background: #BC4328;
+        left:0; right:0;
+        top:0; bottom:0;
+        position: fixed;
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+      }
+      .ovalo1{
+        height: 270px;
+
+      }
+      .ovalo2{
+        height: 340px;
+      }
+
+      .ovalo3{
+        height: 400px;
+      }
+
+      .ovalo4{
+        height: 470px;
+      }
+
+      .ovalo5{
+        height: 540px;
+      }
+
+      .ovalo6{
+        height: 600px;
+      }
+
+      .ovalo7{
+        height: 660px;
+      }
+
+      .ovalo8{
+        height: 730px;
+      }
+
+      .ovalo-interno{
+        display: block;
+        height: 200px;
+        background: #008000;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        left:0; right:0;
+        top:0; bottom:0;
+        margin:auto;
+        position: inherit;
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+      }
+
+      .circleIn{
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        position: absolute;
+        top:0;
+        margin-top: 2px;
+      }
+      #circle9{
+        background-color: #E84855;
+        right: 40px;
+      }
+      #circle10{
+        background-color: #0099FF;
+        right: 60px;
+      }
+      #circle11{
+        background-color: #FFCC00;
+        right: 80px;
+      }
+      #circle12{
+        background-color: #E84855;
+        right: 100px
+      }
+      #circle13{
+        background-color: #0099FF;
+        right:120px;
+      }
+      #circle14{
+        background-color: #FFCC00;
+        right:140px
+      }
+      #circle15{
+        background-color: #E84855;
+        right:160px;
+      }
+      #circle16{
+        right: 180px;
+        background-color: #0099FF;
+      }
+
+
+      @keyframes move9{
+    			0%{
+    				transform: translateX(40px);
+    			}
+    			100%{
+    				transform: translateX(30px);
+    			}
+    		}
+      @keyframes move10{
+          0%{
+            transform: translateX(60px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+      @keyframes move11{
+          0%{
+            transform: translateX(80px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+      @keyframes move12{
+          0%{
+            transform: translateX(100px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+      @keyframes move13{
+        0%{
+          transform: translateX(120px);
+        }
+        100%{
+          transform: translateX(30px);
+        }
+      }
+      @keyframes move14{
+          0%{
+            transform: translateX(140px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+      @keyframes move15{
+          0%{
+            transform: translateX(160px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+      @keyframes move16{
+          0%{
+            transform: translateX(180px);
+          }
+          100%{
+            transform: translateX(30px);
+          }
+        }
+
+        .circleTop {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          position: absolute;
+          top:0;
+          margin-top: 2px;
+        }
+        #circle17{
+          background-color: #E84855;
+          right: 40px;
+        }
+        #circle18 {
+          background-color: #0099FF;
+          right: 60px;
+        }
+        #circle19 {
+          background-color: #FFCC00;
+          right: 80px;
+        }
+        #circle20 {
+          background-color: #E84855;
+          right: 100px
+        }
+        #circle21 {
+          background-color: #0099FF;
+          right:120px;
+        }
+        #circle22 {
+          background-color: #FFCC00;
+          right:140px;
+        }
+        #circle23 {
+          background-color: #E84855;
+          right:160px;
+        }
+
+        #circle24{
+          right: 180px;
+          background-color: #0099FF;
+        }
+
+        @keyframes move17{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move18{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move19{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move20{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move21{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move22{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+
+        @keyframes move23{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+        @keyframes move24{
+            100%{
+              transform: translateX(-2000px);
+            }
+          }
+
+          .circleBotIn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            position: absolute;
+            bottom:0;
+            left: -30px;
+          }
+
+          #circle42{
+            background-color: #E84855;
+          }
+           #circle43{
+            background-color: #0099FF;
+          }
+          #circle44{
+            background-color: #FFCC00;
+          }
+          #circle45{
+            background-color: #E84855;
+          }
+          #circle46{
+            background-color: #0099FF;
+          }
+          #circle47{
+            background-color: #FFCC00;
+          }
+          #circle48{
+            background-color: #E84855;
+          }
+          #circle49{
+            background-color: #0099FF;
+          }
+           @keyframes move42{
+        			100%{
+        				transform: translateX(80px);
+        			}
+        		}
+          @keyframes move43{
+                100%{
+                  transform: translateX(100px);
+                }
+              }
+           @keyframes move44{
+                100%{
+                  transform: translateX(120px);
+                }
+              }
+            @keyframes move45{
+                100%{
+                  transform: translateX(140px);
+                }
+              }
+            @keyframes move46{
+                100%{
+                  transform: translateX(160px);
+                }
+              }
+            @keyframes move47{
+                100%{
+                  transform: translateX(180px);
+                }
+              }
+            @keyframes move48{
+                100%{
+                  transform: translateX(200px);
+                }
+              }
+            @keyframes move49{
+                100%{
+                  transform: translateX(220px);
+                }
+              }
+
+            .circle {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                position: absolute;
+                bottom:0;
+                margin-bottom: 1px;
+            }
+
+            #circle50 {
+                background-color: #E84855;
+                left:80px;
+            }
+            #circle51 {
+                background-color: #0099FF;
+                left:100px;
+            }
+            #circle52 {
+                background-color: #FFCC00;
+                left:120px;
+            }
+            #circle53 {
+                background-color: #E84855;
+                left:140px
+            }
+            #circle54 {
+                background-color: #0099FF;
+                left:160px;
+            }
+            #circle55 {
+                background-color: #FFCC00;
+                left:180px
+            }
+            #circle56 {
+                background-color: #E84855;
+                left:200px
+            }
+            #circle57 {
+                background-color: #0099FF;
+                left:220px;
+            }
+            @keyframes move50 {
+              100%{
+                transform: translateX(1320px);
+              }
+            }
+            @keyframes move51 {
+              100%{
+                transform: translateX(1300px);
+              }
+            }
+            @keyframes move52 {
+              100%{
+                transform: translateX(1280px);
+              }
+            }
+            @keyframes move53 {
+              100%{
+                transform: translateX(1260px);
+              }
+            }
+            @keyframes move54 {
+              100%{
+                transform: translateX(1240px);
+              }
+            }
+            @keyframes move55 {
+              100%{
+                transform: translateX(1220px);
+              }
+            }
+            @keyframes move56 {
+              100%{
+                transform: translateX(1200px);
+              }
+            }
+            @keyframes move57 {
+              100%{
+                transform: translateX(1180px);
+              }
+            }
+
+
+      .linea{
+        width:100px;
+        height: 100px;
+        border-right: 2px solid white;
+        position:absolute;
+        bottom: 0px;
+      }
+
+      #linea1{
+        left:10px;
+      }
+      #linea2{
+        left:30px;
+      }
+      #linea3{
+        left:50px;
+      }
+      #linea4{
+        left:70px;
+      }
+      #linea5{
+        left:90px;
+      }
+      #linea6{
+        left:110px;
+      }
+      #linea7{
+        left:130px;
+      }
+      #linea8{
+        left:150px;
+      }
+
+      .Linea{
+        width:100px;
+        height: 100px;
+        border-right: 2px solid white;
+        position:absolute;
+        top: 0px;
+      }
+
+      #Linea1{
+        right:70px;
+      }
+      #Linea2{
+        right:90px;
+      }
+      #Linea3{
+        right:110px;
+      }
+      #Linea4{
+        right:130px;
+      }
+      #Linea5{
+        right:150px;
+      }
+      #Linea6{
+        right:170px;
+      }
+      #Linea7{
+        right:190px;
+      }
+      #Linea8{
+        right:210px;
+      }
+
+      .lineafinish{
+        width:100px;
+        height: 50%;
+        border-right: 2px solid white;
+        position:absolute;
+        left: 80%;
+        bottom: 0;
+      }
+
+      .meta{
+        width: 100px;
+        height: 70px;
+        background-image: url('./images/meta.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+      </style>
+
+  </head>
+  <body>
+    <div class="container">
+        <div class="ovalo8">
+          <div class="circle" id="circle57"></div>
+          <div class="circleTop" id="circle24"></div>
+          <div class="circleIn" id="circle16"></div>
+          <div class="circleBotIn" id="circle49"></div>
+          <div class="Linea" id="Linea8"></div>
+          <div class="linea" id="linea8"></div>
+
+
+            <div class="ovalo7">
+              <div class="circle" id="circle56"></div>
+              <div class="circleTop" id="circle23"></div>
+              <div class="circleIn" id="circle15"></div>
+              <div class="circleBotIn" id="circle48"></div>
+              <div class="Linea" id="Linea7"></div>
+              <div class="linea" id="linea7"></div>
+
+                <div class="ovalo6">
+                  <div class="circle" id="circle55"></div>
+                  <div class="circleTop" id="circle22"></div>
+                  <div class="circleIn" id="circle14"></div>
+                  <div class="circleBotIn" id="circle47"></div>
+                  <div class="Linea" id="Linea6"></div>
+                  <div class="linea" id="linea6"></div>
+
+                    <div class="ovalo5">
+                      <div class="circle" id="circle54"></div>
+                      <div class="circleIn" id="circle13"></div>
+                      <div class="circleTop" id="circle21"></div>
+                      <div class="circleBotIn" id="circle46"></div>
+                      <div class="Linea" id="Linea5"></div>
+                      <div class="linea" id="linea5"></div>
+
+
+                        <div class="ovalo4">
+                          <div class="circle" id="circle53"></div>
+                          <div class="circleIn" id="circle12"></div>
+                          <div class="circleTop" id="circle20"></div>
+                          <div class="circleBotIn" id="circle45"></div>
+                          <div class="Linea" id="Linea4"></div>
+                          <div class="linea" id="linea4"></div>
+
+                            <div class="ovalo3">
+                              <div class="circle" id="circle52"></div>
+                              <div class="circleTop" id="circle19"></div>
+                              <div class="circleIn" id="circle11"></div>
+                              <div class="circleBotIn" id="circle44"></div>
+                              <div class="Linea" id="Linea3"></div>
+                              <div class="linea" id="linea3"></div>
+
+                                <div class="ovalo2">
+                                  <div class="circle" id="circle51"></div>
+                                  <div class="circleTop" id="circle18"></div>
+                                  <div class="circleIn" id="circle10"></div>
+                                  <div class="circleBotIn" id="circle43"></div>
+                                  <div class="Linea" id="Linea2"></div>
+                                  <div class="linea" id="linea2"></div>
+
+                                    <div class="ovalo1">
+                                      <div class="circle" id="circle50"></div>
+                                      <div class="circleTop" id="circle17"></div>
+                                      <div class="circleIn" id="circle9"></div>
+                                      <div class="circleBotIn" id="circle42"></div>
+                                      <div class="Linea" id="Linea1"></div>
+                                      <div class="linea" id="linea1"></div>
+
+                                        <div class="ovalo-interno"></div>
+
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <div class="lineafinish">
+                    <div class="meta"></div>
+                  </div>
+    </div>
+
+      <script>
+
+      </script>
+  </body>
+</html>

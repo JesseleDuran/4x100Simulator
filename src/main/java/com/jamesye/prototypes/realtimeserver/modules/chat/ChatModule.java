@@ -30,6 +30,11 @@ public class ChatModule {
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
         this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
         this.namespace.addEventListener("finishAnimation", FinishAnimation.class, sendAnimationType());
+        this.namespace.addEventListener("cerrarModal", CerrarModal.class, sendCloseModal());
+
+        this.namespace.addEventListener("sendEquipoFase2", listEquiposDTO.class, sendEquipo2());
+        this.namespace.addEventListener("sendEquipoFase3", listEquiposDTO.class, sendEquipo3());
+        this.namespace.addEventListener("sendEquipoFase4", listEquiposDTO.class, sendEquipo4());
     }
 
     private DataListener<ChatDTO> onChatReceived() {
@@ -43,6 +48,37 @@ public class ChatModule {
     private DataListener<FinishAnimation> sendAnimationType() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("animationType", data);
+
+        };
+    }
+
+    private DataListener<CerrarModal> sendCloseModal() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("cerrarMyModal", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo2() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase2", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo3() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase3", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo4() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase4", data);
 
         };
     }
@@ -68,19 +104,19 @@ public class ChatModule {
                 namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("master", "eres el principal");
                 switch (conectados.getId_conectados().size()) {
                     case 1:
-                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio-medio.html");
                         break;
                     case 2:
                         namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
-                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-izquierdo.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
                         break;
                     case 3:
                         namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
-                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
                         namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
                         break;
                     default:
-                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio.html");
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio-medio.html");
                 }
             }
         };
