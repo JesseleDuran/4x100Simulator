@@ -177,6 +177,13 @@
 
     })
 
+    socket.on('getEquipoFase1', function (data) {
+
+        console.log("get equipo fase 1", data.equipos);
+        equipoFase1 = data.equipos;
+
+    });
+
     socket.on('getEquipoFase2', function (data) {
 
         console.log("get equipo fase 2", data.equipos);
@@ -350,6 +357,11 @@
                 activateAnimation(56, speedToTime(equipoFase4[7].velocidad_recta));
                 break;
 
+            case 'move49': case 'move50': case 'move51': case 'move52': case 'move53':
+            case 'move54': case 'move55': case 'move56':
+                console.log("la carrera termino");
+                break;
+
         }
     });
 
@@ -473,13 +485,23 @@
 
     });
 
-
+    function timer() {
+        var secs = 0;
+        var id = setInterval(function(){
+            secs++; console.log(secs);
+            /*if(secs> 5){
+                clearInterval(id);
+                alert('Total Time: ' + secs + ' seconds');
+            }*/
+        }, 1000);
+    }
 
 
     //start simulator
     function startRace() {
 
         socket.emit('cerrarModal', 'hide');
+        timer();
 
         equipoFase1 = orderArrays(equipos, 1);
         equipoFase2 = orderArrays(equipos, 2);
@@ -489,6 +511,8 @@
         console.log("equipos de fase 1", equipoFase1);
         console.log("equipos de fase 2", equipoFase2);
 
+        var jsonObject = {equipos: equipoFase1};
+        socket.emit('sendEquipoFase1', jsonObject);
 
         var jsonObject = {equipos: equipoFase2};
         socket.emit('sendEquipoFase2', jsonObject);

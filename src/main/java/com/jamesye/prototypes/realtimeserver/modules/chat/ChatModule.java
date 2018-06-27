@@ -32,6 +32,7 @@ public class ChatModule {
         this.namespace.addEventListener("finishAnimation", FinishAnimation.class, sendAnimationType());
         this.namespace.addEventListener("cerrarModal", CerrarModal.class, sendCloseModal());
 
+        this.namespace.addEventListener("sendEquipoFase1", listEquiposDTO.class, sendEquipo1());
         this.namespace.addEventListener("sendEquipoFase2", listEquiposDTO.class, sendEquipo2());
         this.namespace.addEventListener("sendEquipoFase3", listEquiposDTO.class, sendEquipo3());
         this.namespace.addEventListener("sendEquipoFase4", listEquiposDTO.class, sendEquipo4());
@@ -55,6 +56,14 @@ public class ChatModule {
     private DataListener<CerrarModal> sendCloseModal() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("cerrarMyModal", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo1() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase1", data);
 
         };
     }
