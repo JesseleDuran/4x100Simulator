@@ -155,6 +155,66 @@
         </div>
     </div>
 
+    <!-- FINISH Modal -->
+    <div class="modal fade bd-example-modal-lg" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id=finishModalTitle">Estadísticas finales</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="finishTable"
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-pagination="true"
+                               data-page-list="[8, 10]"
+                        >
+                            <thead>
+                            <tr>
+                                <th scope="col"
+                                    data-field="equipo_1"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Primera Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_2"
+                                    data-field="apellido"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Segunda Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_3"
+                                    data-align="center"
+                                    data-halign="center"
+                                    data-align="center"
+                                >Tercera Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_final"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Finales</th>
+
+                            </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Inicio</button>
+                    <button type="button" class="btn btn-primary">Ir al historial</button>
+                    <button type="button" onClick="startRace()" class="btn btn-primary">Repetir</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
 
@@ -167,6 +227,10 @@
     var equipoFase2 ;
     var equipoFase3;
     var equipoFase4;
+    var equiposGanadores4 = [];
+    var equiposGanadores3 = [];
+    var equiposGanadores2 = [];
+    var equiposGanadores1 = [];
     socket.connect();
 
     $(document.body).on('webkitAnimationEnd', function(e){
@@ -210,28 +274,37 @@
         switch(data.animation){
             case 'move1' :
                 activateAnimation(9, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move2' :
                 activateAnimation(10, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move3' :
                 activateAnimation(11, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move4' :
                 activateAnimation(12, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move5' :
                 activateAnimation(13, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move6' :
                 activateAnimation(14, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move7' :
                 activateAnimation(15, 2);
+                equiposGanadores1.push(data.animation);
                 break;
             case 'move8' :
                 activateAnimation(16, 2);
+                equiposGanadores1.push(data.animation);
                 break;
+
             case'move9':
                 activateAnimation(17, speedToTime(equipoFase2[0].velocidad_recta));
                 break;
@@ -259,27 +332,35 @@
 
             case 'move17' :
                 activateAnimation(25, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move18' :
                 activateAnimation(26, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move19' :
                 activateAnimation(27, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move20' :
                 activateAnimation(28, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move21' :
                 activateAnimation(29, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move22' :
                 activateAnimation(30, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move23' :
                 activateAnimation(31, 2);
+                equiposGanadores2.push(data.animation);
                 break;
             case 'move24' :
                 activateAnimation(32, 2);
+                equiposGanadores2.push(data.animation);
                 break;
 
             case'move25':
@@ -309,27 +390,35 @@
 
             case 'move33' :
                 activateAnimation(41, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move34' :
                 activateAnimation(42, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move35' :
                 activateAnimation(43, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move36' :
                 activateAnimation(44, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move37' :
                 activateAnimation(45, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move38' :
                 activateAnimation(46, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move39' :
                 activateAnimation(47, 2);
+                equiposGanadores3.push(data.animation);
                 break;
             case 'move40' :
                 activateAnimation(48, 2);
+                equiposGanadores3.push(data.animation);
                 break;
 
             case'move41':
@@ -359,11 +448,37 @@
 
             case 'move49': case 'move50': case 'move51': case 'move52': case 'move53':
             case 'move54': case 'move55': case 'move56':
-                console.log("la carrera termino");
+                finishSimulator(data.animation);
                 break;
 
         }
     });
+
+    function finishSimulator(animation) {
+
+        equiposGanadores4.push(animation);
+        if(equiposGanadores4.length === 8) {
+            var myStringArray = [];
+            for (var i = 0; i < 8; i++) {
+                myStringArray.push({
+                    "equipo_1" : equiposGanadores1[i],
+                    "equipo_2": equiposGanadores2[i],
+                    "equipo_3" : equiposGanadores3[i],
+                    "equipo_final" : equiposGanadores4[i]
+                });
+                console.log(myStringArray);
+            }
+
+
+             //socket.emit('finishSimulator', equiposGanadores);
+            $('.finishTable').bootstrapTable({
+                data: myStringArray
+            });
+            $('#finishModal').modal({backdrop: 'static', keyboard: false});
+
+        }
+
+    }
 
     //when a user connects
     socket.on('connect', function () {
@@ -485,23 +600,11 @@
 
     });
 
-    function timer() {
-        var secs = 0;
-        var id = setInterval(function(){
-            secs++; console.log(secs);
-            /*if(secs> 5){
-                clearInterval(id);
-                alert('Total Time: ' + secs + ' seconds');
-            }*/
-        }, 1000);
-    }
-
 
     //start simulator
     function startRace() {
 
         socket.emit('cerrarModal', 'hide');
-        timer();
 
         equipoFase1 = orderArrays(equipos, 1);
         equipoFase2 = orderArrays(equipos, 2);
