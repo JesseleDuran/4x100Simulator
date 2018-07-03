@@ -175,6 +175,12 @@
                             <thead>
                             <tr>
                                 <th scope="col"
+                                    data-field="lugar"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Lugar</th>
+                                <th scope="col"
                                     data-field="equipo_1"
                                     data-sortable="true"
                                     data-align="center"
@@ -273,36 +279,36 @@
     socket.on('animationType', function (data) {
         switch(data.animation){
             case 'move1' :
-                activateAnimation(9, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[0].nombre_equipo + " - " + equipoFase1[0].apellido);
+                activateAnimation(9, speedToTimeShort(equipoFase1[0].velocidad_recta));
                 break;
             case 'move2' :
-                activateAnimation(10, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[1].nombre_equipo + " - " + equipoFase1[1].apellido);
+                activateAnimation(10, speedToTimeShort(equipoFase1[1].velocidad_recta));
                 break;
             case 'move3' :
-                activateAnimation(11, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[2].nombre_equipo + " - " + equipoFase1[2].apellido);
+                activateAnimation(11, speedToTimeShort(equipoFase1[2].velocidad_recta));
                 break;
             case 'move4' :
-                activateAnimation(12, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[3].nombre_equipo + " - " + equipoFase1[3].apellido);
+                activateAnimation(12, speedToTimeShort(equipoFase1[3].velocidad_recta));
                 break;
             case 'move5' :
-                activateAnimation(13, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[4].nombre_equipo + " - " + equipoFase1[4].apellido);
+                activateAnimation(13, speedToTimeShort(equipoFase1[4].velocidad_recta));
                 break;
             case 'move6' :
-                activateAnimation(14, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[5].nombre_equipo + " - " + equipoFase1[5].apellido);
+                activateAnimation(14, speedToTimeShort(equipoFase1[5].velocidad_recta));
                 break;
             case 'move7' :
-                activateAnimation(15, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[6].nombre_equipo + " - " + equipoFase1[6].apellido);
+                activateAnimation(15, speedToTimeShort(equipoFase1[6].velocidad_recta));
                 break;
             case 'move8' :
-                activateAnimation(16, 2);
-                equiposGanadores1.push(data.animation);
+                equiposGanadores1.push(equipoFase1[7].nombre_equipo + " - " + equipoFase1[7].apellido);
+                activateAnimation(16, speedToTimeShort(equipoFase1[7].velocidad_recta));
                 break;
 
             case'move9':
@@ -331,36 +337,36 @@
                 break;
 
             case 'move17' :
-                activateAnimation(25, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[0].nombre_equipo + " - " + equipoFase2[0].apellido);
+                activateAnimation(25, speedToTimeShort(equipoFase2[0].velocidad_recta));
                 break;
             case 'move18' :
-                activateAnimation(26, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[1].nombre_equipo + " - " + equipoFase2[1].apellido);
+                activateAnimation(26, speedToTimeShort(equipoFase2[1].velocidad_recta));
                 break;
             case 'move19' :
-                activateAnimation(27, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[2].nombre_equipo + " - " + equipoFase2[2].apellido);
+                activateAnimation(27, speedToTimeShort(equipoFase2[2].velocidad_recta));
                 break;
             case 'move20' :
-                activateAnimation(28, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[3].nombre_equipo + " - " + equipoFase2[3].apellido);
+                activateAnimation(28, speedToTimeShort(equipoFase2[3].velocidad_recta));
                 break;
             case 'move21' :
-                activateAnimation(29, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[4].nombre_equipo + " - " + equipoFase2[4].apellido);
+                activateAnimation(29, speedToTimeShort(equipoFase2[4].velocidad_recta));
                 break;
             case 'move22' :
-                activateAnimation(30, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[5].nombre_equipo + " - " + equipoFase2[5].apellido);
+                activateAnimation(30, speedToTimeShort(equipoFase2[5].velocidad_recta));
                 break;
             case 'move23' :
-                activateAnimation(31, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[6].nombre_equipo + " - " + equipoFase2[6].apellido);
+                activateAnimation(31, speedToTimeShort(equipoFase2[6].velocidad_recta));
                 break;
             case 'move24' :
-                activateAnimation(32, 2);
-                equiposGanadores2.push(data.animation);
+                equiposGanadores2.push(equipoFase2[7].nombre_equipo + " - " + equipoFase2[7].apellido);
+                activateAnimation(32, speedToTimeShort(equipoFase2[7].velocidad_recta));
                 break;
 
             case'move25':
@@ -389,36 +395,36 @@
                 break;
 
             case 'move33' :
-                activateAnimation(41, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[0].nombre_equipo + " - " + equipoFase3[0].apellido);
+                activateAnimation(41, speedToTimeShort(equipoFase3[0].velocidad_curva));
                 break;
             case 'move34' :
-                activateAnimation(42, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[1].nombre_equipo + " - " + equipoFase3[1].apellido);
+                activateAnimation(42, speedToTimeShort(equipoFase3[1].velocidad_curva));
                 break;
             case 'move35' :
-                activateAnimation(43, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[2].nombre_equipo + " - " + equipoFase3[2].apellido);
+                activateAnimation(43, speedToTimeShort(equipoFase3[2].velocidad_curva));
                 break;
             case 'move36' :
-                activateAnimation(44, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[3].nombre_equipo + " - " + equipoFase3[3].apellido);
+                activateAnimation(44, speedToTimeShort(equipoFase3[3].velocidad_curva));
                 break;
             case 'move37' :
-                activateAnimation(45, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[4].nombre_equipo + " - " + equipoFase3[4].apellido);
+                activateAnimation(45, speedToTimeShort(equipoFase3[4].velocidad_curva));
                 break;
             case 'move38' :
-                activateAnimation(46, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[5].nombre_equipo + " - " + equipoFase3[5].apellido);
+                activateAnimation(46, speedToTimeShort(equipoFase3[5].velocidad_curva));
                 break;
             case 'move39' :
-                activateAnimation(47, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[6].nombre_equipo + " - " + equipoFase3[6].apellido);
+                activateAnimation(47, speedToTimeShort(equipoFase3[6].velocidad_curva));
                 break;
             case 'move40' :
-                activateAnimation(48, 2);
-                equiposGanadores3.push(data.animation);
+                equiposGanadores3.push(equipoFase3[7].nombre_equipo + " - " + equipoFase3[7].apellido);
+                activateAnimation(48, speedToTimeShort(equipoFase3[7].velocidad_curva));
                 break;
 
             case'move41':
@@ -446,27 +452,58 @@
                 activateAnimation(56, speedToTime(equipoFase4[7].velocidad_recta));
                 break;
 
-            case 'move49': case 'move50': case 'move51': case 'move52': case 'move53':
-            case 'move54': case 'move55': case 'move56':
-                finishSimulator(data.animation);
+            case 'move49':
+                equiposGanadores4.push(equipoFase4[0].nombre_equipo + " - " + equipoFase4[0].apellido);
+                finishSimulator();
                 break;
+            case 'move50':
+                equiposGanadores4.push(equipoFase4[1].nombre_equipo + " - " + equipoFase4[1].apellido);
+                finishSimulator();
+                break;
+            case 'move51':
+                equiposGanadores4.push(equipoFase4[2].nombre_equipo + " - " + equipoFase4[2].apellido);
+                finishSimulator();
+                break;
+            case 'move52':
+                equiposGanadores4.push(equipoFase4[3].nombre_equipo + " - " + equipoFase4[3].apellido);
+                finishSimulator();
+                break;
+            case 'move53':
+                equiposGanadores4.push(equipoFase4[4].nombre_equipo + " - " + equipoFase4[4].apellido);
+                finishSimulator();
+                break;
+            case 'move54':
+                equiposGanadores4.push(equipoFase4[5].nombre_equipo + " - " + equipoFase4[5].apellido);
+                finishSimulator();
+                break;
+            case 'move55':
+                equiposGanadores4.push(equipoFase4[6].nombre_equipo + " - " + equipoFase4[6].apellido);
+                finishSimulator();
+                break;
+            case 'move56':
+                equiposGanadores4.push(equipoFase4[7].nombre_equipo + " - " + equipoFase4[7].apellido);
+                finishSimulator();
+                break;
+
 
         }
     });
 
-    function finishSimulator(animation) {
+    function finishSimulator() {
 
-        equiposGanadores4.push(animation);
         if(equiposGanadores4.length === 8) {
             var myStringArray = [];
+            var j = 1;
             for (var i = 0; i < 8; i++) {
                 myStringArray.push({
+                    "lugar" : j,
                     "equipo_1" : equiposGanadores1[i],
                     "equipo_2": equiposGanadores2[i],
                     "equipo_3" : equiposGanadores3[i],
                     "equipo_final" : equiposGanadores4[i]
                 });
                 console.log(myStringArray);
+                j++;
             }
 
 
@@ -690,6 +727,12 @@
     function speedToTime(speed)
     {
         return ((0.1 / speed)*3600);
+
+    }
+
+    function speedToTimeShort(speed)
+    {
+        return ((0.01 / speed)*3600);
 
     }
 
