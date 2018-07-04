@@ -6,6 +6,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.listener.ConnectListener;
 import com.corundumstudio.socketio.listener.DataListener;
 import com.corundumstudio.socketio.listener.DisconnectListener;
+import com.jamesye.prototypes.realtimeserver.modules.chat.DTO.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,67 @@ public class ChatModule {
         this.namespace.addConnectListener(onConnected());
         this.namespace.addDisconnectListener(onDisconnected());
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
+        this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
+        this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
+        this.namespace.addEventListener("finishAnimation", FinishAnimation.class, sendAnimationType());
+        this.namespace.addEventListener("cerrarModal", CerrarModal.class, sendCloseModal());
+
+        this.namespace.addEventListener("sendEquipoFase1", listEquiposDTO.class, sendEquipo1());
+        this.namespace.addEventListener("sendEquipoFase2", listEquiposDTO.class, sendEquipo2());
+        this.namespace.addEventListener("sendEquipoFase3", listEquiposDTO.class, sendEquipo3());
+        this.namespace.addEventListener("sendEquipoFase4", listEquiposDTO.class, sendEquipo4());
     }
 
     private DataListener<ChatDTO> onChatReceived() {
         return (client, data, ackSender) -> {
             log.debug("Client[{}] - Received chat message '{}'", client.getSessionId().toString(), data);
             namespace.getBroadcastOperations().sendEvent("chat", data);
+
+        };
+    }
+
+    private DataListener<FinishAnimation> sendAnimationType() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("animationType", data);
+
+        };
+    }
+
+    private DataListener<CerrarModal> sendCloseModal() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("cerrarMyModal", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo1() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase1", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo2() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase2", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo3() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase3", data);
+
+        };
+    }
+
+    private DataListener<listEquiposDTO> sendEquipo4() {
+        return (client, data, ackSender) -> {
+
+            namespace.getBroadcastOperations().sendEvent("getEquipoFase4", data);
 
         };
     }
@@ -46,33 +102,40 @@ public class ChatModule {
             conectados.addConectados();
             conectados.getId_conectados().add(client.getSessionId());
 
-            sendHtmlBySizeOFClients();
-
             namespace.getBroadcastOperations().sendEvent("cantidadConectados", conectados);
 
         };
     }
 
-    private void sendHtmlBySizeOFClients() {
+    private DataListener<FirstStartDTO> sendHtmlBySizeOFClients() {
+        return (client, data, ackSender) -> {
+            if (data.isStart()) {
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("master", "eres el principal");
+                switch (conectados.getId_conectados().size()) {
+                    case 1:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio-medio.html");
+                        break;
+                    case 2:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
+                        break;
+                    case 3:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
+                        namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
+                        namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
+                        break;
+                    default:
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio-medio.html");
+                }
+            }
+        };
 
-        System.out.println(conectados.getId_conectados().size());
+    }
 
-        switch(conectados.getId_conectados().size()) {
-            case 1 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
-                break;
-            case 2 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html2_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html2_para_02.html");
-                break;
-            case 3 :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html3_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "html3_para_01.html");
-                namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "html3_para_01.html");
-                break;
-            default :
-                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "html_para_01.html");
-        }
+    private DataListener<listEquiposDTO> sendEquiposToClients() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("equipoList", data);
+        };
 
     }
 
@@ -83,8 +146,6 @@ public class ChatModule {
             //remove 1 to total of connected and add the client's session id
             conectados.deleteConectados();
             conectados.getId_conectados().remove(client.getSessionId());
-
-            sendHtmlBySizeOFClients();
 
             System.out.printf("se desconecto alguien, quedan %02d%n personas", conectados.getConectados());
         };

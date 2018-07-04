@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Pista derecha</title>
+
+
+      <style media="screen">
+
+
+      .ovalo-interno{
+        display: block;
+        width: 240px;
+        height: 200px;
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        background: #008000;
+        border-right: 1px solid white;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        left:0; top:0; bottom: 0;
+        margin:auto;
+        position: absolute;
+        max-width:100%;
+        max-height:100%;
+        overflow:auto;
+
+      }
+      .ovalo1, .ovalo2, .ovalo3, .ovalo4, .ovalo5, .ovalo6, .ovalo7, .ovalo8{
+        display: block;
+        margin: auto;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+        border-right: 1px solid white;
+        /* border-radius:150% / 0 100% 100% 0; */
+        border-top-right-radius: 100%;
+        border-bottom-right-radius: 100%;
+        background: #BC4328;
+        left:0;
+        top:0; bottom:0;
+        position: absolute;
+      }
+
+      .ovalo1{
+        height: 270px;
+        width: 270px;
+        line-height: 50px;
+      }
+     .ovalo2{
+       height: 340px;
+       width: 300px;
+      }
+
+      .ovalo3{
+        height: 400px;
+        width: 330px;
+      }
+
+      .ovalo4{
+        height: 470px;
+        width: 360px;
+      }
+
+      .ovalo5{
+        height: 540px;
+        width: 390px;
+      }
+      .ovalo6{
+        height: 600px;
+        width: 420px;
+      }
+      .ovalo7{
+        height: 660px;
+        width: 450px;
+      }
+      .ovalo8{
+        height: 720px;
+        width: 480px;
+      }
+
+      .circle {
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          position: absolute;
+          bottom:0;
+          margin-bottom: 1px;
+      }
+
+      #circle1 {
+          transform-origin: center top;
+          background-color: #E84855;
+          left:80px;
+      }
+
+      @keyframes move1 {
+           100% {
+              transform: rotate(180deg) translateX(380%) translateY(240px) rotate(-180deg);
+          }
+
+          75% {
+              transform: rotate(270deg) translateX(220px) translateY(100px) rotate(-270deg);
+          }
+          50% {
+              transform: rotate(270deg) translateX(180px) translateY(150px) rotate(-270deg);
+          }
+          25% {
+              transform: rotate(310deg) translateX(120px) translateY(80px) rotate(-270deg);
+          }
+          0% {
+              transform: rotate(360deg) rotate(-360deg) scale(1);
+          }
+      }
+
+      #circle2 {
+          animation-timing-function: linear;
+          background-color: #0099FF;
+          left:100px;
+      }
+      @keyframes move2 {
+           100% {
+              transform: rotate(180deg) translateX(460%) translateY(310px) rotate(-180deg);
+          }
+
+          75% {
+              transform: rotate(270deg) translateX(250px) translateY(150px) rotate(-270deg);
+          }
+          50% {
+              transform: rotate(270deg) translateX(180px) translateY(170px) rotate(-270deg);
+          }
+          25% {
+              transform: rotate(310deg) translateX(120px) translateY(80px) rotate(-270deg);
+          }
+          0% {
+              transform: rotate(360deg) rotate(-360deg) scale(1);
+          }
+      }
+      #circle3 {
+          animation-timing-function: cubic-bezier(0, 1, .76, 1.14);
+          background-color: #FFCC00;
+          left:120px;
+      }
+      @keyframes move3 {
+          100% {
+            transform: rotate(180deg) translateX(215px) translateY(370px) rotate(-180deg);
+          }
+
+          75% {
+              transform: rotate(270deg) translateX(350px) translateY(110px) rotate(-270deg);
+          }
+          50% {
+              transform: rotate(270deg) translateX(250px) translateY(180px) rotate(-270deg);
+          }
+          25% {
+              transform: rotate(310deg) translateX(80px) translateY(70px) rotate(-310deg);
+          }
+          0% {
+              transform: rotate(360deg) rotate(-360deg) scale(1);
+          }
+        }
+      #circle4 {
+        transform-origin: center top;
+        background-color: #E84855;
+        left:140px
+      }
+      @keyframes move4 {
+        100% {
+          transform: rotate(180deg) translateX(220px) translateY(430px) rotate(-180deg);
+        }
+
+        75% {
+            transform: rotate(270deg) translateX(390px) translateY(150px) rotate(-270deg);
+        }
+        50% {
+            transform: rotate(270deg) translateX(250px) translateY(200px) rotate(-270deg);
+        }
+        25% {
+            transform: rotate(310deg) translateX(80px) translateY(60px) rotate(-310deg);
+        }
+        0% {
+            transform: rotate(360deg) rotate(-360deg) scale(1);
+        }
+      }
+
+      #circle5 {
+        background-color: #0099FF;
+        left:160px;
+      }
+
+    @keyframes move5 {
+      100% {
+        transform: rotate(180deg) translateX(300px) translateY(500px) rotate(-180deg);
+      }
+
+      75% {
+          transform: rotate(270deg) translateX(490px) translateY(120px) rotate(-270deg);
+      }
+      50% {
+          transform: rotate(270deg) translateX(400px) translateY(180px) rotate(-270deg);
+      }
+      25% {
+          transform: rotate(310deg) translateX(100px) translateY(60px) rotate(-310deg);
+      }
+      0% {
+          transform: rotate(360deg) rotate(-360deg) scale(1);
+        }
+      }
+
+      #circle6 {
+          background-color: #FFCC00;
+          left:180px
+      }
+      @keyframes move6 {
+        100% {
+          transform: rotate(180deg) translateX(420px) translateY(530px) rotate(-180deg);
+        }
+
+        75% {
+            transform: rotate(270deg) translateX(490px) translateY(160px) rotate(-270deg);
+        }
+        50% {
+            transform: rotate(270deg) translateX(400px) translateY(200px) rotate(-270deg);
+        }
+        25% {
+            transform: rotate(310deg) translateX(100px) translateY(60px) rotate(-310deg);
+        }
+        0% {
+            transform: rotate(360deg) rotate(-360deg) scale(1);
+          }
+        }
+
+      #circle7 {
+          background-color: #E84855;
+          left:200px
+      }
+      @keyframes move7 {
+        100% {
+          transform: rotate(180deg) translateX(460px) translateY(600px) rotate(-180deg);
+        }
+
+        75% {
+            transform: rotate(270deg) translateX(600px) translateY(110px) rotate(-270deg);
+        }
+        50% {
+            transform: rotate(270deg) translateX(520px) translateY(170px) rotate(-270deg);
+        }
+        25% {
+            transform: rotate(310deg) translateX(100px) translateY(60px) rotate(-310deg);
+        }
+        0% {
+            transform: rotate(360deg) rotate(-360deg) scale(1);
+          }
+        }
+      #circle8 {
+          background-color: #0099FF;
+          left:220px;
+
+      }
+      @keyframes move8 {
+          100% {
+            transform: rotate(180deg) translateX(650px) translateY(550px) rotate(-180deg);
+          }
+
+          75% {
+              transform: rotate(270deg) translateX(670px) translateY(100px) rotate(-270deg);
+          }
+          50% {
+              transform: rotate(270deg) translateX(610px) translateY(170px) rotate(-270deg);
+          }
+          25% {
+              transform: rotate(310deg) translateX(140px) translateY(60px) rotate(-310deg);
+          }
+          0% {
+              transform: rotate(360deg) rotate(-360deg) scale(1);
+            }
+          }
+
+      .linea{
+        width:100px;
+        height: 100px;
+        border-right: 2px solid white;
+        position:absolute;
+        bottom: 0px;
+      }
+
+      #linea1{
+        left:10px;
+      }
+      #linea2{
+        left:30px;
+      }
+      #linea3{
+        left:50px;
+      }
+      #linea4{
+        left:70px;
+      }
+      #linea5{
+        left:90px;
+      }
+      #linea6{
+        left:110px;
+      }
+      #linea7{
+        left:130px;
+      }
+      #linea8{
+        left:150px;
+      }
+
+      .btn-sim{
+        position: absolute;
+        right: 20%;
+        top: 45%;
+        width: 160px;
+        height: 100px;
+        text-align: center;
+        background: #7dc800;
+        padding: .6em .8em .8em;
+        border: none;
+        color: white;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: inset 0 -.2em rgba(0, 0, 0, .2);
+        outline: 0;
+        transition: .2s;
+        will-change: transform;
+      }
+      #play{
+        right: 35%;
+      }
+
+      .btn-sim:active{
+        transform: scale(.9);
+      }
+
+
+      </style>
+
+  </head>
+  <body>
+    <div class="buttons">
+      <button class="btn-sim" id="play">Play</button>
+      <button class="btn-sim" id="pause">Pause</button>
+    </div>
+
+    <div class="container">
+        <div class="ovalo8">
+          <div class="linea" id="linea8"></div>
+          <div class="circle" id="circle8"></div>
+
+          <div class="ovalo7">
+            <div class="linea" id="linea7"></div>
+            <div class="circle" id="circle7"></div>
+
+            <div class="ovalo6">
+              <div class="linea" id="linea6"></div>
+              <div class="circle" id="circle6"></div>
+
+              <div class="ovalo5">
+                <div class="linea" id="linea5"></div>
+                <div class="circle" id="circle5"></div>
+
+                <div class="ovalo4">
+                  <div class="linea" id="linea4"></div>
+                  <div class="circle" id="circle4"></div>
+
+                <div class="ovalo3">
+                    <div class="linea" id="linea3"></div>
+                    <div class="circle" id="circle3"></div>
+
+                    <div class="ovalo2">
+                      <div class="linea" id="linea2"></div>
+                      <div class="circle" id="circle2"></div>
+                     <div class="slide">
+
+                        <div class="ovalo1">
+                          <div class="linea" id="linea1"></div>
+                          <div class="circle" id="circle1"></div>
+
+                              <div class="ovalo-interno"></div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      <script>
+
+      const $playButton = document.getElementById('play');
+      const $pauseButton = document.getElementById('pause');
+
+
+      $playButton.addEventListener('click', (event) =>{
+        animation.play();
+      });
+
+      $pauseButton.addEventListener('click', (event) =>{
+        animation.pause();
+      });
+
+      </script>
+  </body>
+</html>

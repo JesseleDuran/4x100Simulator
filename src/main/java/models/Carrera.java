@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Carrera {
 
-    private int id;
+    private int id_carrera;
+
+    private String nombre_carrera;
 
     private String tiempo_total;
 
@@ -18,25 +20,35 @@ public class Carrera {
 
     private Equipo equipo_ganador3;
 
-    private Corredor corredor_ganador1;
-
-    private Corredor corredor_ganador2;
-
-    private Corredor corredor_ganador3;
-
     private List<Equipo> equipoList;
 
-    public Carrera(String tiempo_total, Date fecha) {
+    public Carrera() {
+    }
+
+    public Carrera(String nombre_carrera, String tiempo_total, Date fecha, Equipo equipo_ganador1, Equipo equipo_ganador2, Equipo equipo_ganador3, List<Equipo> equipoList) {
+        this.nombre_carrera = nombre_carrera;
         this.tiempo_total = tiempo_total;
         this.fecha = fecha;
+        this.equipo_ganador1 = equipo_ganador1;
+        this.equipo_ganador2 = equipo_ganador2;
+        this.equipo_ganador3 = equipo_ganador3;
+        this.equipoList = equipoList;
     }
 
-    public int getId() {
-        return id;
+    public int getId_carrera() {
+        return id_carrera;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_carrera(int id_carrera) {
+        this.id_carrera = id_carrera;
+    }
+
+    public String getNombre_carrera() {
+        return nombre_carrera;
+    }
+
+    public void setNombre_carrera(String nombre_carrera) {
+        this.nombre_carrera = nombre_carrera;
     }
 
     public String getTiempo_total() {
@@ -79,27 +91,11 @@ public class Carrera {
         this.equipo_ganador3 = equipo_ganador3;
     }
 
-    public Corredor getCorredor_ganador1() {
-        return corredor_ganador1;
+    public List<Equipo> getEquipoList() {
+        return equipoList;
     }
 
-    public void setCorredor_ganador1(Corredor corredor_ganador1) {
-        this.corredor_ganador1 = corredor_ganador1;
-    }
-
-    public Corredor getCorredor_ganador2() {
-        return corredor_ganador2;
-    }
-
-    public void setCorredor_ganador2(Corredor corredor_ganador2) {
-        this.corredor_ganador2 = corredor_ganador2;
-    }
-
-    public Corredor getCorredor_ganador3() {
-        return corredor_ganador3;
-    }
-
-    public void setCorredor_ganador3(Corredor corredor_ganador3) {
-        this.corredor_ganador3 = corredor_ganador3;
+    public void setEquipoList(List<Equipo> equipoList) {
+        this.equipoList = equipoList;
     }
 }

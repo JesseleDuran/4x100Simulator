@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Corredores</title>
+</head>
+<body>
+
+<div id="toolbar">
+    <button id="remove" class="btn btn-danger" disabled>
+        <i class="glyphicon glyphicon-remove"></i> Delete
+    </button>
+</div>
+    <table id="table"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+           data-pagination="true"
+           data-page-list="[5, 10, 20]" class="tableCorredores"
+    >
+    <thead>
+    <tr>
+        <th scope="col"
+            data-field="nombre_corredor"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Nombre del Corredor</th>
+        <th scope="col"
+            data-field="apellido"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Apellido del Corredor</th>
+        <th scope="col"
+            data-field="prob_terminar"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Probabilidad de terminar (%)</th>
+        <th scope="col"
+            data-field="tiempo_arranque"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Tiempo de reacción (seg)</th>
+        <th scope="col"
+            data-field="velocidad_curva"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Velocidad en curvas (km/hr)</th>
+        <th scope="col"
+            data-field="velocidad_recta"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Velocidad en rectas (km/hr)</th>
+        <th scope="col"
+            data-field="fase"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Fase en la que empieza</th>
+        <th scope="col"
+            data-field="nombre_equipo"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Equipo</th>
+    </tr>
+    </thead>
+</table>
+</body>
+</html>

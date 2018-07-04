@@ -1,59 +1,66 @@
 package models;
 
 import java.util.List;
-import java.util.Set;
 
 public class Equipo {
 
-    private int id;
+    private int id_equipo;
 
-    private String nombre;
+    private String nombre_equipo;
 
-    private Set<Corredor> integrantes;
+    private List<Corredor> integrantes;
 
     private List<Carrera> carreraList;
 
     public Equipo() {
     }
 
-    public Equipo(String nombre) {
-        this.nombre = nombre;
+    public Equipo(String nombre_equipo) {
+        this.nombre_equipo = nombre_equipo;
     }
 
-    public Equipo(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+    public Equipo(int id_equipo, String nombre_equipo) {
+        this.id_equipo = id_equipo;
+        this.nombre_equipo = nombre_equipo;
     }
 
-    public Set<Corredor> getIntegrantes() {
+    public int getId_equipo() {
+        return id_equipo;
+    }
+
+    public void setId_equipo(int id_equipo) {
+        this.id_equipo = id_equipo;
+    }
+
+    public String getNombre_equipo() {
+        return nombre_equipo;
+    }
+
+    public void setNombre_equipo(String nombre_equipo) {
+        this.nombre_equipo = nombre_equipo;
+    }
+
+    public List<Corredor> getIntegrantes() {
         return integrantes;
     }
 
-    public void setIntegrantes(Set<Corredor> integrantes) {
+    public void setIntegrantes(List<Corredor> integrantes) {
         this.integrantes = integrantes;
     }
 
-    public int getId() {
-        return id;
+    public List<Carrera> getCarreraList() {
+        return carreraList;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCarreraList(List<Carrera> carreraList) {
+        this.carreraList = carreraList;
     }
 
     @Override
     public String toString() {
         return "Equipo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
+                "id=" + id_equipo +
+                ", nombre='" + nombre_equipo + '\'' +
                 ", integrantes=" + integrantes +
                 ", carreraList=" + carreraList +
                 '}';

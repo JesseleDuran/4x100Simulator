@@ -2,8 +2,33 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Chat Client</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <title>4x100 Simulator</title>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/locale/bootstrap-table-es-ES.min.js"></script>
+
+    <script type="text/javascript" src="js/libraries/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/libraries/moment.min.js"></script>
+    <!-- <script type="text/javascript" src="js/client.js"></script> -->
     <style>
         body {
             padding: 20px;
@@ -29,23 +54,736 @@
 </head>
 <body>
 
-<h1>Chat Client</h1>
-<br/>
+    <div id="body">
+        Main App Body
+    </div>
 
-<div id="test">This text will change</div>
+    <!-- Connected Modal -->
+    <div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="connectedModalTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Hay <span class="displayConectados">0</span> usuarios conectados, está seguro que desea continuar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" onClick="startSimulator()" class="btn btn-primary">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div id="console" class="well"></div>
+    <!-- START Modal -->
+    <div class="modal fade bd-example-modal-lg" id="equiposModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="equipoModalTitle">Generar Equipos</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="tableEquipos "
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-pagination="true"
+                               data-page-list="[5, 10]"
+                        >
+                            <thead>
+                                <tr>
+                                    <th scope="col"
+                                        data-field="nombre_equipo"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >País</th>
+                                    <th scope="col"
+                                        data-field="nombre_corredor"
+                                        data-field="apellido"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Corredor</th>
+                                    <th scope="col"
+                                        data-field="prob_terminar"
+                                        data-align="center"
+                                        data-halign="center"
+                                        data-align="center"
+                                    >Prob. de Terminar (%)</th>
+                                    <th scope="col"
+                                        data-field="tiempo_arranque"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Tiempo de reacción (seg)</th>
+                                    <th scope="col"
+                                        data-field="velocidad_curva"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Velocidad en curvas (km/hr)</th>
+                                    <th scope="col"
+                                        data-field="velocidad_recta"
+                                        data-sortable="true"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Velocidad en rectas (km/hr)</th>
+                                    <th scope="col"
+                                        data-field="fase"
+                                        data-align="center"
+                                        data-halign="center"
+                                    >Fase</th>
+                                </tr>
 
-<form class="well form-inline" onsubmit="return false;">
-    <input id="msg" class="input-xlarge" type="text" placeholder="Type something..."/>
-    <button type="button" onClick="sendMessage()" class="btn" id="send">Send</button>
-    <button type="button" onClick="sendDisconnect()" class="btn">Disconnect</button>
-</form>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
+                    <button type="button" class="btn btn-primary">Reload</button>
+                    <button type="button" onClick="startRace()" class="btn btn-primary">Start</button>
 
-<script src="js/libraries/socket.io/socket.io.js"></script>
-<script src="js/libraries/moment.min.js"></script>
-<script src="js/libraries/jquery-1.10.1.min.js"></script>
-<script src="js/client.js"></script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FINISH Modal -->
+    <div class="modal fade bd-example-modal-lg" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id=finishModalTitle">Estadísticas finales</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="finishTable"
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true"
+                               data-show-columns="true"
+                               data-pagination="true"
+                               data-page-list="[8, 10]"
+                        >
+                            <thead>
+                            <tr>
+                                <th scope="col"
+                                    data-field="lugar"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Lugar</th>
+                                <th scope="col"
+                                    data-field="equipo_1"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Primera Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_2"
+                                    data-field="apellido"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Segunda Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_3"
+                                    data-align="center"
+                                    data-halign="center"
+                                    data-align="center"
+                                >Tercera Fase</th>
+                                <th scope="col"
+                                    data-field="equipo_final"
+                                    data-sortable="true"
+                                    data-align="center"
+                                    data-halign="center"
+                                >Finales</th>
+
+                            </tr>
+
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Inicio</button>
+                    <button type="button" class="btn btn-primary">Ir al historial</button>
+                    <button type="button" onClick="startRace()" class="btn btn-primary">Repetir</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
+
+<script>
+
+    var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+    var socket = io('http://localhost:9092/chat');
+    var equipos;
+    var equipoFase1;
+    var equipoFase2 ;
+    var equipoFase3;
+    var equipoFase4;
+    var equiposGanadores4 = [];
+    var equiposGanadores3 = [];
+    var equiposGanadores2 = [];
+    var equiposGanadores1 = [];
+    socket.connect();
+
+    $(document.body).on('webkitAnimationEnd', function(e){
+        var animName = e.originalEvent.animationName;
+        console.log(animName);
+        //emit when a animation finish
+        socket.emit('finishAnimation', animName);
+
+    })
+
+    socket.on('getEquipoFase1', function (data) {
+
+        console.log("get equipo fase 1", data.equipos);
+        equipoFase1 = data.equipos;
+
+    });
+
+    socket.on('getEquipoFase2', function (data) {
+
+        console.log("get equipo fase 2", data.equipos);
+        equipoFase2 = data.equipos;
+
+    });
+
+    socket.on('getEquipoFase3', function (data) {
+
+        console.log("get equipo fase 3", data.equipos);
+        equipoFase3 = data.equipos;
+
+    });
+
+    socket.on('getEquipoFase4', function (data) {
+
+        console.log("get equipo fase 4", data.equipos);
+        equipoFase4 = data.equipos;
+
+    });
+
+    //when an animation finish
+    socket.on('animationType', function (data) {
+        switch(data.animation){
+            case 'move1' :
+                equiposGanadores1.push(equipoFase1[0].nombre_equipo + " - " + equipoFase1[0].apellido);
+                activateAnimation(9, speedToTimeShort(equipoFase1[0].velocidad_recta));
+                break;
+            case 'move2' :
+                equiposGanadores1.push(equipoFase1[1].nombre_equipo + " - " + equipoFase1[1].apellido);
+                activateAnimation(10, speedToTimeShort(equipoFase1[1].velocidad_recta));
+                break;
+            case 'move3' :
+                equiposGanadores1.push(equipoFase1[2].nombre_equipo + " - " + equipoFase1[2].apellido);
+                activateAnimation(11, speedToTimeShort(equipoFase1[2].velocidad_recta));
+                break;
+            case 'move4' :
+                equiposGanadores1.push(equipoFase1[3].nombre_equipo + " - " + equipoFase1[3].apellido);
+                activateAnimation(12, speedToTimeShort(equipoFase1[3].velocidad_recta));
+                break;
+            case 'move5' :
+                equiposGanadores1.push(equipoFase1[4].nombre_equipo + " - " + equipoFase1[4].apellido);
+                activateAnimation(13, speedToTimeShort(equipoFase1[4].velocidad_recta));
+                break;
+            case 'move6' :
+                equiposGanadores1.push(equipoFase1[5].nombre_equipo + " - " + equipoFase1[5].apellido);
+                activateAnimation(14, speedToTimeShort(equipoFase1[5].velocidad_recta));
+                break;
+            case 'move7' :
+                equiposGanadores1.push(equipoFase1[6].nombre_equipo + " - " + equipoFase1[6].apellido);
+                activateAnimation(15, speedToTimeShort(equipoFase1[6].velocidad_recta));
+                break;
+            case 'move8' :
+                equiposGanadores1.push(equipoFase1[7].nombre_equipo + " - " + equipoFase1[7].apellido);
+                activateAnimation(16, speedToTimeShort(equipoFase1[7].velocidad_recta));
+                break;
+
+            case'move9':
+                activateAnimation(17, speedToTime(equipoFase2[0].velocidad_recta));
+                break;
+            case'move10':
+                activateAnimation(18, speedToTime(equipoFase2[1].velocidad_recta));
+                break;
+            case'move11':
+                activateAnimation(19, speedToTime(equipoFase2[2].velocidad_recta));
+                break;
+            case'move12':
+                activateAnimation(20, speedToTime(equipoFase2[3].velocidad_recta));
+                break;
+            case'move13':
+                activateAnimation(21, speedToTime(equipoFase2[4].velocidad_recta));
+                break;
+            case'move14':
+                activateAnimation(22, speedToTime(equipoFase2[5].velocidad_recta));
+                break;
+            case'move15':
+                activateAnimation(23, speedToTime(equipoFase2[6].velocidad_recta));
+                break;
+            case'move16':
+                activateAnimation(24, speedToTime(equipoFase2[7].velocidad_recta));
+                break;
+
+            case 'move17' :
+                equiposGanadores2.push(equipoFase2[0].nombre_equipo + " - " + equipoFase2[0].apellido);
+                activateAnimation(25, speedToTimeShort(equipoFase2[0].velocidad_recta));
+                break;
+            case 'move18' :
+                equiposGanadores2.push(equipoFase2[1].nombre_equipo + " - " + equipoFase2[1].apellido);
+                activateAnimation(26, speedToTimeShort(equipoFase2[1].velocidad_recta));
+                break;
+            case 'move19' :
+                equiposGanadores2.push(equipoFase2[2].nombre_equipo + " - " + equipoFase2[2].apellido);
+                activateAnimation(27, speedToTimeShort(equipoFase2[2].velocidad_recta));
+                break;
+            case 'move20' :
+                equiposGanadores2.push(equipoFase2[3].nombre_equipo + " - " + equipoFase2[3].apellido);
+                activateAnimation(28, speedToTimeShort(equipoFase2[3].velocidad_recta));
+                break;
+            case 'move21' :
+                equiposGanadores2.push(equipoFase2[4].nombre_equipo + " - " + equipoFase2[4].apellido);
+                activateAnimation(29, speedToTimeShort(equipoFase2[4].velocidad_recta));
+                break;
+            case 'move22' :
+                equiposGanadores2.push(equipoFase2[5].nombre_equipo + " - " + equipoFase2[5].apellido);
+                activateAnimation(30, speedToTimeShort(equipoFase2[5].velocidad_recta));
+                break;
+            case 'move23' :
+                equiposGanadores2.push(equipoFase2[6].nombre_equipo + " - " + equipoFase2[6].apellido);
+                activateAnimation(31, speedToTimeShort(equipoFase2[6].velocidad_recta));
+                break;
+            case 'move24' :
+                equiposGanadores2.push(equipoFase2[7].nombre_equipo + " - " + equipoFase2[7].apellido);
+                activateAnimation(32, speedToTimeShort(equipoFase2[7].velocidad_recta));
+                break;
+
+            case'move25':
+                activateAnimation(33, speedToTime(equipoFase3[0].velocidad_curva));
+                break;
+            case'move26':
+                activateAnimation(34, speedToTime(equipoFase3[1].velocidad_curva));
+                break;
+            case'move27':
+                activateAnimation(35, speedToTime(equipoFase3[2].velocidad_curva));
+                break;
+            case'move28':
+                activateAnimation(36, speedToTime(equipoFase3[3].velocidad_curva));
+                break;
+            case'move29':
+                activateAnimation(37, speedToTime(equipoFase3[4].velocidad_curva));
+                break;
+            case'move30':
+                activateAnimation(38, speedToTime(equipoFase3[5].velocidad_curva));
+                break;
+            case'move31':
+                activateAnimation(39, speedToTime(equipoFase3[6].velocidad_curva));
+                break;
+            case'move32':
+                activateAnimation(40, speedToTime(equipoFase3[7].velocidad_curva));
+                break;
+
+            case 'move33' :
+                equiposGanadores3.push(equipoFase3[0].nombre_equipo + " - " + equipoFase3[0].apellido);
+                activateAnimation(41, speedToTimeShort(equipoFase3[0].velocidad_curva));
+                break;
+            case 'move34' :
+                equiposGanadores3.push(equipoFase3[1].nombre_equipo + " - " + equipoFase3[1].apellido);
+                activateAnimation(42, speedToTimeShort(equipoFase3[1].velocidad_curva));
+                break;
+            case 'move35' :
+                equiposGanadores3.push(equipoFase3[2].nombre_equipo + " - " + equipoFase3[2].apellido);
+                activateAnimation(43, speedToTimeShort(equipoFase3[2].velocidad_curva));
+                break;
+            case 'move36' :
+                equiposGanadores3.push(equipoFase3[3].nombre_equipo + " - " + equipoFase3[3].apellido);
+                activateAnimation(44, speedToTimeShort(equipoFase3[3].velocidad_curva));
+                break;
+            case 'move37' :
+                equiposGanadores3.push(equipoFase3[4].nombre_equipo + " - " + equipoFase3[4].apellido);
+                activateAnimation(45, speedToTimeShort(equipoFase3[4].velocidad_curva));
+                break;
+            case 'move38' :
+                equiposGanadores3.push(equipoFase3[5].nombre_equipo + " - " + equipoFase3[5].apellido);
+                activateAnimation(46, speedToTimeShort(equipoFase3[5].velocidad_curva));
+                break;
+            case 'move39' :
+                equiposGanadores3.push(equipoFase3[6].nombre_equipo + " - " + equipoFase3[6].apellido);
+                activateAnimation(47, speedToTimeShort(equipoFase3[6].velocidad_curva));
+                break;
+            case 'move40' :
+                equiposGanadores3.push(equipoFase3[7].nombre_equipo + " - " + equipoFase3[7].apellido);
+                activateAnimation(48, speedToTimeShort(equipoFase3[7].velocidad_curva));
+                break;
+
+            case'move41':
+                activateAnimation(49, speedToTime(equipoFase4[0].velocidad_recta));
+                break;
+            case'move42':
+                activateAnimation(50, speedToTime(equipoFase4[1].velocidad_recta));
+                break;
+            case'move43':
+                activateAnimation(51, speedToTime(equipoFase4[2].velocidad_recta));
+                break;
+            case'move44':
+                activateAnimation(52, speedToTime(equipoFase4[3].velocidad_recta));
+                break;
+            case'move45':
+                activateAnimation(53, speedToTime(equipoFase4[4].velocidad_recta));
+                break;
+            case'move46':
+                activateAnimation(54, speedToTime(equipoFase4[5].velocidad_recta));
+                break;
+            case'move47':
+                activateAnimation(55, speedToTime(equipoFase4[6].velocidad_recta));
+                break;
+            case'move48':
+                activateAnimation(56, speedToTime(equipoFase4[7].velocidad_recta));
+                break;
+
+            case 'move49':
+                equiposGanadores4.push(equipoFase4[0].nombre_equipo + " - " + equipoFase4[0].apellido);
+                finishSimulator();
+                break;
+            case 'move50':
+                equiposGanadores4.push(equipoFase4[1].nombre_equipo + " - " + equipoFase4[1].apellido);
+                finishSimulator();
+                break;
+            case 'move51':
+                equiposGanadores4.push(equipoFase4[2].nombre_equipo + " - " + equipoFase4[2].apellido);
+                finishSimulator();
+                break;
+            case 'move52':
+                equiposGanadores4.push(equipoFase4[3].nombre_equipo + " - " + equipoFase4[3].apellido);
+                finishSimulator();
+                break;
+            case 'move53':
+                equiposGanadores4.push(equipoFase4[4].nombre_equipo + " - " + equipoFase4[4].apellido);
+                finishSimulator();
+                break;
+            case 'move54':
+                equiposGanadores4.push(equipoFase4[5].nombre_equipo + " - " + equipoFase4[5].apellido);
+                finishSimulator();
+                break;
+            case 'move55':
+                equiposGanadores4.push(equipoFase4[6].nombre_equipo + " - " + equipoFase4[6].apellido);
+                finishSimulator();
+                break;
+            case 'move56':
+                equiposGanadores4.push(equipoFase4[7].nombre_equipo + " - " + equipoFase4[7].apellido);
+                finishSimulator();
+                break;
+
+
+        }
+    });
+
+    function finishSimulator() {
+
+        if(equiposGanadores4.length === 8) {
+            var myStringArray = [];
+            var j = 1;
+            for (var i = 0; i < 8; i++) {
+                myStringArray.push({
+                    "lugar" : j,
+                    "equipo_1" : equiposGanadores1[i],
+                    "equipo_2": equiposGanadores2[i],
+                    "equipo_3" : equiposGanadores3[i],
+                    "equipo_final" : equiposGanadores4[i]
+                });
+                console.log(myStringArray);
+                j++;
+            }
+
+
+             //socket.emit('finishSimulator', equiposGanadores);
+            $('.finishTable').bootstrapTable({
+                data: myStringArray
+            });
+            $('#finishModal').modal({backdrop: 'static', keyboard: false});
+
+        }
+
+    }
+
+    //when a user connects
+    socket.on('connect', function () {
+        output('<span class="connect-msg">Client has connected to the server!</span>');
+    });
+
+    //master
+    socket.on('master', function (data) {
+        console.log(data);
+        displayEquipos();
+    });
+
+    //send chat message
+    socket.on('chat', function (data) {
+        console.log('Received message', data);
+        output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+    });
+
+    //disconnect from network
+    socket.on('disconnect', function () {
+        output('<span class="disconnect-msg">The client has disconnected!</span>');
+    });
+
+    //quantity of connected
+    socket.on('cantidadConectados', function (data) {
+        console.log('Received conectados', data);
+        conectados = data.id_conectados;
+
+        $(".displayConectados").html(data.conectados);
+    });
+
+    //divide .html to different users
+    socket.on('htmlType', function (data) {
+
+        console.log("antes del req");
+
+        $('#connectedModal').modal('hide');
+        $('#body').load('views/' + data );
+        $('#equiposModal').modal({backdrop: 'static', keyboard: false});
+
+    });
+
+    $(document).ready(function(){
+        goHome();
+    });
+
+    function goHome() {
+        $('#body').load('views/home.html');
+    }
+
+    function goHistorialCarreras() {
+        displayHistorialCarreras();
+        $('#body').load('views/historial-carreras.html');
+
+    }
+
+    function goCorredores() {
+        displayCorredores();
+        $('#body').load('views/corredores.html');
+
+    }
+
+    //accept begin with that quantity of users
+    function startSimulator() {
+
+        console.log("He dado click a empezar");
+        var jsonObject = {start: true};
+        socket.emit('firstStart', jsonObject);
+
+    }
+
+    function activateAnimation(i, time)
+    {
+        var classId = 'circle' + i;
+        var circle = document.getElementById(classId);
+        circle.style["animation-duration"] = time + "s";
+        circle.style["animation-name"] = "move" + i;
+        circle.style.animationIterationCount = "1";
+        circle.style.animationFillMode = "forwards";
+    }
+
+
+
+    function activeEquiposFase1(equipos)
+    {
+
+        var k = 0;
+        var time = 0;
+        for(var i = 1; i <= 8; i++){
+
+            var classId = 'circle' + i;
+
+            if(equipos[k].fase === 1 || equipos[k].fase === 3) {
+                time = speedToTime(equipos[k].velocidad_curva);
+            }
+            else {
+                time = speedToTime(equipos[k].velocidad_recta);
+            }
+
+            console.log("clase",classId);
+            console.log("tiempo", time);
+            equipos[k]['circleId'] =  i;
+            console.log("un requipo", equipos[k]);
+
+            var circle = document.getElementById(classId);
+            circle.style["animation-duration"] = time + "s";
+            circle.style["animation-name"] = "move" + i;
+            circle.style.animationIterationCount = "1";
+            circle.style.animationFillMode = "forwards";
+
+        }
+
+    }
+
+    socket.on('cerrarMyModal', function (data) {
+
+        console.log("cerrar modal", data);
+        $('#equiposModal').modal('hide');
+
+    });
+
+
+    //start simulator
+    function startRace() {
+
+        socket.emit('cerrarModal', 'hide');
+
+        equipoFase1 = orderArrays(equipos, 1);
+        equipoFase2 = orderArrays(equipos, 2);
+        equipoFase3 = orderArrays(equipos, 3);
+        equipoFase4 = orderArrays(equipos, 4);
+
+        console.log("equipos de fase 1", equipoFase1);
+        console.log("equipos de fase 2", equipoFase2);
+
+        var jsonObject = {equipos: equipoFase1};
+        socket.emit('sendEquipoFase1', jsonObject);
+
+        var jsonObject = {equipos: equipoFase2};
+        socket.emit('sendEquipoFase2', jsonObject);
+
+        var jsonObject = {equipos: equipoFase3};
+        socket.emit('sendEquipoFase3', jsonObject);
+
+        var jsonObject = {equipos: equipoFase4};
+        socket.emit('sendEquipoFase4', jsonObject);
+
+        console.log("He dado click a iniciar carrera");
+
+        activeEquiposFase1(equipoFase1);
+
+    }
+
+
+    function sendDisconnect() {
+        socket.disconnect();
+    }
+
+    function sendMessage() {
+        var $msg = $('#msg');
+        var message = $msg.val();
+        $msg.val('');
+        var jsonObject = {userName: userName, message: message, actionTime: new Date()};
+        socket.emit('chat', jsonObject);
+    }
+
+    function output(message) {
+        var currentTime = "<span class='time'>" + moment().format('HH:mm:ss.SSS') + "</span>";
+        var element = $("<div>" + currentTime + " " + message + "</div>");
+        $('#console').prepend(element);
+    }
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 13) {
+            $('#send').click();
+        }
+    });
+
+    socket.on('equipoList', function (data) {
+
+        console.log("equipos para todos", data);
+        equipos = data.equipos;
+        $('.tableEquipos').bootstrapTable({
+            data: data.equipos
+        });
+
+    });
+
+
+    function orderArrays(equipos, fase)
+    {
+
+        var equiposFase = [];
+        for(var x in equipos){
+
+            if(equipos[x].fase === fase) {
+
+                equiposFase.push(equipos[x]);
+
+            }
+
+        }
+        console.log("ordenado equipo!!", equiposFase);
+        return equiposFase;
+
+    }
+
+
+    function speedToTime(speed)
+    {
+        return ((0.1 / speed)*3600);
+
+    }
+
+    function speedToTimeShort(speed)
+    {
+        return ((0.01 / speed)*3600);
+
+    }
+
+
+    function displayEquipos()
+    {
+        $.ajax({
+            url: "http://localhost:8080/equipo/all",
+            type: 'GET',
+            success: function (entry)
+            {
+                equipos = entry;
+                var jsonObject = {equipos: entry};
+                socket.emit('getEquipos', jsonObject);
+
+
+            }
+        });
+
+    }
+
+    function displayHistorialCarreras()
+    {
+        $.ajax({
+            url: "http://localhost:8080/historial/carrera",
+            type: 'GET',
+            success: function (entry)
+            {
+
+                $('.tableCarreras').bootstrapTable({
+                    data: entry
+                });
+            }
+        });
+
+    }
+
+    function displayCorredores()
+    {
+        $.ajax({
+            url: "http://localhost:8080/corredores",
+            type: 'GET',
+            success: function (entry)
+            {
+                console.log(entry);
+                $('.tableCorredores').bootstrapTable({
+                    data: entry
+                });
+            }
+        });
+
+    }
+
+</script>

@@ -9,6 +9,14 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <bean id="jdbcCarreraDAO" class="daos.impl.JDBCCarreraDAOImpl">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="jdbcCorredorDAO" class="daos.impl.JDBCCorredorDAOImpl">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
     <bean id="dataSource"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 
