@@ -591,8 +591,6 @@
         circle.style.animationFillMode = "forwards";
     }
 
-
-
     function activeEquiposFase1(equipos)
     {
 
@@ -734,14 +732,13 @@
     function displayEquipos()
     {
         $.ajax({
-            url: "https://a618d43a.ngrok.io/equipo/all",
+            url: "http://a618d43a.ngrok.io/equipo/all",
             type: 'GET',
             success: function (entry)
             {
                 equipos = entry;
                 var jsonObject = {equipos: entry};
                 socket.emit('getEquipos', jsonObject);
-
 
             }
         });
