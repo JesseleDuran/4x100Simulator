@@ -54,172 +54,166 @@
 </head>
 <body>
 
-    <div id="body">
-        Main App Body
-    </div>
+<div id="body">
+    Main App Body
+</div>
 
-    <!-- Connected Modal -->
-    <div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="connectedModalTitle">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Hay <span class="displayConectados">0</span> usuarios conectados, está seguro que desea continuar?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="button" onClick="startSimulator()" class="btn btn-primary">Yes</button>
-                </div>
+<!-- Connected Modal -->
+<div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                Hay <span class="displayConectados">0</span> usuarios conectados, está seguro que desea continuar?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" onClick="startSimulator()" class="btn btn-primary">Yes</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- START Modal -->
-    <div class="modal fade bd-example-modal-lg" id="equiposModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="equipoModalTitle">Generar Equipos</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="tableEquipos "
-                               data-search="true"
-                               data-show-refresh="true"
-                               data-show-toggle="true"
-                               data-show-columns="true"
-                               data-pagination="true"
-                               data-page-list="[5, 10]"
-                        >
-                            <thead>
-                                <tr>
-                                    <th scope="col"
-                                        data-field="nombre_equipo"
-                                        data-sortable="true"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >País</th>
-                                    <th scope="col"
-                                        data-field="nombre_corredor"
-                                        data-field="apellido"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >Corredor</th>
-                                    <th scope="col"
-                                        data-field="prob_terminar"
-                                        data-align="center"
-                                        data-halign="center"
-                                        data-align="center"
-                                    >Prob. de Terminar (%)</th>
-                                    <th scope="col"
-                                        data-field="tiempo_arranque"
-                                        data-sortable="true"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >Tiempo de reacción (seg)</th>
-                                    <th scope="col"
-                                        data-field="velocidad_curva"
-                                        data-sortable="true"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >Velocidad en curvas (km/hr)</th>
-                                    <th scope="col"
-                                        data-field="velocidad_recta"
-                                        data-sortable="true"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >Velocidad en rectas (km/hr)</th>
-                                    <th scope="col"
-                                        data-field="fase"
-                                        data-align="center"
-                                        data-halign="center"
-                                    >Fase</th>
-                                </tr>
+<!-- START Modal -->
+<div class="modal fade bd-example-modal-lg" id="equiposModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="equipoModalTitle">Generar Equipos</h5>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="tableEquipos "
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-pagination="true"
+                           data-page-list="[5, 10]"
+                    >
+                        <thead>
+                        <tr>
+                            <th scope="col"
+                                data-field="nombre_equipo"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >País</th>
+                            <th scope="col"
+                                data-field="nombre_corredor"
+                                data-field="apellido"
+                                data-align="center"
+                                data-halign="center"
+                            >Corredor</th>
+                            <th scope="col"
+                                data-field="prob_terminar"
+                                data-align="center"
+                                data-halign="center"
+                                data-align="center"
+                            >Prob. de Terminar (%)</th>
+                            <th scope="col"
+                                data-field="tiempo_arranque"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Tiempo de reacción (seg)</th>
+                            <th scope="col"
+                                data-field="velocidad_curva"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Velocidad en curvas (km/hr)</th>
+                            <th scope="col"
+                                data-field="velocidad_recta"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Velocidad en rectas (km/hr)</th>
+                            <th scope="col"
+                                data-field="fase"
+                                data-align="center"
+                                data-halign="center"
+                            >Fase</th>
+                        </tr>
 
-                            </thead>
-                        </table>
-                    </div>
+                        </thead>
+                    </table>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
-                    <button type="button" class="btn btn-primary">Reload</button>
-                    <button type="button" onClick="startRace()" class="btn btn-primary">Start</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
+                <button type="button" class="btn btn-primary">Reload</button>
+                <button type="button" onClick="startRace()" class="btn btn-primary">Start</button>
 
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- FINISH Modal -->
-    <div class="modal fade bd-example-modal-lg" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id=finishModalTitle">Estadísticas finales</h5>
+<!-- FINISH Modal -->
+<div class="modal fade bd-example-modal-lg" id="finishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id=finishModalTitle">Estadísticas finales</h5>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="finishTable"
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-show-columns="true"
+                           data-pagination="true"
+                           data-page-list="[8, 10]"
+                    >
+                        <thead>
+                        <tr>
+                            <th scope="col"
+                                data-field="lugar"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Lugar</th>
+                            <th scope="col"
+                                data-field="equipo_1"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Primera Fase</th>
+                            <th scope="col"
+                                data-field="equipo_2"
+                                data-field="apellido"
+                                data-align="center"
+                                data-halign="center"
+                            >Segunda Fase</th>
+                            <th scope="col"
+                                data-field="equipo_3"
+                                data-align="center"
+                                data-halign="center"
+                                data-align="center"
+                            >Tercera Fase</th>
+                            <th scope="col"
+                                data-field="equipo_final"
+                                data-sortable="true"
+                                data-align="center"
+                                data-halign="center"
+                            >Finales</th>
+
+                        </tr>
+
+                        </thead>
+                    </table>
                 </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="finishTable"
-                               data-search="true"
-                               data-show-refresh="true"
-                               data-show-toggle="true"
-                               data-show-columns="true"
-                               data-pagination="true"
-                               data-page-list="[8, 10]"
-                        >
-                            <thead>
-                            <tr>
-                                <th scope="col"
-                                    data-field="lugar"
-                                    data-sortable="true"
-                                    data-align="center"
-                                    data-halign="center"
-                                >Lugar</th>
-                                <th scope="col"
-                                    data-field="equipo_1"
-                                    data-sortable="true"
-                                    data-align="center"
-                                    data-halign="center"
-                                >Primera Fase</th>
-                                <th scope="col"
-                                    data-field="equipo_2"
-                                    data-field="apellido"
-                                    data-align="center"
-                                    data-halign="center"
-                                >Segunda Fase</th>
-                                <th scope="col"
-                                    data-field="equipo_3"
-                                    data-align="center"
-                                    data-halign="center"
-                                    data-align="center"
-                                >Tercera Fase</th>
-                                <th scope="col"
-                                    data-field="equipo_final"
-                                    data-sortable="true"
-                                    data-align="center"
-                                    data-halign="center"
-                                >Finales</th>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Inicio</button>
+                <button type="button" class="btn btn-primary">Ir al historial</button>
+                <button type="button" onClick="startRace()" class="btn btn-primary">Repetir</button>
 
-                            </tr>
-
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Inicio</button>
-                    <button type="button" class="btn btn-primary">Ir al historial</button>
-                    <button type="button" onClick="startRace()" class="btn btn-primary">Repetir</button>
-
-                </div>
             </div>
         </div>
     </div>
+</div>
 
 </body>
 </html>
@@ -227,7 +221,7 @@
 <script>
 
     var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
-    var socket = io('http://localhost:9092/chat');
+    var socket = io('https://c9d4384b.ngrok.io/chat');
     var equipos;
     var equipoFase1;
     var equipoFase2 ;
@@ -507,7 +501,7 @@
             }
 
 
-             //socket.emit('finishSimulator', equiposGanadores);
+            //socket.emit('finishSimulator', equiposGanadores);
             $('.finishTable').bootstrapTable({
                 data: myStringArray
             });
@@ -740,7 +734,7 @@
     function displayEquipos()
     {
         $.ajax({
-            url: "http://localhost:8080/equipo/all",
+            url: "https://a618d43a.ngrok.io/equipo/all",
             type: 'GET',
             success: function (entry)
             {
@@ -757,7 +751,7 @@
     function displayHistorialCarreras()
     {
         $.ajax({
-            url: "http://localhost:8080/historial/carrera",
+            url: "http://a618d43a.ngrok.io/historial/carrera",
             type: 'GET',
             success: function (entry)
             {
@@ -773,7 +767,7 @@
     function displayCorredores()
     {
         $.ajax({
-            url: "http://localhost:8080/corredores",
+            url: "http://a618d43a.ngrok.io/corredores",
             type: 'GET',
             success: function (entry)
             {
