@@ -1,38 +1,28 @@
 package models;
 
-import java.util.Date;
-import java.util.List;
-
-
 public class Carrera {
 
     private int id_carrera;
 
     private String nombre_carrera;
 
-    private String tiempo_total;
+    private String fecha;
 
-    private Date fecha;
+    private int id_equipo_ganador1;
 
-    private int equipo_ganador1;
+    private int id_equipo_ganador2;
 
-    private int equipo_ganador2;
-
-    private int equipo_ganador3;
-
-    private List<Equipo> equipoList;
+    private int id_equipo_ganador3;
 
     public Carrera() {
     }
 
-    public Carrera(String nombre_carrera, String tiempo_total, Date fecha, int equipo_ganador1, int equipo_ganador2, int equipo_ganador3, List<Equipo> equipoList) {
+    public Carrera(String nombre_carrera, String fecha, int id_equipo_ganador1, int id_equipo_ganador2, int id_equipo_ganador3) {
         this.nombre_carrera = nombre_carrera;
-        this.tiempo_total = tiempo_total;
         this.fecha = fecha;
-        this.equipo_ganador1 = equipo_ganador1;
-        this.equipo_ganador2 = equipo_ganador2;
-        this.equipo_ganador3 = equipo_ganador3;
-        this.equipoList = equipoList;
+        this.id_equipo_ganador1 = id_equipo_ganador1;
+        this.id_equipo_ganador2 = id_equipo_ganador2;
+        this.id_equipo_ganador3 = id_equipo_ganador3;
     }
 
     public int getId_carrera() {
@@ -51,51 +41,35 @@ public class Carrera {
         this.nombre_carrera = nombre_carrera;
     }
 
-    public String getTiempo_total() {
-        return tiempo_total;
-    }
-
-    public void setTiempo_total(String tiempo_total) {
-        this.tiempo_total = tiempo_total;
-    }
-
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public int getEquipo_ganador1() {
-        return equipo_ganador1;
+    public int getId_equipo_ganador1() {
+        return id_equipo_ganador1;
     }
 
-    public void setEquipo_ganador1(int equipo_ganador1) {
-        this.equipo_ganador1 = equipo_ganador1;
+    public void setId_equipo_ganador1(int id_equipo_ganador1) {
+        this.id_equipo_ganador1 = id_equipo_ganador1;
     }
 
-    public int getEquipo_ganador2() {
-        return equipo_ganador2;
+    public int getId_equipo_ganador2() {
+        return id_equipo_ganador2;
     }
 
-    public void setEquipo_ganador2(int equipo_ganador2) {
-        this.equipo_ganador2 = equipo_ganador2;
+    public void setId_equipo_ganador2(int id_equipo_ganador2) {
+        this.id_equipo_ganador2 = id_equipo_ganador2;
     }
 
-    public int getEquipo_ganador3() {
-        return equipo_ganador3;
+    public int getId_equipo_ganador3() {
+        return id_equipo_ganador3;
     }
 
-    public void setEquipo_ganador3(int equipo_ganador3) {
-        this.equipo_ganador3 = equipo_ganador3;
-    }
-
-    public List<Equipo> getEquipoList() {
-        return equipoList;
-    }
-
-    public void setEquipoList(List<Equipo> equipoList) {
-        this.equipoList = equipoList;
+    public void setId_equipo_ganador3(int id_equipo_ganador3) {
+        this.id_equipo_ganador3 = id_equipo_ganador3;
     }
 }

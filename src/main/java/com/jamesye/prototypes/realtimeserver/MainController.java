@@ -31,7 +31,6 @@ public class MainController {
         JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
         List<Map<String, Object>> carreras = jdbcCarreraDAO.findAll();
-        System.out.println(carreras);
 
         context.close();
 
@@ -47,7 +46,6 @@ public class MainController {
         JDBCCorredorDAO jdbcCorredorDAO = (JDBCCorredorDAO) context.getBean("jdbcCorredorDAO");
 
         List<Map<String, Object>> corredores = jdbcCorredorDAO.findAll();
-        System.out.println(corredores);
 
         context.close();
 
