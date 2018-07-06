@@ -16,21 +16,21 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @Component
-public class ChatModule {
+public class SocketsServerModule {
 
     private final SocketIONamespace namespace;
     private static ConnectedDTO conectados = new ConnectedDTO(0, new ArrayList<UUID>());
 
     @Autowired
-    public ChatModule(SocketIOServer server) {
+    public SocketsServerModule(SocketIOServer server) {
         this.namespace = server.addNamespace("/chat");
         this.namespace.addConnectListener(onConnected());
         this.namespace.addDisconnectListener(onDisconnected());
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
         this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
-        this.namespace.addEventListener("finishAnimation", FinishAnimation.class, sendAnimationType());
-        this.namespace.addEventListener("cerrarModal", CerrarModal.class, sendCloseModal());
+        this.namespace.addEventListener("finishAnimation", FinishAnimationDTO.class, sendAnimationType());
+        this.namespace.addEventListener("cerrarModal", CerrarModalDTO.class, sendCloseModal());
 
         this.namespace.addEventListener("sendEquipoFase1", listEquiposDTO.class, sendEquipo1());
         this.namespace.addEventListener("sendEquipoFase2", listEquiposDTO.class, sendEquipo2());
@@ -46,14 +46,14 @@ public class ChatModule {
         };
     }
 
-    private DataListener<FinishAnimation> sendAnimationType() {
+    private DataListener<FinishAnimationDTO> sendAnimationType() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("animationType", data);
 
         };
     }
 
-    private DataListener<CerrarModal> sendCloseModal() {
+    private DataListener<CerrarModalDTO> sendCloseModal() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("cerrarMyModal", data);
 
@@ -151,5 +151,5 @@ public class ChatModule {
         };
     }
 
-    private static final Logger log = LoggerFactory.getLogger(ChatModule.class);
+    private static final Logger log = LoggerFactory.getLogger(SocketsServerModule.class);
 }

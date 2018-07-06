@@ -496,10 +496,160 @@
         background-position: center;
         background-size: contain;
       }
+
+      body {
+        background: -webkit-linear-gradient(45deg, rgba(242,249,255,1) 0%,rgba(64,150,238,1) 100%);
+        overflow: hidden;
+      }
+
+      .cloudcontain1 {
+        top: 250px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove1 55s infinite;
+        animation: cloudmove1 55s infinite;
+        position: absolute;
+        opacity: .7;
+      }
+
+      @-webkit-keyframes cloudmove1 {
+          0%   {left: 0;}
+          100% {left: 1200px;}
+      }
+
+      @keyframes cloudmove1 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      .cloudcontain2 {
+        top: 75px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove2 40s infinite;
+        animation: cloudmove2 40s infinite;
+        position: absolute;
+        -webkit-animation-delay: -16s;
+        animation-delay: -16s;
+        opacity: .3;
+      }
+
+      @-webkit-keyframes cloudmove2 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove2 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      .cloudcontain3 {
+        top: 320px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove3 47s infinite;
+        animation: cloudmove3 47s infinite;
+        position: absolute;
+        -webkit-animation-delay: -8s;
+        animation-delay: -8s;
+        opacity: .6;
+      }
+
+      @-webkit-keyframes cloudmove3 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove3 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+
+      .cloudcontain4 {
+        top: 400px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove4 41s infinite;
+        animation: cloudmove4 41s infinite;
+        position: absolute;
+        -webkit-animation-delay: -13s;
+        animation-delay: -13s;
+        opacity: .6;
+      }
+
+      @-webkit-keyframes cloudmove4 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove4 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+
+      .cloud1 {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          background: white;
+          position :absolute;
+          z-index: 1;
+          margin: 15px;
+      }
+
+      .cloud2 {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          background: white;
+          position :absolute;
+          z-index: 2;
+          margin: 45px;
+      }
+
+      .cloud3 {
+          width: 75px;
+          height: 75px;
+          border-radius: 45px;
+          background: white;
+          position :absolute;
+          z-index: 3;
+          margin: 0px;
+          top: 50px;
+      }
       </style>
 
   </head>
   <body>
+
+    <div class="cloudcontain1">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <div class="cloudcontain2">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <div class="cloudcontain3">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <div class="cloudcontain4">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+
     <div class="container">
         <div class="ovalo8">
           <div class="circle" id="circle56"></div>
