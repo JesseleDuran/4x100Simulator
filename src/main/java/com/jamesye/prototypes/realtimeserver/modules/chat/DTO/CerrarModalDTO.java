@@ -1,10 +1,10 @@
 package com.jamesye.prototypes.realtimeserver.modules.chat.DTO;
 
-public class CerrarModal {
+public class CerrarModalDTO {
 
     private String value;
 
-    public CerrarModal(String value) {
+    public CerrarModalDTO(String value) {
         this.value = value;
     }
 }

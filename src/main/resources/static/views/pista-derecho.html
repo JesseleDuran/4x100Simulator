@@ -4,10 +4,7 @@
     <meta charset="utf-8">
     <title>Pista derecha</title>
 
-
       <style media="screen">
-
-
       .ovalo-interno{
         display: block;
         width: 240px;
@@ -32,7 +29,6 @@
         border-top: 1px solid white;
         border-bottom: 1px solid white;
         border-right: 1px solid white;
-        /* border-radius:150% / 0 100% 100% 0; */
         border-top-right-radius: 100%;
         border-bottom-right-radius: 100%;
         background: #BC4328;
@@ -121,7 +117,6 @@
            100% {
               transform: rotate(180deg) translateX(460%) translateY(310px) rotate(-180deg);
           }
-
           75% {
               transform: rotate(270deg) translateX(250px) translateY(150px) rotate(-270deg);
           }
@@ -308,6 +303,323 @@
         left:150px;
       }
 
+
+      body {
+        background: -webkit-linear-gradient(45deg, rgba(242,249,255,1) 0%,rgba(64,150,238,1) 100%);
+        overflow: hidden;
+      }
+
+
+
+
+      .cloudcontain1 {
+        top: 250px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove1 55s infinite;
+        animation: cloudmove1 55s infinite;
+        position: absolute;
+        opacity: .7;
+      }
+
+      @-webkit-keyframes cloudmove1 {
+          0%   {left: 0;}
+          100% {left: 1200px;}
+      }
+
+      @keyframes cloudmove1 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      .cloudcontain2 {
+        top: 75px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove2 40s infinite;
+        animation: cloudmove2 40s infinite;
+        position: absolute;
+        -webkit-animation-delay: -16s;
+        animation-delay: -16s;
+        opacity: .3;
+      }
+
+      @-webkit-keyframes cloudmove2 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove2 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      .cloudcontain3 {
+        top: 320px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove3 47s infinite;
+        animation: cloudmove3 47s infinite;
+        position: absolute;
+        -webkit-animation-delay: -8s;
+        animation-delay: -8s;
+        opacity: .6;
+      }
+
+      @-webkit-keyframes cloudmove3 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove3 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+
+      .cloudcontain4 {
+        top: 400px;
+        width: 200px;
+        height: 150px;
+        -webkit-animation: cloudmove4 41s infinite;
+        animation: cloudmove4 41s infinite;
+        position: absolute;
+        -webkit-animation-delay: -13s;
+        animation-delay: -13s;
+        opacity: .6;
+      }
+
+      @-webkit-keyframes cloudmove4 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+      @keyframes cloudmove4 {
+          0%   {left: 0;}
+          100% {left: 100%;}
+      }
+
+
+      .cloud1 {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          background: white;
+          position :absolute;
+          z-index: 1;
+          margin: 15px;
+      }
+
+      .cloud2 {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          background: white;
+          position :absolute;
+          z-index: 2;
+          margin: 45px;
+      }
+
+      .cloud3 {
+          width: 75px;
+          height: 75px;
+          border-radius: 45px;
+          background: white;
+          position :absolute;
+          z-index: 3;
+          margin: 0px;
+          top: 50px;
+      }
+
+
+
+      /*Front Row*/
+
+      .blade1, .blade2, .blade3, .blade4, .blade5,
+      .blade6, .blade7, .blade8, .blade9, .blade10,
+      .blade11, .blade12, .blade13, .blade14, .blade15,
+      .blade16, .blade17, .blade18, .blade19, .blade20,
+      .blade21, .blade22, .blade23, .blade24, .blade25,
+      .blade26, .blade27, .blade28, .blade29, .blade30,
+      .blade31, .blade32, .blade33, .blade34, .blade35,
+      .blade36, .blade37, .blade38, .blade39, .blade40,
+      .blade41, .blade42, .blade43, .blade44, .blade45{
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 55px solid #156A32;
+          position: absolute;
+          -webkit-animation: mymove 5s infinite;
+          animation: mymove 5s infinite;
+          -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+          z-index: 7;
+          bottom: 0px;
+      }
+
+      .blade1 {right: 0px;}
+      .blade2 {right: 25px;}
+      .blade3 {right: 50px;}
+      .blade4 {right: 75px;}
+      .blade5 {right: 100px;}
+      .blade6 {right: 125px;}
+      .blade7 {right: 150px;}
+      .blade8 {right: 175px;}
+      .blade9 {right: 200px;}
+      .blade10 {right: 225px;}
+      .blade11 {right: 250px;}
+      .blade12 {right: 275px;}
+      .blade13 {right: 300px;}
+      .blade14 {right: 325px;}
+      .blade15 {right: 350px;}
+      .blade16 {right: 375px;}
+      .blade17 {right: 400px;}
+      .blade18 {right: 425px;}
+      .blade19 {right: 450px;}
+      .blade20 {right: 475px;}
+      .blade21 {right: 500px;}
+      .blade22 {right: 525px;}
+      .blade23 {right: 550px;}
+      .blade24 {right: 575px;}
+      .blade25 {right: 600px;}
+      .blade26 {right: 625px;}
+      .blade27 {right: 650px;}
+      .blade28 {right: 675px;}
+      .blade29 {right: 700px;}
+      .blade30 {right: 725px;}
+      .blade31 {right: 750px;}
+      .blade32 {right: 775px;}
+      .blade33 {right: 800px;}
+      .blade34 {right: 825px;}
+      .blade35 {right: 850px;}
+      .blade36 {right: 875px;}
+      .blade37 {right: 900px;}
+      .blade38 {right: 925px;}
+      .blade39 {right: 950px;}
+      .blade40 {right: 975px;}
+      .blade41 {right: 1000px;}
+      .blade42 {right: 1025px;}
+      .blade43 {right: 1050px;}
+      .blade44 {right: 1075px;}
+      .blade45 {right: 1100px;}
+
+      @-webkit-keyframes mymove {
+          0%   {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #156A32; }
+          25% {
+            border-left: 25px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 55px solid #156A32; }
+          50% {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #156A32; }
+          75%   {
+            border-left: 25px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 55px solid #156A32; }
+          100%   {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #156A32; }
+      }
+
+
+
+      /*Back Row*/
+
+      .blade1b, .blade2b, .blade3b, .blade4b, .blade5b,
+      .blade6b, .blade7b, .blade8b, .blade9b, .blade10b,
+      .blade11b, .blade12b, .blade13b, .blade14b, .blade15b,
+      .blade16b, .blade17b, .blade18b, .blade19b, .blade20b,
+      .blade21b, .blade22b, .blade23b, .blade24b, .blade25b,
+      .blade26b, .blade27b, .blade28b, .blade29b, .blade30b,
+      .blade31b, .blade32b, .blade33b, .blade34b, .blade35b,
+      .blade36b, .blade37b, .blade38b, .blade39b, .blade40b,
+      .blade41b, .blade42b, .blade43b, .blade44b, .blade45b {
+          border-left: 10px solid transparent;
+          border-right: 10px solid transparent;
+          border-bottom: 55px solid #1E4018;
+          position: absolute;
+          -webkit-animation: mymoveb 5s infinite;
+          animation: mymoveb 5s infinite;
+          -webkit-transition-timing-function: ease-in-out;
+          transition-timing-function: ease-in-out;
+          z-index: 5;
+          bottom: 0px;
+      }
+
+      .blade1b {right: 15px;}
+      .blade2b {right: 35px;}
+      .blade3b {right: 65px;}
+      .blade4b {right: 85px;}
+      .blade5b {right: 115px;}
+      .blade6b {right: 135px;}
+      .blade7b {right: 165px;}
+      .blade8b {right: 185px;}
+      .blade9b {right: 215px;}
+      .blade10b {right: 235px;}
+      .blade11b {right: 265px;}
+      .blade12b {right: 285px;}
+      .blade13b {right: 315px;}
+      .blade14b {right: 335px;}
+      .blade15b {right: 365px;}
+      .blade16b {right: 385px;}
+      .blade17b {right: 415px;}
+      .blade18b {right: 435px;}
+      .blade19b {right: 465px;}
+      .blade20b {right: 485px;}
+      .blade21b {right: 515px;}
+      .blade22b {right: 535px;}
+      .blade23b {right: 565px;}
+      .blade24b {right: 585px;}
+      .blade25b {right: 615px;}
+      .blade26b {right: 635px;}
+      .blade27b {right: 665px;}
+      .blade28b {right: 685px;}
+      .blade29b {right: 715px;}
+      .blade30b {right: 735px;}
+      .blade31b {right: 765px;}
+      .blade32b {right: 785px;}
+      .blade33b {right: 815px;}
+      .blade34b {right: 835px;}
+      .blade35b {right: 865px;}
+      .blade36b {right: 885px;}
+      .blade37b {right: 915px;}
+      .blade38b {right: 935px;}
+      .blade39b {right: 965px;}
+      .blade40b {right: 985px;}
+      .blade41b {right: 1015px;}
+      .blade42b {right: 1035px;}
+      .blade43b {right: 1065px;}
+      .blade44b {right: 1085px;}
+      .blade45b {right: 1115px;}
+
+      @-webkit-keyframes mymoveb {
+          0%   {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #1E4018; }
+          25% {
+            border-left: 25px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 55px solid #1E4018; }
+          50% {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #1E4018; }
+          75%   {
+            border-left: 25px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 55px solid #1E4018; }
+          100%   {
+            border-left: 10px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 55px solid #1E4018; }
+      }
+
+
       .btn-sim{
         position: absolute;
         right: 20%;
@@ -335,15 +647,128 @@
         transform: scale(.9);
       }
 
-
       </style>
 
   </head>
   <body>
-    <div class="buttons">
-      <button class="btn-sim" id="play">Play</button>
-      <button class="btn-sim" id="pause">Pause</button>
+
+    <div class="cloudcontain1">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
     </div>
+
+    <div class="cloudcontain2">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <div class="cloudcontain3">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <div class="cloudcontain4">
+      <div class="cloud1"></div>
+      <div class="cloud2"></div>
+      <div class="cloud3"></div>
+    </div>
+
+    <!--Front Row-->
+    <div class="blade1"></div>
+    <div class="blade2"></div>
+    <div class="blade3"></div>
+    <div class="blade4"></div>
+    <div class="blade5"></div>
+    <div class="blade6"></div>
+    <div class="blade7"></div>
+    <div class="blade8"></div>
+    <div class="blade9"></div>
+    <div class="blade10"></div>
+    <div class="blade11"></div>
+    <div class="blade12"></div>
+    <div class="blade13"></div>
+    <div class="blade14"></div>
+    <div class="blade15"></div>
+    <div class="blade16"></div>
+    <div class="blade17"></div>
+    <div class="blade18"></div>
+    <div class="blade19"></div>
+    <div class="blade20"></div>
+    <div class="blade21"></div>
+    <div class="blade22"></div>
+    <div class="blade23"></div>
+    <div class="blade24"></div>
+    <div class="blade25"></div>
+    <div class="blade26"></div>
+    <div class="blade27"></div>
+    <div class="blade28"></div>
+    <div class="blade29"></div>
+    <div class="blade30"></div>
+    <div class="blade31"></div>
+    <div class="blade32"></div>
+    <div class="blade33"></div>
+    <div class="blade34"></div>
+    <div class="blade35"></div>
+    <div class="blade36"></div>
+    <div class="blade37"></div>
+    <div class="blade38"></div>
+    <div class="blade39"></div>
+    <div class="blade40"></div>
+    <div class="blade41"></div>
+    <div class="blade42"></div>
+    <div class="blade43"></div>
+    <div class="blade44"></div>
+    <div class="blade45"></div>
+    <!--Back Row-->
+    <div class="blade1b"></div>
+    <div class="blade2b"></div>
+    <div class="blade3b"></div>
+    <div class="blade4b"></div>
+    <div class="blade5b"></div>
+    <div class="blade6b"></div>
+    <div class="blade7b"></div>
+    <div class="blade8b"></div>
+    <div class="blade9b"></div>
+    <div class="blade10b"></div>
+    <div class="blade11b"></div>
+    <div class="blade12b"></div>
+    <div class="blade13b"></div>
+    <div class="blade14b"></div>
+    <div class="blade15b"></div>
+    <div class="blade16b"></div>
+    <div class="blade17b"></div>
+    <div class="blade18b"></div>
+    <div class="blade19b"></div>
+    <div class="blade20b"></div>
+    <div class="blade21b"></div>
+    <div class="blade22b"></div>
+    <div class="blade23b"></div>
+    <div class="blade24b"></div>
+    <div class="blade25b"></div>
+    <div class="blade26b"></div>
+    <div class="blade27b"></div>
+    <div class="blade28b"></div>
+    <div class="blade29b"></div>
+    <div class="blade30b"></div>
+    <div class="blade31b"></div>
+    <div class="blade32b"></div>
+    <div class="blade33b"></div>
+    <div class="blade34b"></div>
+    <div class="blade35b"></div>
+    <div class="blade36b"></div>
+    <div class="blade37b"></div>
+    <div class="blade38b"></div>
+    <div class="blade39b"></div>
+    <div class="blade40b"></div>
+    <div class="blade41b"></div>
+    <div class="blade42b"></div>
+    <div class="blade43b"></div>
+    <div class="blade44b"></div>
+    <div class="blade45b"></div>
+
 
     <div class="container">
         <div class="ovalo8">
@@ -373,14 +798,13 @@
                     <div class="ovalo2">
                       <div class="linea" id="linea2"></div>
                       <div class="circle" id="circle2"></div>
-                     <div class="slide">
+
 
                         <div class="ovalo1">
                           <div class="linea" id="linea1"></div>
                           <div class="circle" id="circle1"></div>
 
                               <div class="ovalo-interno"></div>
-
                         </div>
                       </div>
                     </div>
@@ -392,20 +816,5 @@
         </div>
 
 
-      <script>
-
-      const $playButton = document.getElementById('play');
-      const $pauseButton = document.getElementById('pause');
-
-
-      $playButton.addEventListener('click', (event) =>{
-        animation.play();
-      });
-
-      $pauseButton.addEventListener('click', (event) =>{
-        animation.pause();
-      });
-
-      </script>
   </body>
 </html>
