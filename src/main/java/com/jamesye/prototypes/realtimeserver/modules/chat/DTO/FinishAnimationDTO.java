@@ -1,13 +1,13 @@
 package com.jamesye.prototypes.realtimeserver.modules.chat.DTO;
 
-public class FinishAnimation {
+public class FinishAnimationDTO {
 
     private String animation;
 
-    public FinishAnimation() {
+    public FinishAnimationDTO() {
     }
 
-    public FinishAnimation(String animation) {
+    public FinishAnimationDTO(String animation) {
         this.animation = animation;
     }
 
