@@ -5,6 +5,7 @@ import models.Carrera;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.sql.*;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,41 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
                 carrera.getId_equipo_ganador3()
         });
 
+    }
+
+    //TODO: refactor
+    @Override
+    public int insertReturningId(Carrera carrera) {
+        String URL="localhost:3306";
+        String USERNAME="jessele";
+        String PASSWORD="";
+        String DATABASE="race_simulator";
+
+        int id=0;
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://"+ URL + "/" + DATABASE,USERNAME,PASSWORD);
+
+            PreparedStatement ps=con.prepareStatement("INSERT INTO carrera " +
+                    "(nombre_carrera, fecha, id_equipo_ganador1, id_equipo_ganador2, id_equipo_ganador3) VALUES (?,?,?,?,?)" ,Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, carrera.getNombre_carrera());
+            ps.setString(2, carrera.getFecha());
+            ps.setInt(3, carrera.getId_equipo_ganador1());
+            ps.setInt(4, carrera.getId_equipo_ganador2());
+            ps.setInt(5, carrera.getId_equipo_ganador3());
+
+            ps.executeUpdate();
+            ResultSet rs=ps.getGeneratedKeys();
+            if(rs.next()){
+                id=rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return id;
     }
 
 

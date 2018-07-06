@@ -12,15 +12,15 @@ public class CarreraController {
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
     @ResponseBody
-    public Carrera create(@RequestBody Carrera carrera) {
+    public int create(@RequestBody Carrera carrera) {
 
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
-        jdbcCarreraDAO.insert(carrera);
+        int id = jdbcCarreraDAO.insert2(carrera);
 
         context.close();
 
-        return carrera;
+        return id;
     }
 }

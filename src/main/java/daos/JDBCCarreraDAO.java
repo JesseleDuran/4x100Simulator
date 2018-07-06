@@ -9,5 +9,5 @@ public interface JDBCCarreraDAO {
 
     public List<Map<String, Object>> findAll();
     public void insert(Carrera carrera);
-
+    public int insertReturningId(Carrera carrera);
 }
