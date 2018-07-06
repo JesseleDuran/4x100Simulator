@@ -17,7 +17,7 @@ public class CarreraController {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
-        int id = jdbcCarreraDAO.insert2(carrera);
+        int id = jdbcCarreraDAO.insertReturningId(carrera);
 
         context.close();
 
