@@ -2,6 +2,7 @@ package daos.impl;
 
 import daos.JDBCCarreraDAO;
 import models.Carrera;
+import models.CarreraCorredor;
 import models.CarreraEquipo;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -108,6 +109,29 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
 
             public int getBatchSize() {
                 return carreraEquipos.size();
+            }
+        });
+    }
+
+    @Override
+    public void insertBatchCarreraCorredor(final List<CarreraCorredor> carreraCorredores){
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "INSERT INTO carrera_corredor " +
+                "(id_carrera, id_corredor, tiempo_fase) VALUES (?, ?, ?)";
+
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                CarreraCorredor carreraCorredor = carreraCorredores.get(i);
+                ps.setLong(1, carreraCorredor.getId_carrera());
+                ps.setLong(2, carreraCorredor.getId_corredor());
+                ps.setString(3, carreraCorredor.getTiempo_fase());
+
+            }
+
+            public int getBatchSize() {
+                return carreraCorredores.size();
             }
         });
     }

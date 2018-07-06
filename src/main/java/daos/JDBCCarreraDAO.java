@@ -1,6 +1,7 @@
 package daos;
 
 import models.Carrera;
+import models.CarreraCorredor;
 import models.CarreraEquipo;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface JDBCCarreraDAO {
     public void insert(Carrera carrera);
     public int insertReturningId(Carrera carrera);
     public void insertBatchCarreraEquipo(final List<CarreraEquipo> carreraEquipos);
+    public void insertBatchCarreraCorredor(final List<CarreraCorredor> carreraCorredores);
 }

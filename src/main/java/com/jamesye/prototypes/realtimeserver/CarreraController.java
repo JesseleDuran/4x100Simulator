@@ -2,6 +2,7 @@ package com.jamesye.prototypes.realtimeserver;
 
 import daos.JDBCCarreraDAO;
 import models.Carrera;
+import models.CarreraCorredor;
 import models.CarreraEquipo;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -29,7 +30,7 @@ public class CarreraController {
 
     @RequestMapping(path = "/create/carrera_equipo", method = RequestMethod.POST)
     @ResponseBody
-    public boolean create(@RequestBody List<CarreraEquipo> carreraEquipos) {
+    public boolean createCarreraEquipo(@RequestBody List<CarreraEquipo> carreraEquipos) {
         try
         {
                 ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -39,6 +40,25 @@ public class CarreraController {
 
                 context.close();
                 return true;
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    @RequestMapping(path = "/create/carrera_corredor", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean createCarreraCorredor(@RequestBody List<CarreraCorredor> carreraCorredores) {
+        try
+        {
+            ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
+
+            jdbcCarreraDAO.insertBatchCarreraCorredor(carreraCorredores);
+
+            context.close();
+            return true;
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
