@@ -2,6 +2,8 @@ package daos.impl;
 
 import daos.JDBCCarreraDAO;
 import models.Carrera;
+import models.CarreraEquipo;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -22,7 +24,7 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
     public List<Map<String, Object>> findAll() {
 
             jdbcTemplate = new JdbcTemplate(dataSource);
-            String sql = "SELECT e1.nombre_equipo as primer_lugar, e2.nombre_equipo AS segundo_lugar, e3.nombre_equipo AS tercer_lugar, carrera.nombre_carrera, carrera.tiempo_total, carrera.fecha FROM `carrera` \n" +
+            String sql = "SELECT e1.nombre_equipo as primer_lugar, e2.nombre_equipo AS segundo_lugar, e3.nombre_equipo AS tercer_lugar, carrera.nombre_carrera, carrera.fecha FROM `carrera` \n" +
                     "JOIN equipo e1 ON (carrera.id_equipo_ganador1 = e1.id)\n" +
                     "JOIN equipo e2 ON (carrera.id_equipo_ganador2 = e2.id)\n" +
                     "JOIN equipo e3 ON (carrera.id_equipo_ganador3 = e3.id)";
@@ -84,6 +86,30 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
         }
 
         return id;
+    }
+
+    @Override
+    public void insertBatchCarreraEquipo(final List<CarreraEquipo> carreraEquipos){
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        String sql = "INSERT INTO carrera_equipo " +
+                "(id_carrera, id_equipo, tiempo_equipo, n_posicion) VALUES (?, ?, ?, ?)";
+
+        jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                CarreraEquipo carreraEquipo = carreraEquipos.get(i);
+                ps.setLong(1, carreraEquipo.getId_carrera());
+                ps.setLong(2, carreraEquipo.getId_equipo());
+                ps.setString(3, carreraEquipo.getTiempo_equipo());
+                ps.setInt(4, carreraEquipo.getN_posicion());
+
+            }
+
+            public int getBatchSize() {
+                return carreraEquipos.size();
+            }
+        });
     }
 
 
