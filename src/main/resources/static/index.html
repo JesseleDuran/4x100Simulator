@@ -604,11 +604,6 @@
         console.log("CARRERA OBJECT", carreraObject);
         createCarrera(carreraObject);
 
-        var carreraEquipo = parameterCarreraEquipo();
-        createCarreraEquipo(carreraEquipo);
-        console.log("CARRERA_EQUIPO OBJECT", carreraEquipo);
-
-
     });
 
     function secsToTimeFormat(secs) {
@@ -942,8 +937,10 @@
             dataType: 'JSON',
             success: function (data)
             {
-                console.log(data);
+                console.log("ID CARRERA RECIEN GUARDADA",data);
                 idCarrera = data;
+                var carreraEquipo = parameterCarreraEquipo();
+                createCarreraEquipo(carreraEquipo);
             }});
     }
 
@@ -956,13 +953,13 @@
             dataType: 'JSON',
             success: function (data)
             {
-                console.log(data);
+                console.log("respuesta de carrera equipo", data);
+
             }});
     }
 
 
     // Rebound of this pen https://codepen.io/Tonetete/pen/fzDop
-
 
         var t = undefined;
         var log = $("#log");
@@ -981,8 +978,8 @@
                 }
 
             }
-            else
-                cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
+            else           cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
+
         }
 
         function initTimer() {
@@ -1038,6 +1035,7 @@
 
         $("#change").on('click', changeTimer);
         $("#init").on('click', resetTimer);
+
 
 
 </script>

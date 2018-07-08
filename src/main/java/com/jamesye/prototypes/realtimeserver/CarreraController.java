@@ -37,13 +37,13 @@ public class CarreraController {
     public @ResponseBody boolean createCarreraEquipo(List<CarreraEquipo> carreraEquipos) {
         try
         {
-                ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-                JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
+            ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+            JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
-                jdbcCarreraDAO.insertBatchCarreraEquipo(carreraEquipos);
+            jdbcCarreraDAO.insertBatchCarreraEquipo(carreraEquipos);
 
-                context.close();
-                return true;
+            context.close();
+            return true;
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
