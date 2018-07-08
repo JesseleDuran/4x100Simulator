@@ -139,10 +139,8 @@
                     </table>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Atras</button>
-                <button type="button" class="btn btn-primary">Reload</button>
-                <button type="button" onClick="startRace()" class="btn btn-primary">Start</button>
+            <div class="modal-footer" id="modal-footer-master">
+
 
             </div>
         </div>
@@ -175,29 +173,17 @@
                                 data-halign="center"
                             >Lugar</th>
                             <th scope="col"
-                                data-field="equipo_1"
+                                data-field="tiempo_equipo"
                                 data-sortable="true"
                                 data-align="center"
                                 data-halign="center"
-                            >Primera Fase</th>
-                            <th scope="col"
-                                data-field="equipo_2"
-                                data-field="apellido"
-                                data-align="center"
-                                data-halign="center"
-                            >Segunda Fase</th>
-                            <th scope="col"
-                                data-field="equipo_3"
-                                data-align="center"
-                                data-halign="center"
-                                data-align="center"
-                            >Tercera Fase</th>
+                            >Tiempo</th>
                             <th scope="col"
                                 data-field="equipo_final"
                                 data-sortable="true"
                                 data-align="center"
                                 data-halign="center"
-                            >Finales</th>
+                            >Equipos</th>
 
                         </tr>
 
@@ -231,6 +217,7 @@
     var equiposGanadores3 = [];
     var equiposGanadores2 = [];
     var equiposGanadores1 = [];
+    var idCarrera;
     socket.connect();
 
     $(document.body).on('webkitAnimationEnd', function(e){
@@ -242,7 +229,10 @@
     })
 
     socket.on('getEquipoFase1', function (data) {
-
+        equiposGanadores4 = [];
+        equiposGanadores3 = [];
+        equiposGanadores2 = [];
+        equiposGanadores1 = [];
         console.log("get equipo fase 1", data.equipos);
         equipoFase1 = data.equipos;
 
@@ -273,35 +263,35 @@
     socket.on('animationType', function (data) {
         switch(data.animation){
             case 'move1' :
-                equiposGanadores1.push(equipoFase1[0].nombre_equipo + " - " + equipoFase1[0].apellido);
+                equiposGanadores1.push(equipoFase1[0]);
                 activateAnimation(9, speedToTimeShort(equipoFase1[0].velocidad_recta));
                 break;
             case 'move2' :
-                equiposGanadores1.push(equipoFase1[1].nombre_equipo + " - " + equipoFase1[1].apellido);
+                equiposGanadores1.push(equipoFase1[1]);
                 activateAnimation(10, speedToTimeShort(equipoFase1[1].velocidad_recta));
                 break;
             case 'move3' :
-                equiposGanadores1.push(equipoFase1[2].nombre_equipo + " - " + equipoFase1[2].apellido);
+                equiposGanadores1.push(equipoFase1[2]);
                 activateAnimation(11, speedToTimeShort(equipoFase1[2].velocidad_recta));
                 break;
             case 'move4' :
-                equiposGanadores1.push(equipoFase1[3].nombre_equipo + " - " + equipoFase1[3].apellido);
+                equiposGanadores1.push(equipoFase1[3]);
                 activateAnimation(12, speedToTimeShort(equipoFase1[3].velocidad_recta));
                 break;
             case 'move5' :
-                equiposGanadores1.push(equipoFase1[4].nombre_equipo + " - " + equipoFase1[4].apellido);
+                equiposGanadores1.push(equipoFase1[4]);
                 activateAnimation(13, speedToTimeShort(equipoFase1[4].velocidad_recta));
                 break;
             case 'move6' :
-                equiposGanadores1.push(equipoFase1[5].nombre_equipo + " - " + equipoFase1[5].apellido);
+                equiposGanadores1.push(equipoFase1[5]);
                 activateAnimation(14, speedToTimeShort(equipoFase1[5].velocidad_recta));
                 break;
             case 'move7' :
-                equiposGanadores1.push(equipoFase1[6].nombre_equipo + " - " + equipoFase1[6].apellido);
+                equiposGanadores1.push(equipoFase1[6]);
                 activateAnimation(15, speedToTimeShort(equipoFase1[6].velocidad_recta));
                 break;
             case 'move8' :
-                equiposGanadores1.push(equipoFase1[7].nombre_equipo + " - " + equipoFase1[7].apellido);
+                equiposGanadores1.push(equipoFase1[7]);
                 activateAnimation(16, speedToTimeShort(equipoFase1[7].velocidad_recta));
                 break;
 
@@ -331,35 +321,35 @@
                 break;
 
             case 'move17' :
-                equiposGanadores2.push(equipoFase2[0].nombre_equipo + " - " + equipoFase2[0].apellido);
+                equiposGanadores2.push(equipoFase2[0]);
                 activateAnimation(25, speedToTimeShort(equipoFase2[0].velocidad_recta));
                 break;
             case 'move18' :
-                equiposGanadores2.push(equipoFase2[1].nombre_equipo + " - " + equipoFase2[1].apellido);
+                equiposGanadores2.push(equipoFase2[1]);
                 activateAnimation(26, speedToTimeShort(equipoFase2[1].velocidad_recta));
                 break;
             case 'move19' :
-                equiposGanadores2.push(equipoFase2[2].nombre_equipo + " - " + equipoFase2[2].apellido);
+                equiposGanadores2.push(equipoFase2[2]);
                 activateAnimation(27, speedToTimeShort(equipoFase2[2].velocidad_recta));
                 break;
             case 'move20' :
-                equiposGanadores2.push(equipoFase2[3].nombre_equipo + " - " + equipoFase2[3].apellido);
+                equiposGanadores2.push(equipoFase2[3]);
                 activateAnimation(28, speedToTimeShort(equipoFase2[3].velocidad_recta));
                 break;
             case 'move21' :
-                equiposGanadores2.push(equipoFase2[4].nombre_equipo + " - " + equipoFase2[4].apellido);
+                equiposGanadores2.push(equipoFase2[4]);
                 activateAnimation(29, speedToTimeShort(equipoFase2[4].velocidad_recta));
                 break;
             case 'move22' :
-                equiposGanadores2.push(equipoFase2[5].nombre_equipo + " - " + equipoFase2[5].apellido);
+                equiposGanadores2.push(equipoFase2[5]);
                 activateAnimation(30, speedToTimeShort(equipoFase2[5].velocidad_recta));
                 break;
             case 'move23' :
-                equiposGanadores2.push(equipoFase2[6].nombre_equipo + " - " + equipoFase2[6].apellido);
+                equiposGanadores2.push(equipoFase2[6]);
                 activateAnimation(31, speedToTimeShort(equipoFase2[6].velocidad_recta));
                 break;
             case 'move24' :
-                equiposGanadores2.push(equipoFase2[7].nombre_equipo + " - " + equipoFase2[7].apellido);
+                equiposGanadores2.push(equipoFase2[7]);
                 activateAnimation(32, speedToTimeShort(equipoFase2[7].velocidad_recta));
                 break;
 
@@ -389,35 +379,35 @@
                 break;
 
             case 'move33' :
-                equiposGanadores3.push(equipoFase3[0].nombre_equipo + " - " + equipoFase3[0].apellido);
+                equiposGanadores3.push(equipoFase3[0]);
                 activateAnimation(41, speedToTimeShort(equipoFase3[0].velocidad_curva));
                 break;
             case 'move34' :
-                equiposGanadores3.push(equipoFase3[1].nombre_equipo + " - " + equipoFase3[1].apellido);
+                equiposGanadores3.push(equipoFase3[1]);
                 activateAnimation(42, speedToTimeShort(equipoFase3[1].velocidad_curva));
                 break;
             case 'move35' :
-                equiposGanadores3.push(equipoFase3[2].nombre_equipo + " - " + equipoFase3[2].apellido);
+                equiposGanadores3.push(equipoFase3[2]);
                 activateAnimation(43, speedToTimeShort(equipoFase3[2].velocidad_curva));
                 break;
             case 'move36' :
-                equiposGanadores3.push(equipoFase3[3].nombre_equipo + " - " + equipoFase3[3].apellido);
+                equiposGanadores3.push(equipoFase3[3]);
                 activateAnimation(44, speedToTimeShort(equipoFase3[3].velocidad_curva));
                 break;
             case 'move37' :
-                equiposGanadores3.push(equipoFase3[4].nombre_equipo + " - " + equipoFase3[4].apellido);
+                equiposGanadores3.push(equipoFase3[4]);
                 activateAnimation(45, speedToTimeShort(equipoFase3[4].velocidad_curva));
                 break;
             case 'move38' :
-                equiposGanadores3.push(equipoFase3[5].nombre_equipo + " - " + equipoFase3[5].apellido);
+                equiposGanadores3.push(equipoFase3[5]);
                 activateAnimation(46, speedToTimeShort(equipoFase3[5].velocidad_curva));
                 break;
             case 'move39' :
-                equiposGanadores3.push(equipoFase3[6].nombre_equipo + " - " + equipoFase3[6].apellido);
+                equiposGanadores3.push(equipoFase3[6]);
                 activateAnimation(47, speedToTimeShort(equipoFase3[6].velocidad_curva));
                 break;
             case 'move40' :
-                equiposGanadores3.push(equipoFase3[7].nombre_equipo + " - " + equipoFase3[7].apellido);
+                equiposGanadores3.push(equipoFase3[7]);
                 activateAnimation(48, speedToTimeShort(equipoFase3[7].velocidad_curva));
                 break;
 
@@ -447,35 +437,131 @@
                 break;
 
             case 'move49':
-                equiposGanadores4.push(equipoFase4[0].nombre_equipo + " - " + equipoFase4[0].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[0].apellido,
+                    "fase" : equipoFase4[0].fase,
+                    "id": equipoFase4[0].id,
+                    "id_equipo" : equipoFase4[0].id_equipo,
+                    "nombre_corredor" : equipoFase4[0].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[0].nombre_equipo,
+                    "prob_terminar" : equipoFase4[0].prob_terminar,
+                    "tiempo_arranque": equipoFase4[0].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[0].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[0].velocidad_recta,
+                    "posicion_array" : 0,
+                });
                 finishSimulator();
                 break;
             case 'move50':
-                equiposGanadores4.push(equipoFase4[1].nombre_equipo + " - " + equipoFase4[1].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[1].apellido,
+                    "fase" : equipoFase4[1].fase,
+                    "id": equipoFase4[1].id,
+                    "id_equipo" : equipoFase4[1].id_equipo,
+                    "nombre_corredor" : equipoFase4[1].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[1].nombre_equipo,
+                    "prob_terminar" : equipoFase4[1].prob_terminar,
+                    "tiempo_arranque": equipoFase4[1].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[1].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[1].velocidad_recta,
+                    "posicion_array" : 1,
+                });
                 finishSimulator();
                 break;
             case 'move51':
-                equiposGanadores4.push(equipoFase4[2].nombre_equipo + " - " + equipoFase4[2].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[2].apellido,
+                    "fase" : equipoFase4[2].fase,
+                    "id": equipoFase4[2].id,
+                    "id_equipo" : equipoFase4[2].id_equipo,
+                    "nombre_corredor" : equipoFase4[2].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[2].nombre_equipo,
+                    "prob_terminar" : equipoFase4[2].prob_terminar,
+                    "tiempo_arranque": equipoFase4[2].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[2].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[2].velocidad_recta,
+                    "posicion_array" : 2,
+                });
                 finishSimulator();
                 break;
             case 'move52':
-                equiposGanadores4.push(equipoFase4[3].nombre_equipo + " - " + equipoFase4[3].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[3].apellido,
+                    "fase" : equipoFase4[3].fase,
+                    "id": equipoFase4[3].id,
+                    "id_equipo" : equipoFase4[3].id_equipo,
+                    "nombre_corredor" : equipoFase4[3].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[3].nombre_equipo,
+                    "prob_terminar" : equipoFase4[3].prob_terminar,
+                    "tiempo_arranque": equipoFase4[3].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[3].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[3].velocidad_recta,
+                    "posicion_array" : 3,
+                });
                 finishSimulator();
                 break;
             case 'move53':
-                equiposGanadores4.push(equipoFase4[4].nombre_equipo + " - " + equipoFase4[4].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[4].apellido,
+                    "fase" : equipoFase4[4].fase,
+                    "id": equipoFase4[4].id,
+                    "id_equipo" : equipoFase4[4].id_equipo,
+                    "nombre_corredor" : equipoFase4[4].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[4].nombre_equipo,
+                    "prob_terminar" : equipoFase4[4].prob_terminar,
+                    "tiempo_arranque": equipoFase4[4].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[4].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[4].velocidad_recta,
+                    "posicion_array" : 4,
+                });
                 finishSimulator();
                 break;
             case 'move54':
-                equiposGanadores4.push(equipoFase4[5].nombre_equipo + " - " + equipoFase4[5].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[5].apellido,
+                    "fase" : equipoFase4[5].fase,
+                    "id": equipoFase4[5].id,
+                    "id_equipo" : equipoFase4[5].id_equipo,
+                    "nombre_corredor" : equipoFase4[5].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[5].nombre_equipo,
+                    "prob_terminar" : equipoFase4[5].prob_terminar,
+                    "tiempo_arranque": equipoFase4[5].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[5].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[5].velocidad_recta,
+                    "posicion_array" : 5,
+                });
                 finishSimulator();
                 break;
             case 'move55':
-                equiposGanadores4.push(equipoFase4[6].nombre_equipo + " - " + equipoFase4[6].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[6].apellido,
+                    "fase" : equipoFase4[6].fase,
+                    "id": equipoFase4[6].id,
+                    "id_equipo" : equipoFase4[6].id_equipo,
+                    "nombre_corredor" : equipoFase4[6].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[6].nombre_equipo,
+                    "prob_terminar" : equipoFase4[6].prob_terminar,
+                    "tiempo_arranque": equipoFase4[6].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[6].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[6].velocidad_recta,
+                    "posicion_array" : 6,
+                });
                 finishSimulator();
                 break;
             case 'move56':
-                equiposGanadores4.push(equipoFase4[7].nombre_equipo + " - " + equipoFase4[7].apellido);
+                equiposGanadores4.push({
+                    "apellido" : equipoFase4[7].apellido,
+                    "fase" : equipoFase4[7].fase,
+                    "id": equipoFase4[7].id,
+                    "id_equipo" : equipoFase4[7].id_equipo,
+                    "nombre_corredor" : equipoFase4[7].nombre_corredor,
+                    "nombre_equipo" : equipoFase4[7].nombre_equipo,
+                    "prob_terminar" : equipoFase4[7].prob_terminar,
+                    "tiempo_arranque": equipoFase4[7].tiempo_arranque,
+                    "velocidad_curva" : equipoFase4[7].velocidad_curva,
+                    "velocidad_recta" : equipoFase4[7].velocidad_recta,
+                    "posicion_array" : 7,
+                });
                 finishSimulator();
                 break;
 
@@ -491,16 +577,16 @@
             for (var i = 0; i < 8; i++) {
                 myStringArray.push({
                     "lugar" : j,
-                    "equipo_1" : equiposGanadores1[i],
-                    "equipo_2": equiposGanadores2[i],
-                    "equipo_3" : equiposGanadores3[i],
-                    "equipo_final" : equiposGanadores4[i]
+                    "equipo_final" : equiposGanadores4[i].nombre_equipo,
+                    "tiempo_equipo" : secsToTimeFormat(speedToTime(equipoFase4[equiposGanadores4[i].posicion_array].velocidad_recta) +
+                        speedToTime(equipoFase3[equiposGanadores4[i].posicion_array].velocidad_curva) +
+                        speedToTime(equipoFase2[equiposGanadores4[i].posicion_array].velocidad_recta) +
+                        speedToTime(equipoFase1[equiposGanadores4[i].posicion_array].velocidad_recta))
                 });
-                console.log(myStringArray);
                 j++;
             }
 
-            //socket.emit('finishSimulator', equiposGanadores);
+            socket.emit('finishedSimulator');
             $('.finishTable').bootstrapTable({
                 data: myStringArray
             });
@@ -508,6 +594,73 @@
 
         }
 
+    }
+
+    //save carrera
+    socket.on('masterSave', function (data) {
+
+        console.log(data);
+        var carreraObject = parameterCreateCarrera();
+        console.log("CARRERA OBJECT", carreraObject);
+        createCarrera(carreraObject);
+
+        var carreraEquipo = parameterCarreraEquipo();
+        createCarreraEquipo(carreraEquipo);
+        console.log("CARRERA_EQUIPO OBJECT", carreraEquipo);
+
+
+    });
+
+    function secsToTimeFormat(secs) {
+
+        var date = new Date(null);
+        date.setSeconds(secs); // specify value for SECONDS here
+        var timeString = date.toISOString().substr(11, 8);
+
+        return timeString;
+    }
+
+    //missing tiempo x equipo
+    function parameterCarreraEquipo() {
+
+        var carreraEquipo = [];
+        var j = 1;
+        for (var i = 0; i < 8; i++) {
+            carreraEquipo.push({
+                "id_carrera" : idCarrera,
+                "id_equipo" : equiposGanadores4[i].id_equipo,
+                "tiempo_equipo": secsToTimeFormat(speedToTime(equipoFase4[equiposGanadores4[i].posicion_array].velocidad_recta) +
+                    speedToTime(equipoFase3[equiposGanadores4[i].posicion_array].velocidad_curva) +
+                    speedToTime(equipoFase2[equiposGanadores4[i].posicion_array].velocidad_recta) +
+                    speedToTime(equipoFase1[equiposGanadores4[i].posicion_array].velocidad_recta)),
+                "n_posicion" : j,
+            });
+            j++;
+            console.log(carreraEquipo);
+        }
+
+        return carreraEquipo;
+    }
+
+    //missing nombre carrera
+    function parameterCreateCarrera() {
+
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var output = d.getFullYear() + '/' +
+            (month<10 ? '0' : '') + month + '/' +
+            (day<10 ? '0' : '') + day;
+
+        var carreraObject = {
+            "nombre_carrera" : "",
+            "fecha" : output,
+            "id_equipo_ganador1": equiposGanadores4[0].id_equipo,
+            "id_equipo_ganador2" : equiposGanadores4[1].id_equipo,
+            "id_equipo_ganador3" : equiposGanadores4[2].id_equipo
+        };
+
+        return carreraObject;
     }
 
     //when a user connects
@@ -518,6 +671,9 @@
     //master
     socket.on('master', function (data) {
         console.log(data);
+        $( "#modal-footer-master" ).empty();
+        $( "#modal-footer-master" ).append( "<div><button type=\"button\" onClick=\"goHome()\" class=\"btn btn-primary\" data-dismiss=\"modal\">Atras</button>\n" +
+            "<button type=\"button\" onClick=\"startRace()\" class=\"btn btn-primary\">Start</button></div>" );
         displayEquipos();
     });
 
@@ -561,6 +717,7 @@
 
     function goHistorialCarreras() {
         displayHistorialCarreras();
+        $('#finishModal').modal('hide');
         $('#body').load('views/historial-carreras.html');
 
     }
@@ -633,7 +790,7 @@
     function startRace() {
 
         socket.emit('cerrarModal', 'hide');
-
+        changeTimer();
         equipoFase1 = orderArrays(equipos, 1);
         equipoFase2 = orderArrays(equipos, 2);
         equipoFase3 = orderArrays(equipos, 3);
@@ -776,9 +933,36 @@
 
     }
 
+    function createCarrera(carreraObject)
+    {
+        $.ajax({
+            url: 'http://localhost:8080/carrera/create',
+            type: 'POST',
+            data: carreraObject,
+            dataType: 'JSON',
+            success: function (data)
+            {
+                console.log(data);
+                idCarrera = data;
+            }});
+    }
+
+    function createCarreraEquipo(carreraEquipoObject)
+    {
+        $.ajax({
+            url: 'http://localhost:8080/carrera/create/carrera_equipo',
+            type: 'POST',
+            data: carreraEquipoObject,
+            dataType: 'JSON',
+            success: function (data)
+            {
+                console.log(data);
+            }});
+    }
+
 
     // Rebound of this pen https://codepen.io/Tonetete/pen/fzDop
-    $(function(){
+
 
         var t = undefined;
         var log = $("#log");
@@ -797,8 +981,8 @@
                 }
 
             }
-            else           cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
-
+            else
+                cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
         }
 
         function initTimer() {
@@ -854,9 +1038,6 @@
 
         $("#change").on('click', changeTimer);
         $("#init").on('click', resetTimer);
-    })
-
-
 
 
 </script>
