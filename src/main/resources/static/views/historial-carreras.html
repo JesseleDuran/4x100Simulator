@@ -6,6 +6,12 @@
 </head>
 <body>
 
+<div id="toolbar">
+    <button id="remove" class="btn btn-primary" onClick="goHome()">
+        <i class="glyphicon glyphicon-chevron-left"></i> Atras
+    </button>
+</div>
+
 <table id="table"
        data-search="true"
        data-show-refresh="true"
@@ -23,12 +29,6 @@
             data-align="center"
             data-halign="center"
         >Carrera</th>
-        <th scope="col"
-            data-field="tiempo_total"
-            data-sortable="true"
-            data-align="center"
-            data-halign="center"
-        >Tiempo total</th>
         <th scope="col"
             data-field="fecha"
             data-sortable="true"
