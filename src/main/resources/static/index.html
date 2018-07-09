@@ -194,7 +194,6 @@
             <div class="modal-footer">
                 <button type="button" onClick="goHome()" class="btn btn-primary" data-dismiss="modal">Inicio</button>
                 <button type="button" onClick="goHistorialCarreras()" class="btn btn-primary">Ir al historial</button>
-                <button type="button" onClick="startRace()" class="btn btn-primary">Repetir</button>
 
             </div>
         </div>
@@ -235,6 +234,7 @@
         equiposGanadores1 = [];
         resetTimer();
         console.log("get equipo fase 1", data.equipos);
+
         equipoFase1 = data.equipos;
 
     });
@@ -816,6 +816,8 @@
         equipoFase2 = orderArrays(equipos, 2);
         equipoFase3 = orderArrays(equipos, 3);
         equipoFase4 = orderArrays(equipos, 4);
+
+
 
         console.log("equipos de fase 1", equipoFase1);
         console.log("equipos de fase 2", equipoFase2);
