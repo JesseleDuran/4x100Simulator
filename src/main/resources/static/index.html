@@ -62,10 +62,10 @@
 <div class="modal fade" id="connectedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body conectados-body">
                 Hay <span class="displayConectados">0</span> usuarios conectados, está seguro que desea continuar?
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer conectados-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button type="button" onClick="startSimulator()" class="btn btn-primary">Yes</button>
             </div>
@@ -237,6 +237,68 @@
 
         equipoFase1 = data.equipos;
 
+        //fase1
+        for (var i = 1; i <=8; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[i-1].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+        }
+
+        var j = 0;
+        for (var i = 9; i <=16; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            j++;
+            $('#'+classId).css('background-image', 'url(' + url +')');
+        }
+
+        j = 0;
+        for (var i = 17; i <=24; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+            j++;
+        }
+
+        j = 0;
+        for (var i = 25; i <=32; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+            j++;
+        }
+
+        j = 0;
+        for (var i = 33; i <=40; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+            j++;
+        }
+
+        j = 0;
+        for (var i = 41; i <=48; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+            j++;
+        }
+
+        j = 0;
+        for (var i = 49; i <=56; i++) {
+            var classId = 'circle' + i;
+            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+            console.log("url de imagen", url);
+            $('#'+classId).css('background-image', 'url(' + url +')');
+            j++;
+        }
+
     });
 
     socket.on('getEquipoFase2', function (data) {
@@ -265,22 +327,33 @@
         switch(data.animation){
             case 'move1' :
                 equiposGanadores1.push(equipoFase1[0]);
+                var url = 'images/' + equipoFase1[0].id_equipo + '.png';
+                $('#circle9').css('background-image', 'url(' + url +')');
+
                 activateAnimation(9, speedToTimeShort(equipoFase1[0].velocidad_recta));
                 break;
             case 'move2' :
                 equiposGanadores1.push(equipoFase1[1]);
+                var url = 'images/' + equipoFase1[1].id_equipo + '.png';
+                $('#circle10').css('background-image', 'url(' + url +')');
                 activateAnimation(10, speedToTimeShort(equipoFase1[1].velocidad_recta));
                 break;
             case 'move3' :
                 equiposGanadores1.push(equipoFase1[2]);
+                var url = 'images/' + equipoFase1[2].id_equipo + '.png';
+                $('#circle11').css('background-image', 'url(' + url +')');
                 activateAnimation(11, speedToTimeShort(equipoFase1[2].velocidad_recta));
                 break;
             case 'move4' :
                 equiposGanadores1.push(equipoFase1[3]);
+                var url = 'images/' + equipoFase1[3].id_equipo + '.png';
+                $('#circle12').css('background-image', 'url(' + url +')');
                 activateAnimation(12, speedToTimeShort(equipoFase1[3].velocidad_recta));
                 break;
             case 'move5' :
                 equiposGanadores1.push(equipoFase1[4]);
+                var url = 'images/' + equipoFase1[4].id_equipo + '.png';
+                $('#circle13').css('background-image', 'url(' + url +')');
                 activateAnimation(13, speedToTimeShort(equipoFase1[4].velocidad_recta));
                 break;
             case 'move6' :
@@ -600,9 +673,18 @@
             }
 
             socket.emit('finishedSimulator');
+
+            var jsonObject = {equipos: myStringArray};
+            socket.emit('getEquipos', jsonObject);
+
+            socket.on('equipoList', function (data) {
+                myStringArray = data.equipos;
+            });
+
             $('.finishTable').bootstrapTable({
                 data: myStringArray
             });
+
             $('#finishModal').modal({backdrop: 'static', keyboard: false});
 
         }
@@ -713,8 +795,15 @@
     socket.on('cantidadConectados', function (data) {
         console.log('Received conectados', data);
         conectados = data.id_conectados;
+        if(conectados == 3){
+            $(".displayConectados").html(data.conectados);
+        }
+        else {
+            $("#displayConectados").html(data.conectados);
+            $(".conectados-footer").empty();
+            $(".conectados-body").replaceWith("<div>No puede empezar, hay <span id='displayConectados'>0</span> conectados y se requieren 3</div>");
+        }
 
-        $(".displayConectados").html(data.conectados);
     });
 
     //divide .html to different users
