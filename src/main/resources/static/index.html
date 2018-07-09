@@ -233,6 +233,7 @@
         equiposGanadores3 = [];
         equiposGanadores2 = [];
         equiposGanadores1 = [];
+        resetTimer();
         console.log("get equipo fase 1", data.equipos);
         equipoFase1 = data.equipos;
 
@@ -449,6 +450,7 @@
                     "velocidad_curva" : equipoFase4[0].velocidad_curva,
                     "velocidad_recta" : equipoFase4[0].velocidad_recta,
                     "posicion_array" : 0,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -465,6 +467,7 @@
                     "velocidad_curva" : equipoFase4[1].velocidad_curva,
                     "velocidad_recta" : equipoFase4[1].velocidad_recta,
                     "posicion_array" : 1,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -481,6 +484,8 @@
                     "velocidad_curva" : equipoFase4[2].velocidad_curva,
                     "velocidad_recta" : equipoFase4[2].velocidad_recta,
                     "posicion_array" : 2,
+                    "tiempo": getCarreerTime()
+
                 });
                 finishSimulator();
                 break;
@@ -497,6 +502,7 @@
                     "velocidad_curva" : equipoFase4[3].velocidad_curva,
                     "velocidad_recta" : equipoFase4[3].velocidad_recta,
                     "posicion_array" : 3,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -513,6 +519,7 @@
                     "velocidad_curva" : equipoFase4[4].velocidad_curva,
                     "velocidad_recta" : equipoFase4[4].velocidad_recta,
                     "posicion_array" : 4,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -529,6 +536,7 @@
                     "velocidad_curva" : equipoFase4[5].velocidad_curva,
                     "velocidad_recta" : equipoFase4[5].velocidad_recta,
                     "posicion_array" : 5,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -545,6 +553,7 @@
                     "velocidad_curva" : equipoFase4[6].velocidad_curva,
                     "velocidad_recta" : equipoFase4[6].velocidad_recta,
                     "posicion_array" : 6,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -561,6 +570,7 @@
                     "velocidad_curva" : equipoFase4[7].velocidad_curva,
                     "velocidad_recta" : equipoFase4[7].velocidad_recta,
                     "posicion_array" : 7,
+                    "tiempo": getCarreerTime()
                 });
                 finishSimulator();
                 break;
@@ -572,16 +582,19 @@
     function finishSimulator() {
 
         if(equiposGanadores4.length === 8) {
+            changeTimer();
             var myStringArray = [];
             var j = 1;
             for (var i = 0; i < 8; i++) {
+
                 myStringArray.push({
                     "lugar" : j,
                     "equipo_final" : equiposGanadores4[i].nombre_equipo,
-                    "tiempo_equipo" : secsToTimeFormat(speedToTime(equipoFase4[equiposGanadores4[i].posicion_array].velocidad_recta) +
+                    /*"tiempo_equipo" : secsToTimeFormat(speedToTime(equipoFase4[equiposGanadores4[i].posicion_array].velocidad_recta) +
                         speedToTime(equipoFase3[equiposGanadores4[i].posicion_array].velocidad_curva) +
                         speedToTime(equipoFase2[equiposGanadores4[i].posicion_array].velocidad_recta) +
-                        speedToTime(equipoFase1[equiposGanadores4[i].posicion_array].velocidad_recta))
+                        speedToTime(equipoFase1[equiposGanadores4[i].posicion_array].velocidad_recta)),*/
+                    "tiempo_equipo": equiposGanadores4[i].tiempo
                 });
                 j++;
             }
@@ -615,7 +628,6 @@
         return timeString;
     }
 
-    //missing tiempo x equipo
     function parameterCarreraEquipo() {
 
         var carreraEquipo = [];
@@ -624,10 +636,7 @@
             carreraEquipo.push({
                 "id_carrera" : idCarrera,
                 "id_equipo" : equiposGanadores4[i].id_equipo,
-                "tiempo_equipo": secsToTimeFormat(speedToTime(equipoFase4[equiposGanadores4[i].posicion_array].velocidad_recta) +
-                    speedToTime(equipoFase3[equiposGanadores4[i].posicion_array].velocidad_curva) +
-                    speedToTime(equipoFase2[equiposGanadores4[i].posicion_array].velocidad_recta) +
-                    speedToTime(equipoFase1[equiposGanadores4[i].posicion_array].velocidad_recta)),
+                "tiempo_equipo": equiposGanadores4[i].tiempo,
                 "n_posicion" : j,
             });
             j++;
@@ -635,6 +644,23 @@
         }
 
         return carreraEquipo;
+    }
+
+    function parameterCarreraCorredor(corredoresFase) {
+
+        var carreraCorredor = [];
+        var j = 1;
+        for (var i = 0; i < 8; i++) {
+            carreraCorredor.push({
+                "id_carrera" : idCarrera,
+                "id_corredor" : corredoresFase[i].id,
+                "tiempo_fase": secsToTimeFormat(speedToTime(corredoresFase[i].velocidad_recta))
+            });
+            j++;
+            console.log(carreraCorredor);
+        }
+
+        return carreraCorredor;
     }
 
     //missing nombre carrera
@@ -940,7 +966,25 @@
                 console.log("ID CARRERA RECIEN GUARDADA",data);
                 idCarrera = data;
                 var carreraEquipo = parameterCarreraEquipo();
-                createCarreraEquipo(carreraEquipo);
+                for(var x in carreraEquipo){
+                    createCarreraEquipo(carreraEquipo[x]);
+                }
+                var carreraCorredor1 = parameterCarreraCorredor(equipoFase1);
+                for(var x in carreraCorredor1){
+                    createCarreraCorredor(carreraCorredor1[x]);
+                }
+                var carreraCorredor2 = parameterCarreraCorredor(equipoFase2);
+                for(var x in carreraCorredor2){
+                    createCarreraCorredor(carreraCorredor2[x]);
+                }
+                var carreraCorredor3 = parameterCarreraCorredor(equipoFase3);
+                for(var x in carreraCorredor3){
+                    createCarreraCorredor(carreraCorredor3[x]);
+                }
+                var carreraCorredor4 = parameterCarreraCorredor(equipoFase4);
+                for(var x in carreraCorredor4){
+                    createCarreraCorredor(carreraCorredor4[x]);
+                }
             }});
     }
 
@@ -950,6 +994,20 @@
             url: 'http://localhost:8080/carrera/create/carrera_equipo',
             type: 'POST',
             data: carreraEquipoObject,
+            dataType: 'JSON',
+            success: function (data)
+            {
+                console.log("respuesta de carrera equipo", data);
+
+            }});
+    }
+
+    function createCarreraCorredor(carreraCorredorObject)
+    {
+        $.ajax({
+            url: 'http://localhost:8080/carrera/create/carrera_corredor',
+            type: 'POST',
+            data: carreraCorredorObject,
             dataType: 'JSON',
             success: function (data)
             {
@@ -978,7 +1036,8 @@
                 }
 
             }
-            else           cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
+            else
+                cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
 
         }
 
@@ -994,6 +1053,14 @@
                 log.show();
             }
             log.html(log.html() + "<tr><td>"+cl_minutes.html() +":"+cl_seconds.html()+":"+ cl_thousandths.html()+"</td><td></tr>");
+
+            var tiempo = ($("#minutes").text() + ":" + $("#seconds").text() + ":" + $("#thousandths").text());
+        }
+
+        function getCarreerTime() {
+            var tiempo = ($("#minutes").text() + ":" + $("#seconds").text() + ":" + $("#thousandths").text());
+            console.log("tiempo", tiempo);
+            return tiempo;
         }
 
         function changeTimer() {

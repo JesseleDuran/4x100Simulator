@@ -7,9 +7,10 @@ import models.CarreraEquipo;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/carrera")
@@ -34,13 +35,13 @@ public class CarreraController {
     @RequestMapping(path = "/create/carrera_equipo", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody boolean createCarreraEquipo(List<CarreraEquipo> carreraEquipos) {
+    public @ResponseBody boolean createCarreraEquipo(CarreraEquipo carreraEquipo) {
         try
         {
             ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
             JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
-            jdbcCarreraDAO.insertBatchCarreraEquipo(carreraEquipos);
+            jdbcCarreraDAO.insertCarreraEquipo(carreraEquipo);
 
             context.close();
             return true;
@@ -51,15 +52,17 @@ public class CarreraController {
         }
     }
 
-    @RequestMapping(path = "/create/carrera_corredor", method = RequestMethod.POST)
+    @RequestMapping(path = "/create/carrera_corredor", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = {MediaType.APPLICATION_ATOM_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public boolean createCarreraCorredor(@RequestBody List<CarreraCorredor> carreraCorredores) {
+    public boolean createCarreraCorredor(CarreraCorredor carreraCorredor) {
         try
         {
             ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
             JDBCCarreraDAO jdbcCarreraDAO = (JDBCCarreraDAO) context.getBean("jdbcCarreraDAO");
 
-            jdbcCarreraDAO.insertBatchCarreraCorredor(carreraCorredores);
+            jdbcCarreraDAO.insertCarreraCorredor(carreraCorredor);
 
             context.close();
             return true;
