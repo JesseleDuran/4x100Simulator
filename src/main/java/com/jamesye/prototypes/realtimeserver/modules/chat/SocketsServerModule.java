@@ -30,6 +30,9 @@ public class SocketsServerModule {
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
         this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
+
+        this.namespace.addEventListener("getRecordsFinish", listEquiposDTO.class, sendRecordsToClients());
+
         this.namespace.addEventListener("finishAnimation", FinishAnimationDTO.class, sendAnimationType());
         this.namespace.addEventListener("cerrarModal", CerrarModalDTO.class, sendCloseModal());
 
@@ -148,6 +151,13 @@ public class SocketsServerModule {
     private DataListener<listEquiposDTO> sendEquiposToClients() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("equipoList", data);
+        };
+
+    }
+
+    private DataListener<listEquiposDTO> sendRecordsToClients() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("recordsList", data);
         };
 
     }

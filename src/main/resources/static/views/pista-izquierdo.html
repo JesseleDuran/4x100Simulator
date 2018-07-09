@@ -897,78 +897,78 @@
 </html>
 
 <script>
-    var equipoFase1;
-    socket.on('getEquipoFase1', function (data) {
-        equiposGanadores4 = [];
-        equiposGanadores3 = [];
-        equiposGanadores2 = [];
-        equiposGanadores1 = [];
-        resetTimer();
-        console.log("get equipo fase 1", data.equipos);
-
-        equipoFase1 = data.equipos;
-
-        //fase1
-        for (var i = 1; i <=8; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[i-1].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-        }
-
-        var j = 0;
-        for (var i = 9; i <=16; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            j++;
-            $('#'+classId).css('background-image', 'url(' + url +')');
-        }
-
-        j = 0;
-        for (var i = 17; i <=24; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-            j++;
-        }
-
-        j = 0;
-        for (var i = 25; i <=32; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-            j++;
-        }
-
-        j = 0;
-        for (var i = 33; i <=40; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-            j++;
-        }
-
-        j = 0;
-        for (var i = 41; i <=48; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-            j++;
-        }
-
-        j = 0;
-        for (var i = 49; i <=56; i++) {
-            var classId = 'circle' + i;
-            var url = 'images/' + equipoFase1[j].id_equipo + '.png';
-            console.log("url de imagen", url);
-            $('#'+classId).css('background-image', 'url(' + url +')');
-            j++;
-        }
-
-    });
+    // var equipoFase1;
+    // socket.on('getEquipoFase1', function (data) {
+    //     equiposGanadores4 = [];
+    //     equiposGanadores3 = [];
+    //     equiposGanadores2 = [];
+    //     equiposGanadores1 = [];
+    //     resetTimer();
+    //     console.log("get equipo fase 1", data.equipos);
+    //
+    //     equipoFase1 = data.equipos;
+    //
+    //     //fase1
+    //     for (var i = 1; i <=8; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[i-1].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //     }
+    //
+    //     var j = 0;
+    //     for (var i = 9; i <=16; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         j++;
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 17; i <=24; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 25; i <=32; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 33; i <=40; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 41; i <=48; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 49; i <=56; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    // });
 </script>
