@@ -1,63 +1,44 @@
 package models;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
-
-@Entity
-@Table(name = "equipo")
 public class Equipo {
 
-    @Id
-    @Column(name = "id")
-    private int id;
+    private int id_equipo;
 
-    @Column(name = "nombre", unique=true, nullable=false)
-    private String nombre;
+    private String nombre_equipo;
 
-    @OneToMany(mappedBy="equipo")
-    private Set<Corredor> integrantes;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "carrera_equipo",
-            joinColumns = @JoinColumn(name = "id_equipo", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_carrera", referencedColumnName = "id"))
-    private List<Carrera> carreraList;
-
-
-    public Equipo(String nombre) {
-        this.nombre = nombre;
+    public Equipo() {
     }
 
-    public Set<Corredor> getIntegrantes() {
-        return integrantes;
+    public Equipo(String nombre_equipo) {
+        this.nombre_equipo = nombre_equipo;
     }
 
-    public void setIntegrantes(Set<Corredor> integrantes) {
-        this.integrantes = integrantes;
+    public Equipo(int id_equipo, String nombre_equipo) {
+        this.id_equipo = id_equipo;
+        this.nombre_equipo = nombre_equipo;
     }
 
-    public int getId() {
-        return id;
+    public int getId_equipo() {
+        return id_equipo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_equipo(int id_equipo) {
+        this.id_equipo = id_equipo;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombre_equipo() {
+        return nombre_equipo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre_equipo(String nombre_equipo) {
+        this.nombre_equipo = nombre_equipo;
     }
 
     @Override
     public String toString() {
         return "Equipo{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
+                "id_equipo=" + id_equipo +
+                ", nombre_equipo='" + nombre_equipo + '\'' +
                 '}';
     }
 }

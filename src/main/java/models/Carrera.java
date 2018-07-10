@@ -1,134 +1,75 @@
 package models;
 
-import javax.persistence.*;
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
-
-@Entity
-@Table(name = "carrera")
 public class Carrera {
 
-    @Id
-    @Column(name = "id")
-    private int id;
+    private int id_carrera;
 
-    @Column(name = "tiempo_total")
-    private String tiempo_total;
+    private String nombre_carrera;
 
-    @Column(name = "fecha")
-    private Date fecha;
+    private String fecha;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_equipo_ganador1")
-    private Equipo equipo_ganador1;
+    private int id_equipo_ganador1;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_equipo_ganador2")
-    private Equipo equipo_ganador2;
+    private int id_equipo_ganador2;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_equipo_ganador3")
-    private Equipo equipo_ganador3;
+    private int id_equipo_ganador3;
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_corredor_ganador_fase1")
-    private Corredor corredor_ganador1;
+    public Carrera() {
+    }
 
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_corredor_ganador_fase2")
-    private Corredor corredor_ganador2;
-
-    @ManyToOne
-    @JoinColumn(name="id", nullable=false) //FK from equipo
-    @Column(name = "id_corredor_ganador_fase3")
-    private Corredor corredor_ganador3;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "carrera_equipo",
-            joinColumns = @JoinColumn(name = "id_carrera", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "id_equipo", referencedColumnName = "id"))
-    private List<Equipo> equipoList;
-
-    public Carrera(String tiempo_total, Date fecha) {
-        this.tiempo_total = tiempo_total;
+    public Carrera(String nombre_carrera, String fecha, int id_equipo_ganador1, int id_equipo_ganador2, int id_equipo_ganador3) {
+        this.nombre_carrera = nombre_carrera;
         this.fecha = fecha;
+        this.id_equipo_ganador1 = id_equipo_ganador1;
+        this.id_equipo_ganador2 = id_equipo_ganador2;
+        this.id_equipo_ganador3 = id_equipo_ganador3;
     }
 
-    public int getId() {
-        return id;
+    public int getId_carrera() {
+        return id_carrera;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_carrera(int id_carrera) {
+        this.id_carrera = id_carrera;
     }
 
-    public String getTiempo_total() {
-        return tiempo_total;
+    public String getNombre_carrera() {
+        return nombre_carrera;
     }
 
-    public void setTiempo_total(String tiempo_total) {
-        this.tiempo_total = tiempo_total;
+    public void setNombre_carrera(String nombre_carrera) {
+        this.nombre_carrera = nombre_carrera;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Equipo getEquipo_ganador1() {
-        return equipo_ganador1;
+    public int getId_equipo_ganador1() {
+        return id_equipo_ganador1;
     }
 
-    public void setEquipo_ganador1(Equipo equipo_ganador1) {
-        this.equipo_ganador1 = equipo_ganador1;
+    public void setId_equipo_ganador1(int id_equipo_ganador1) {
+        this.id_equipo_ganador1 = id_equipo_ganador1;
     }
 
-    public Equipo getEquipo_ganador2() {
-        return equipo_ganador2;
+    public int getId_equipo_ganador2() {
+        return id_equipo_ganador2;
     }
 
-    public void setEquipo_ganador2(Equipo equipo_ganador2) {
-        this.equipo_ganador2 = equipo_ganador2;
+    public void setId_equipo_ganador2(int id_equipo_ganador2) {
+        this.id_equipo_ganador2 = id_equipo_ganador2;
     }
 
-    public Equipo getEquipo_ganador3() {
-        return equipo_ganador3;
+    public int getId_equipo_ganador3() {
+        return id_equipo_ganador3;
     }
 
-    public void setEquipo_ganador3(Equipo equipo_ganador3) {
-        this.equipo_ganador3 = equipo_ganador3;
-    }
-
-    public Corredor getCorredor_ganador1() {
-        return corredor_ganador1;
-    }
-
-    public void setCorredor_ganador1(Corredor corredor_ganador1) {
-        this.corredor_ganador1 = corredor_ganador1;
-    }
-
-    public Corredor getCorredor_ganador2() {
-        return corredor_ganador2;
-    }
-
-    public void setCorredor_ganador2(Corredor corredor_ganador2) {
-        this.corredor_ganador2 = corredor_ganador2;
-    }
-
-    public Corredor getCorredor_ganador3() {
-        return corredor_ganador3;
-    }
-
-    public void setCorredor_ganador3(Corredor corredor_ganador3) {
-        this.corredor_ganador3 = corredor_ganador3;
+    public void setId_equipo_ganador3(int id_equipo_ganador3) {
+        this.id_equipo_ganador3 = id_equipo_ganador3;
     }
 }

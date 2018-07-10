@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Carrera</title>
+</head>
+<body>
+
+<div id="toolbar">
+    <button id="remove" class="btn btn-primary" onClick="goHome()">
+        <i class="glyphicon glyphicon-chevron-left"></i> Atras
+    </button>
+</div>
+
+<table id="table"
+       data-search="true"
+       data-show-refresh="true"
+       data-show-toggle="true"
+       data-show-columns="true"
+       data-pagination="true"
+       data-page-list="[5, 10, 20]" class="tableCarreras"
+       >
+
+    <thead>
+    <tr>
+        <th scope="col"
+            data-field="nombre_carrera"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Carrera</th>
+        <th scope="col"
+            data-field="fecha"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+         >Fecha de la Carrera</th>
+        <th scope="col"
+            data-field="primer_lugar"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Primer lugar</th>
+        <th scope="col"
+            data-field="segundo_lugar"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Segundo lugar</th>
+        <th scope="col"
+            data-field="tercer_lugar"
+            data-sortable="true"
+            data-align="center"
+            data-halign="center"
+        >Tercer lugar</th>
+    </tr>
+
+    </thead>
+</table>
+</body>
+</html>
