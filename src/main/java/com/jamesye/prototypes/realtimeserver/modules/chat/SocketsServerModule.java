@@ -20,6 +20,7 @@ public class SocketsServerModule {
 
     private final SocketIONamespace namespace;
     private static ConnectedDTO conectados = new ConnectedDTO(0, new ArrayList<UUID>());
+    private static boolean finishFlag = true;
 
     @Autowired
     public SocketsServerModule(SocketIOServer server) {
@@ -29,6 +30,9 @@ public class SocketsServerModule {
         this.namespace.addEventListener("chat", ChatDTO.class, onChatReceived());
         this.namespace.addEventListener("firstStart", FirstStartDTO.class, sendHtmlBySizeOFClients());
         this.namespace.addEventListener("getEquipos", listEquiposDTO.class, sendEquiposToClients());
+
+        this.namespace.addEventListener("getRecordsFinish", listEquiposDTO.class, sendRecordsToClients());
+
         this.namespace.addEventListener("finishAnimation", FinishAnimationDTO.class, sendAnimationType());
         this.namespace.addEventListener("cerrarModal", CerrarModalDTO.class, sendCloseModal());
 
@@ -36,6 +40,17 @@ public class SocketsServerModule {
         this.namespace.addEventListener("sendEquipoFase2", listEquiposDTO.class, sendEquipo2());
         this.namespace.addEventListener("sendEquipoFase3", listEquiposDTO.class, sendEquipo3());
         this.namespace.addEventListener("sendEquipoFase4", listEquiposDTO.class, sendEquipo4());
+
+        this.namespace.addEventListener("finishedSimulator", String.class, finishedSimulator());
+    }
+
+    private DataListener<String> finishedSimulator() {
+        return (client, data, ackSender) -> {
+            if (finishFlag) {
+                namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("masterSave", "eres el principal que va a guardar");
+            }
+            finishFlag = false;
+        };
     }
 
     private DataListener<ChatDTO> onChatReceived() {
@@ -110,6 +125,7 @@ public class SocketsServerModule {
     private DataListener<FirstStartDTO> sendHtmlBySizeOFClients() {
         return (client, data, ackSender) -> {
             if (data.isStart()) {
+                finishFlag = true;
                 namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("master", "eres el principal");
                 switch (conectados.getId_conectados().size()) {
                     case 1:
@@ -120,9 +136,9 @@ public class SocketsServerModule {
                         namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
                         break;
                     case 3:
-                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-izquierdo.html");
+                        namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-derecho.html");
                         namespace.getClient(conectados.getId_conectados().get(1)).sendEvent("htmlType", "pista-medio-medio.html");
-                        namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-derecho.html");
+                        namespace.getClient(conectados.getId_conectados().get(2)).sendEvent("htmlType", "pista-izquierdo.html");
                         break;
                     default:
                         namespace.getClient(conectados.getId_conectados().get(0)).sendEvent("htmlType", "pista-medio-medio.html");
@@ -135,6 +151,13 @@ public class SocketsServerModule {
     private DataListener<listEquiposDTO> sendEquiposToClients() {
         return (client, data, ackSender) -> {
             namespace.getBroadcastOperations().sendEvent("equipoList", data);
+        };
+
+    }
+
+    private DataListener<listEquiposDTO> sendRecordsToClients() {
+        return (client, data, ackSender) -> {
+            namespace.getBroadcastOperations().sendEvent("recordsList", data);
         };
 
     }
