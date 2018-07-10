@@ -87,6 +87,7 @@
           transform-origin: center top;
           background-color: #E84855;
           left:80px;
+          background-size: contain;
       }
 
       @keyframes move1 {
@@ -112,6 +113,7 @@
           animation-timing-function: linear;
           background-color: #0099FF;
           left:100px;
+          background-size: contain;
       }
       @keyframes move2 {
            100% {
@@ -134,6 +136,7 @@
           animation-timing-function: cubic-bezier(0, 1, .76, 1.14);
           background-color: #FFCC00;
           left:120px;
+          background-size: contain;
       }
       @keyframes move3 {
           100% {
@@ -156,7 +159,9 @@
       #circle4 {
         transform-origin: center top;
         background-color: #E84855;
-        left:140px
+        left:140px;
+        background-size: contain;
+
       }
       @keyframes move4 {
         100% {
@@ -180,6 +185,7 @@
       #circle5 {
         background-color: #0099FF;
         left:160px;
+        background-size: contain;
       }
 
     @keyframes move5 {
@@ -203,7 +209,8 @@
 
       #circle6 {
           background-color: #FFCC00;
-          left:180px
+          left:180px;
+        background-size: contain;
       }
       @keyframes move6 {
         100% {
@@ -226,7 +233,8 @@
 
       #circle7 {
           background-color: #E84855;
-          left:200px
+          left:200px;
+        background-size: contain;
       }
       @keyframes move7 {
         100% {
@@ -249,6 +257,7 @@
       #circle8 {
           background-color: #0099FF;
           left:220px;
+        background-size: contain;
 
       }
       @keyframes move8 {
@@ -620,7 +629,7 @@
       }
 
 
-      .btn-sim{
+      /* .btn-sim{
         position: absolute;
         right: 20%;
         top: 45%;
@@ -645,12 +654,105 @@
 
       .btn-sim:active{
         transform: scale(.9);
+      } */
+
+      @import url(https://fonts.googleapis.com/css?family=Iceland);
+      html,body{ height:100%; margin:0; }
+        body {
+        text-align:center;
+        margin-left: 20px;
+        }
+      body::before{
+        content:"";
+        display:block;
+        width:100%;
+        height:100%;
+        position:absolute;
+        top:0;
+        left: 0;
+        z-index:-1;
+        opacity:0.9
       }
+      #chronometer span#seconds{
+        text-align:right;
+      }
+      #buttons {
+        position: absolute;
+        right: 33%;
+        top: 27%;
+        display: flex;
+      }
+
+        #chronometer{
+          position: absolute;
+          right: 20%;
+          top: 45%;
+         font-family: 'Iceland', sans-serif;
+          font-size: 126px;
+          white-space:nowrap;
+          padding: 24px;
+          overflow: hidden;
+          letter-spacing:-10px;
+          text-shadow:0 0 10px rgba(219, 246, 246, 0.75);
+          border: 2px solid #99e8ef30;
+          border-radius: 5px;
+          box-shadow: 0px -2px 10px 1px rgba(91, 125, 125, 0.75) inset, 0px 5px 20px -10px #000;
+          width: 620px;
+          color: #ffffff;
+        }
+
+        /* #log{
+          margin: 35px auto;
+          text-align: center;
+          border-radius: 5px;
+          width: 150px;
+          box-shadow: 0px 0px 6px rgba(23, 140, 140, 0.5);
+          background:rgba(0,0,0,0.2);
+          font-family: sans-serif;
+          display: none;
+          padding:10px
+        } */
+
+
+        #buttons a {
+          margin-left: 100px;
+          font-family: 'Iceland', sans-serif;
+          margin: 30px 0;
+          box-shadow: 0px 0px 10px 1px rgba(91, 125, 125, 0.75) inset;
+          border-radius:6px;
+          border:2px solid #99e8ef30;
+          display:inline-block;
+          color:#ffffff;
+          font-family:arial;
+          font-size:15px;
+          font-weight:bold;
+          line-height:50px;
+          width:124px;
+          text-decoration:none;
+          transition:all 0.1s
+        }
+        #buttons a:hover {
+          color:#fff;
+          box-shadow: 0px 0px 30px 1px rgba(23, 140, 140, 0.5) inset;
+        }
+
+
+        th, td {padding:16px 0px; text-align:center; }
+
+        th {padding-top:22px; }
 
       </style>
 
   </head>
   <body>
+    <!--&lt;!&ndash;<div id="buttons">&ndash;&gt;-->
+      <!--&lt;!&ndash;<a id="change" href=#>Start /  Stop</a>&ndash;&gt;-->
+      <!--&lt;!&ndash;<a href=# id="init">Reset</a>&ndash;&gt;-->
+    <!--</div>-->
+    <div id="chronometer">
+      <span id="minutes">00</span><span>&nbsp:&nbsp</span><span id="seconds">00</span><span>&nbsp:&nbsp</span><span id="thousandths">0.00</span>
+    </div>
+    <table id="log"></table>
 
     <div class="cloudcontain1">
       <div class="cloud1"></div>
@@ -818,3 +920,161 @@
 
   </body>
 </html>
+
+<script>
+    // Rebound of this pen https://codepen.io/Tonetete/pen/fzDop
+
+    var t = undefined;
+    var log = $("#log");
+    var cl_thousandths = $("#thousandths");
+    var cl_seconds = $("#seconds");
+    var cl_minutes = $("#minutes");
+
+    function showTimer() {
+        if(Number(cl_thousandths.html())%999>0.8){
+            cl_thousandths.html("0.00");
+            printDigit(cl_seconds);
+            if(Number(cl_seconds.html())>59){
+                cl_seconds.html("00");
+                printDigit(cl_minutes);
+
+            }
+
+        }
+        else
+            cl_thousandths.html((+cl_thousandths.html() + 0.015).toFixed(2));
+    }
+
+    function initTimer() {
+        t=setInterval(showTimer, 20);
+    }
+
+    function stopTimer() {
+        clearInterval(t);
+        t=undefined;
+        if($.trim($("#log").html())==''){
+            log.html("<thead><tr><th>Stop Times</th></tr></thead>");
+            log.show();
+        }
+        log.html(log.html() + "<tr><td>"+cl_minutes.html() +":"+cl_seconds.html()+":"+ cl_thousandths.html()+"</td><td></tr>");
+
+        var tiempo = ($("#minutes").text() + ":" + $("#seconds").text() + ":" + $("#thousandths").text());
+        console.log("tiempo", tiempo);
+    }
+
+    function changeTimer() {
+        (!t)?initTimer() : stopTimer();
+    }
+    // Reset chronometer and clean up log.
+    function resetTimer() {
+        if (!t) {
+            cl_thousandths.html("0.00");
+            cl_seconds.html("00");
+            cl_minutes.html("00");
+            log.html("");
+            log.hide();
+        }
+    }
+
+
+    function printDigit(digit){
+
+        var number = Number(digit.html().replace(/\s+/g, "")) + 1;
+        var numberString;
+
+        (number<10)?numberString="0"+number : numberString=String(number);
+
+        if(numberString.substring(1,2)==="1"){
+            if(number<10)
+                digit.html("0 "+number);
+            else
+                digit.html(numberString.split("").join(" "));
+        }
+
+        else{
+            if(number<10)
+                digit.html("0"+number);
+            else
+                digit.html(number);
+        }
+    }
+
+    $("#change").on('click', changeTimer);
+    $("#init").on('click', resetTimer);
+
+    // var equipoFase1;
+    // socket.on('getEquipoFase1', function (data) {
+    //     equiposGanadores4 = [];
+    //     equiposGanadores3 = [];
+    //     equiposGanadores2 = [];
+    //     equiposGanadores1 = [];
+    //     resetTimer();
+    //     console.log("get equipo fase 1", data.equipos);
+    //
+    //     equipoFase1 = data.equipos;
+    //
+    //     //fase1
+    //     for (var i = 1; i <=8; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[i-1].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //     }
+    //
+    //     var j = 0;
+    //     for (var i = 9; i <=16; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         j++;
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 17; i <=24; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 25; i <=32; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 33; i <=40; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 41; i <=48; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    //     j = 0;
+    //     for (var i = 49; i <=56; i++) {
+    //         var classId = 'circle' + i;
+    //         var url = 'images/' + equipoFase1[j].id_equipo + '.png';
+    //         console.log("url de imagen", url);
+    //         $('#'+classId).css('background-image', 'url(' + url +')');
+    //         j++;
+    //     }
+    //
+    // });
+
+</script>

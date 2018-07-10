@@ -54,6 +54,38 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
 
     }
 
+    @Override
+    public void insertCarreraEquipo(CarreraEquipo carreraEquipo) {
+
+        String sql = "INSERT INTO carrera_equipo " +
+                "(id_carrera, id_equipo, tiempo_equipo, n_posicion) VALUES (?,?,?,?)";
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
+        jdbcTemplate.update(sql, new Object[] {
+                carreraEquipo.getId_carrera(),
+                carreraEquipo.getId_equipo(),
+                carreraEquipo.getTiempo_equipo(),
+                carreraEquipo.getN_posicion()
+        });
+
+    }
+
+    @Override
+    public void insertCarreraCorredor(CarreraCorredor carreraCorredor) {
+        String sql = "INSERT INTO carrera_corredor " +
+                "(id_carrera, id_corredor, tiempo_fase) VALUES (?,?,?)";
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
+
+        jdbcTemplate.update(sql, new Object[] {
+                carreraCorredor.getId_carrera(),
+                carreraCorredor.getId_corredor(),
+                carreraCorredor.getTiempo_fase()
+        });
+
+    }
+
     //TODO: refactor
     @Override
     public int insertReturningId(Carrera carrera) {
@@ -90,7 +122,7 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
     }
 
     @Override
-    public void insertBatchCarreraEquipo(final List<CarreraEquipo> carreraEquipos){
+    public void insertBatchCarreraEquipo(List<CarreraEquipo> carreraEquipos){
 
         jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "INSERT INTO carrera_equipo " +
@@ -114,7 +146,7 @@ public class JDBCCarreraDAOImpl implements JDBCCarreraDAO {
     }
 
     @Override
-    public void insertBatchCarreraCorredor(final List<CarreraCorredor> carreraCorredores){
+    public void insertBatchCarreraCorredor(List<CarreraCorredor> carreraCorredores){
 
         jdbcTemplate = new JdbcTemplate(dataSource);
         String sql = "INSERT INTO carrera_corredor " +
